@@ -1,0 +1,64 @@
+@use '../../styles/mixins' as *;
+
+.root {
+  padding-block: var(--section-py);
+  background: linear-gradient(180deg, var(--color-cotton) 0%, var(--color-sky) 100%);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 3vw, 3rem);
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cat {
+  width: min(320px, 70vw);
+}
+
+.bubble {
+  position: relative;
+  padding: 0.6em 1.1em;
+  background: var(--color-white);
+  border-radius: 999px;
+  font-weight: 500;
+  color: var(--color-ink);
+  box-shadow: var(--shadow-soft);
+  white-space: nowrap;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    width: 14px;
+    height: 14px;
+    background: var(--color-white);
+    transform: rotate(45deg);
+  }
+}
+
+.bubbleLeft {
+  margin-right: -1.5rem;
+  z-index: 1;
+
+  &::after {
+    right: 24px;
+  }
+}
+
+.bubbleRight {
+  margin-left: -1.5rem;
+  z-index: 1;
+
+  &::after {
+    left: 24px;
+  }
+}

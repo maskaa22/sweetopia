@@ -1,0 +1,48 @@
+@use '../../styles/mixins' as *;
+
+.root {
+  padding-block: var(--section-py);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 1rem + 4vw, 4rem);
+  align-items: center;
+  margin-top: clamp(1.5rem, 1rem + 3vw, 3.5rem);
+
+  @include lg {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.reversed {
+  @include lg {
+    .copy {
+      order: 2;
+    }
+    .media {
+      order: 1;
+    }
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  font-size: var(--fs-lead);
+  color: var(--color-text);
+
+  p {
+    max-width: 46ch;
+  }
+}
+
+.footer {
+  margin-top: 0.75rem;
+}
+
+.media {
+  box-shadow: var(--shadow-soft);
+}

@@ -1,0 +1,31 @@
+@use '../../styles/mixins' as *;
+
+.root {
+  padding-block: var(--section-py);
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(255, 255, 255, 0.6), transparent 70%),
+    linear-gradient(180deg, var(--color-mint) 0%, var(--color-cotton) 100%);
+}
+
+.lead {
+  max-width: 56ch;
+  margin: 1.25rem auto 0;
+  text-align: center;
+  font-size: var(--fs-lead);
+  color: var(--color-text);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 0.8rem + 2vw, 2rem);
+  margin-top: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

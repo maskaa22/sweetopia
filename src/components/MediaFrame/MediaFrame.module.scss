@@ -1,0 +1,50 @@
+.root {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.square {
+  aspect-ratio: 1 / 1;
+}
+
+.portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.landscape {
+  aspect-ratio: 4 / 3;
+}
+
+.root[data-placeholder] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--color-blue);
+  background:
+    radial-gradient(120% 120% at 50% 0%, rgba(255, 255, 255, 0.7), transparent 60%),
+    var(--grad-sky);
+  border: 2px dashed color-mix(in srgb, var(--color-blue) 45%, transparent);
+}
+
+.icon {
+  opacity: 0.65;
+}
+
+.caption {
+  font-weight: 500;
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+  max-width: 24ch;
+}

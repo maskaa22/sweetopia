@@ -1,0 +1,24 @@
+.root {
+  padding-block: var(--section-py);
+  background: linear-gradient(180deg, var(--color-blue) 0%, #74b6d1 55%, var(--color-cotton) 100%);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 0.8rem + 2vw, 2.5rem);
+}
+
+.lead {
+  max-width: 52ch;
+  text-align: center;
+  font-size: var(--fs-lead);
+  color: var(--color-white);
+}
+
+.art {
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: var(--shadow-soft);
+}

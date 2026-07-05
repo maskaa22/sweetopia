@@ -1,1 +1,53 @@
-// TODO: add tokens
+// Design tokens — Солодія
+// Palette from the brand board: blue, pink, ink, sky, white.
+
+:root {
+  // Brand palette
+  --color-blue: #4c97bb;
+  --color-pink: #d1628e;
+  --color-ink: #3b4d56;
+  --color-sky: #dff9ff;
+  --color-white: #ffffff;
+
+  // Soft candy tints (derived — for cloud/gradient backgrounds)
+  --color-sky-deep: #bfe9f5;
+  --color-cotton: #f8d7e6;
+  --color-cotton-deep: #f2b8d2;
+  --color-mint: #eafbff;
+
+  // Semantic
+  --color-bg: var(--color-sky);
+  --color-text: var(--color-ink);
+  --color-text-muted: #6a7c85;
+  --color-accent: var(--color-pink);
+  --color-primary: var(--color-blue);
+
+  // Signature gradients
+  --grad-candy: linear-gradient(135deg, var(--color-pink) 0%, var(--color-blue) 100%);
+  --grad-sky: linear-gradient(180deg, var(--color-sky) 0%, var(--color-cotton) 100%);
+  --grad-cotton: linear-gradient(180deg, var(--color-cotton) 0%, var(--color-sky-deep) 100%);
+
+  // Typography
+  --font-display: 'Podarok', 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Oswald', 'Segoe UI', system-ui, sans-serif;
+
+  // Fluid type scale
+  --fs-kicker: clamp(0.85rem, 0.7rem + 0.6vw, 1.05rem);
+  --fs-body: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem);
+  --fs-lead: clamp(1.05rem, 0.9rem + 0.8vw, 1.4rem);
+  --fs-h3: clamp(1.4rem, 1.1rem + 1.4vw, 2.1rem);
+  --fs-h2: clamp(2rem, 1.3rem + 3.4vw, 4rem);
+  --fs-display: clamp(3.2rem, 1.5rem + 8vw, 9rem);
+
+  // Spacing & layout
+  --container: 1200px;
+  --gutter: clamp(1rem, 0.5rem + 3vw, 3rem);
+  --section-py: clamp(3.5rem, 2rem + 8vw, 8rem);
+  --radius: 22px;
+  --radius-lg: 36px;
+
+  // Effects
+  --shadow-soft: 0 18px 44px -20px rgba(59, 77, 86, 0.35);
+  --shadow-card: 0 24px 60px -28px rgba(209, 98, 142, 0.45);
+  --ring: 0 0 0 3px rgba(76, 151, 187, 0.35);
+}

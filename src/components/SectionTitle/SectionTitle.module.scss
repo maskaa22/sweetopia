@@ -1,0 +1,78 @@
+@use '../../styles/mixins' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+}
+
+.align-center {
+  align-items: center;
+  text-align: center;
+}
+
+.align-start {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.kicker {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.kicker-pink {
+  color: var(--color-pink);
+}
+
+.kicker-blue {
+  color: var(--color-blue);
+}
+
+.kicker-white {
+  color: var(--color-white);
+  text-shadow: 0 2px 12px rgba(59, 77, 86, 0.25);
+}
+
+.big {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.92;
+}
+
+// Filled — gradient glyphs.
+.filled {
+  @include gradient-text;
+
+  &.tone-blue {
+    @include gradient-text(linear-gradient(135deg, var(--color-blue), #7bbcd6));
+  }
+
+  &.tone-pink {
+    @include gradient-text(linear-gradient(135deg, var(--color-pink), #f19cbd));
+  }
+}
+
+// Outline — hollow glyphs with a colored stroke.
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-blue);
+
+  &.tone-pink {
+    -webkit-text-stroke-color: var(--color-pink);
+  }
+
+  &.tone-mix {
+    -webkit-text-stroke-color: color-mix(in srgb, var(--color-blue) 55%, var(--color-pink));
+  }
+
+  @include md {
+    -webkit-text-stroke-width: 2.5px;
+  }
+}
