@@ -1,4 +1,5 @@
 import type { Product } from '@/types/content'
+import { useCart } from '@/hooks/useCart'
 import MediaFrame from '@/components/MediaFrame'
 import Button from '@/components/Button'
 import styles from './ProductCard.module.scss'
@@ -8,6 +9,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { add } = useCart()
+
   return (
     <article className={styles.root}>
       <div className={styles.media}>
@@ -22,7 +25,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             {product.price}
             <span className={styles.currency}>грн</span>
           </span>
-          <Button variant="solid" icon="icon-cart">
+          <Button variant="solid" icon="icon-cart" onClick={() => add(product)}>
             До кошика
           </Button>
         </div>

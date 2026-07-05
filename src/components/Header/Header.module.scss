@@ -1,0 +1,87 @@
+@use '../../styles/mixins' as *;
+
+.root {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding-block: 0.6rem;
+  background: rgba(223, 249, 255, 0.72);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  @include gradient-text;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: clamp(0.75rem, 0.3rem + 1.5vw, 1.75rem);
+
+  @include lg {
+    display: flex;
+  }
+}
+
+.link {
+  font-weight: 500;
+  color: var(--color-ink);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-pink);
+  }
+}
+
+.cart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-blue);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    color: var(--color-pink);
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 20px;
+  height: 20px;
+  padding-inline: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--grad-candy);
+  color: var(--color-white);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}

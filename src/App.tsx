@@ -1,3 +1,5 @@
+import Header from '@/components/Header'
+import CartDrawer from '@/components/CartDrawer'
 import Hero from '@/components/Hero'
 import Kingdom from '@/components/Kingdom'
 import Citizens from '@/components/Citizens'
@@ -13,6 +15,7 @@ import Footer from '@/components/Footer'
 const App = () => {
   return (
     <>
+      <Header />
       <main>
         <Hero />
         <Kingdom />
@@ -26,6 +29,7 @@ const App = () => {
         <Contact />
       </main>
       <Footer />
+      <CartDrawer />
     </>
   )
 }
