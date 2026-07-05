@@ -9,24 +9,24 @@ const Contact = () => {
   return (
     <section id={SECTION_IDS.CONTACT} className={styles.root}>
       <Container className={styles.inner}>
-        <SectionTitle kicker="Ми чекаємо на вас у" variant="filled" tone="pink" align="center">
-          Солодії
+        <SectionTitle kicker="We’re waiting for you in" variant="filled" tone="pink" align="center">
+          Sweetopia
         </SectionTitle>
 
         <div className={styles.stage}>
           <span className={[styles.bubble, styles.bubbleLeft].join(' ')}>
-            І є цукрові котики
+            And there are sugar kitties
           </span>
           <MediaFrame
             className={styles.cat}
             ratio="square"
-            label="Ілюстрація: пухнастий цукровий котик"
+            label="Illustration: a fluffy sugar kitty"
           />
-          <span className={[styles.bubble, styles.bubbleRight].join(' ')}>Тут солоденько!</span>
+          <span className={[styles.bubble, styles.bubbleRight].join(' ')}>So sweet in here!</span>
         </div>
 
         <Button href={`#${SECTION_IDS.SHOP}`} variant="solid" icon="icon-arrow-right">
-          Обрати солодощі
+          Choose your sweets
         </Button>
       </Container>
     </section>

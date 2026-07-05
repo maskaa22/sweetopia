@@ -9,12 +9,12 @@ const Shop = () => {
   return (
     <section id={SECTION_IDS.SHOP} className={styles.root}>
       <Container>
-        <SectionTitle kicker="Скуштуй королівство —" variant="outline" tone="mix" align="center">
-          кенді-бар
+        <SectionTitle kicker="Taste the kingdom —" variant="outline" tone="mix" align="center">
+          candy bar
         </SectionTitle>
         <p className={styles.lead}>
-          Забери шматочок Солодії додому. Усі солодощі — ручної роботи, свіжі щодня та за рецептами
-          самих мешканців королівства.
+          Take a piece of Sweetopia home. Every treat is handmade, fresh every day and crafted by
+          the kingdom’s own residents.
         </p>
 
         <div className={styles.grid}>

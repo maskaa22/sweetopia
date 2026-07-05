@@ -7,12 +7,10 @@ const Footer = () => {
   return (
     <footer className={styles.root}>
       <Container className={styles.inner}>
-        <span>Дизайн — студія {BRAND}</span>
-        <span className={styles.center}>
-          Усі зображення згенеровані в&nbsp;нейромережі
-        </span>
+        <span>Designed by {BRAND} studio</span>
+        <span className={styles.center}>All images generated with AI</span>
         <span className={styles.love}>
-          зроблено з великою любов’ю
+          made with great love
           <SvgIcon id="icon-heart" width={16} height={16} className={styles.heart} />
         </span>
       </Container>

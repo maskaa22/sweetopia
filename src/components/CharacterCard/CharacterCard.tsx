@@ -12,7 +12,7 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
       <MediaFrame
         className={styles.art}
         ratio="square"
-        label={`Персонаж: ${character.name}`}
+        label={`Character: ${character.name}`}
       />
       <span className={styles.role}>{character.role}</span>
       <h3 className={styles.name}>{character.name}</h3>

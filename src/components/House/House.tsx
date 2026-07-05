@@ -7,16 +7,16 @@ const House = () => {
     <StorySection
       id={SECTION_IDS.HOUSE}
       className={styles.root}
-      kicker="Побач наживо легендарний"
-      title="пряничний дім"
+      kicker="See the legendary"
+      title="gingerbread house"
       titleVariant="outline"
       titleTone="blue"
-      mediaLabel="Ілюстрація: пряничний дім із льодяниковим дахом"
+      mediaLabel="Illustration: a gingerbread house with a lollipop roof"
       reversed
       paragraphs={[
-        'Стіни зроблені з пряників, прикрашених глазур’ю та різними фігурками з шоколаду.',
-        'Дах укритий льодяниками, що переливаються на сонці. Вікна з мармеладу, а двері — з карамелі.',
-        'Усередині ще більше солодощів: підлога з шоколадних плиток, стіни з печива з ванільною начинкою, стеля з різнокольорового безе.',
+        'The walls are made of gingerbread decorated with glaze and all kinds of chocolate figurines.',
+        'The roof is covered with lollipops that shimmer in the sun. The windows are of marmalade, and the doors of caramel.',
+        'Inside there are even more sweets: floors of chocolate tiles, walls of vanilla-filled biscuits and a ceiling of colorful meringue.',
       ]}
     />
   )

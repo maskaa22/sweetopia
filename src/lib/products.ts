@@ -1,43 +1,43 @@
 import type { Product } from '@/types/content'
 
-// Кенді-бар «Солодія» — картки продажу солодощів.
+// Sweetopia candy bar — products for sale.
 export const PRODUCTS: Product[] = [
   {
     id: 'lollipops',
-    name: 'Карамельні льодяники',
-    description: 'Ручної роботи, зварені на натуральних соках — по одному на кожен смак.',
-    price: 45,
-    tag: 'хіт',
+    name: 'Caramel Lollipops',
+    description: 'Handmade and boiled on natural juices — one for every taste.',
+    price: 5,
+    tag: 'hit',
   },
   {
     id: 'cotton-candy',
-    name: 'Цукрова вата',
-    description: 'Легка хмаринка солодощів на паличці — прямо з Цукрового дерева.',
-    price: 60,
+    name: 'Cotton Candy',
+    description: 'A light cloud of sweetness on a stick — straight from the Sugar Tree.',
+    price: 6,
   },
   {
     id: 'marshmallow',
-    name: 'Зефір ручної роботи',
-    description: 'Ніжний, повітряний, тане в роті — за рецептом пана Зефірки.',
-    price: 55,
+    name: 'Handmade Marshmallow',
+    description: 'Tender, airy and melts in your mouth — by Mr. Marshmallow’s recipe.',
+    price: 5,
   },
   {
     id: 'gingerbread',
-    name: 'Шоколадні пряники',
-    description: 'З глазур’ю та цукровими зірочками, як на стінах Пряничного дому.',
-    price: 75,
+    name: 'Chocolate Gingerbread',
+    description: 'With glaze and sugar stars, like the walls of the Gingerbread House.',
+    price: 7,
   },
   {
     id: 'marmalade',
-    name: 'Мармелад асорті',
-    description: 'Фруктовий мікс усіх кольорів королівства в одній коробці.',
-    price: 50,
-    tag: 'новинка',
+    name: 'Assorted Marmalade',
+    description: 'A fruity mix of all the kingdom’s colors in a single box.',
+    price: 5,
+    tag: 'new',
   },
   {
     id: 'cupcakes',
-    name: 'Капкейки «Солодоцар»',
-    description: 'Королівський вершковий крем і свіжі ягоди на пряничній основі.',
-    price: 90,
+    name: 'Sugar King Cupcakes',
+    description: 'Royal buttercream and fresh berries on a gingerbread base.',
+    price: 9,
   },
 ]

@@ -7,16 +7,16 @@ const Citizens = () => {
     <StorySection
       id={SECTION_IDS.CITIZENS}
       className={styles.root}
-      kicker="Знайомтесь із"
-      title="мешканцями"
+      kicker="Meet the"
+      title="residents"
       titleVariant="filled"
       titleTone="pink"
-      mediaLabel="Ілюстрація: усміхнений персонаж-морозиво"
+      mediaLabel="Illustration: a smiling ice-cream character"
       mediaRatio="square"
       paragraphs={[
-        'Добрі та веселі створіння, які люблять проводити час за поїданням солодощів.',
-        'Вони носять одяг із цукерок і прикрашають своє волосся карамельними стрічками.',
-        'Мешканці королівства завжди усміхаються та сміються, адже живуть у світі, повному радості й щастя.',
+        'Kind and cheerful creatures who love to spend their time eating sweets.',
+        'They wear clothes made of candy and decorate their hair with caramel ribbons.',
+        'The residents of the kingdom always smile and laugh, for they live in a world full of joy and happiness.',
       ]}
     />
   )

@@ -9,8 +9,8 @@ const Characters = () => {
   return (
     <section id={SECTION_IDS.CHARACTERS} className={styles.root}>
       <Container>
-        <SectionTitle kicker="Познайомся з іншими" variant="filled" tone="pink" align="center">
-          мешканцями
+        <SectionTitle kicker="Meet the other" variant="filled" tone="pink" align="center">
+          residents
         </SectionTitle>
         <div className={styles.grid}>
           {CHARACTERS.map((character) => (

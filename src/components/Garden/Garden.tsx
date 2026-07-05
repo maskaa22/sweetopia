@@ -8,17 +8,17 @@ const Garden = () => {
   return (
     <section id={SECTION_IDS.GARDEN} className={styles.root}>
       <Container className={styles.inner}>
-        <SectionTitle kicker="Потрап у прекрасний" tone="mix" kickerTone="white">
-          солодкий сад
+        <SectionTitle kicker="Step into the wonderful" tone="mix" kickerTone="white">
+          candy garden
         </SectionTitle>
         <p className={styles.lead}>
-          Тут ростуть дерева з тістечок і квіти з льодяників, стоять фонтани з морозива та лавки,
-          вкриті глазур’ю.
+          Here grow trees of pastries and flowers of lollipops, with fountains of ice cream and
+          benches covered in glaze.
         </p>
         <MediaFrame
           className={styles.art}
           ratio="landscape"
-          label="Ілюстрація: солодкий сад із карамельними деревами та фонтанами"
+          label="Illustration: a candy garden with caramel trees and fountains"
         />
       </Container>
     </section>

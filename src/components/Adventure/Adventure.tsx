@@ -7,14 +7,14 @@ const Adventure = () => {
     <StorySection
       id={SECTION_IDS.ADVENTURE}
       className={styles.root}
-      kicker="Кожен політ у цій країні —"
-      title="незабутня пригода"
+      kicker="Every flight here is"
+      title="an unforgettable trip"
       titleVariant="filled"
       titleTone="pink"
-      mediaLabel="Ілюстрація: літак із льодяників у хмарах із сердечок"
+      mediaLabel="Illustration: a lollipop plane in clouds of hearts"
       paragraphs={[
-        'Політ на літаку з льодяників, шоколадними крилами, карамельними двигунами та ванільним фюзеляжем.',
-        'Пристебніться зефірними ременями — і вирушайте назустріч найсолодшій подорожі свого життя.',
+        'A flight on a plane of lollipops, with chocolate wings, caramel engines and a vanilla fuselage.',
+        'Buckle up your marshmallow seatbelts and set off on the sweetest journey of your life.',
       ]}
     />
   )

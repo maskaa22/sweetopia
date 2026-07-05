@@ -13,9 +13,9 @@ export const SECTION_IDS = {
 
 export type SectionId = (typeof SECTION_IDS)[keyof typeof SECTION_IDS]
 
-export const BRAND = 'Солодія'
+export const BRAND = 'Sweetopia'
 
-export const CURRENCY = 'грн'
+export const CURRENCY = '$'
 
 export interface NavLink {
   id: SectionId
@@ -23,10 +23,10 @@ export interface NavLink {
 }
 
 export const NAV_LINKS: NavLink[] = [
-  { id: SECTION_IDS.KINGDOM, label: 'Королівство' },
-  { id: SECTION_IDS.CHARACTERS, label: 'Мешканці' },
-  { id: SECTION_IDS.GARDEN, label: 'Сад' },
-  { id: SECTION_IDS.HOUSE, label: 'Пряничний дім' },
-  { id: SECTION_IDS.SHOP, label: 'Кенді-бар' },
-  { id: SECTION_IDS.CONTACT, label: 'Контакти' },
+  { id: SECTION_IDS.KINGDOM, label: 'Kingdom' },
+  { id: SECTION_IDS.CITIZENS, label: 'Citizens' },
+  { id: SECTION_IDS.GARDEN, label: 'Garden' },
+  { id: SECTION_IDS.HOUSE, label: 'Gingerbread House' },
+  { id: SECTION_IDS.SHOP, label: 'Candy Bar' },
+  { id: SECTION_IDS.CONTACT, label: 'Contact' },
 ]

@@ -7,20 +7,20 @@ const Kingdom = () => {
     <StorySection
       id={SECTION_IDS.KINGDOM}
       className={styles.root}
-      kicker="Справжнє королівство"
-      title="солодощів"
+      kicker="A real kingdom of"
+      title="sweets"
       titleVariant="outline"
       titleTone="mix"
-      mediaLabel="Ілюстрація: візок із морозивом посеред цукрових гір"
+      mediaLabel="Illustration: an ice cream cart among the sugar mountains"
       reversed
       paragraphs={[
         <>
-          Тут можна побачити будинки з шоколаду, стіни з льодяників і дахи{' '}
-          <strong>з цукрової вати</strong>.
+          Here you’ll find houses made of chocolate, walls of lollipops and roofs{' '}
+          <strong>of cotton candy</strong>.
         </>,
         <>
-          Ви ніколи не зможете викинути з голови ті враження, які отримаєте,{' '}
-          <strong>побачивши одного разу</strong>.
+          You’ll never get the impressions out of your head — the ones you get{' '}
+          <strong>the moment you see it</strong>.
         </>,
       ]}
     />

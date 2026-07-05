@@ -1,6 +1,5 @@
 import { SECTION_IDS, BRAND } from '@/lib/constants'
 import Container from '@/components/Container'
-import MediaFrame from '@/components/MediaFrame'
 import SvgIcon from '@/components/SvgIcon'
 import styles from './Hero.module.scss'
 
@@ -10,19 +9,19 @@ const Hero = () => {
       <Container className={styles.inner}>
         <ul className={styles.topline}>
           <li>
-            одна маленька
+            one little
             <br />
-            Солодка галактика
+            sweet galaxy
           </li>
           <li>
-            світ, де все зроблено
+            a world where everything
             <br />
-            зі солодкого
+            is made of candy
           </li>
           <li>
-            всесвіт
+            a universe
             <br />
-            із твоїх снів
+            from your dreams
           </li>
         </ul>
 
@@ -31,10 +30,12 @@ const Hero = () => {
           <SvgIcon id="icon-sparkle" width={40} height={40} className={styles.sparkle} />
         </h1>
 
-        <MediaFrame
+        <img
           className={styles.art}
-          ratio="landscape"
-          label="Головна ілюстрація: пряничний дім на цукрових хмарах"
+          src="/images/hero.png"
+          alt="A candy gingerbread house floating on pink sugar clouds"
+          width={1024}
+          height={1024}
         />
       </Container>
     </section>

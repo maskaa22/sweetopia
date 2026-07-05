@@ -56,9 +56,10 @@
 }
 
 .art {
-  margin-top: clamp(-1rem, -2vw, 0rem);
-  max-width: 820px;
+  margin-top: clamp(-1rem, -2vw, 0.5rem);
+  width: 100%;
+  max-width: 760px;
+  height: auto;
   align-self: center;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
+  filter: drop-shadow(0 26px 40px rgba(76, 151, 187, 0.35));
 }
