@@ -1,8 +1,139 @@
-.root {
-  background: linear-gradient(180deg, var(--color-cotton) 0%, var(--color-cotton-deep) 100%);
+@use '../../styles/mixins' as *;
 
-  strong {
-    color: var(--color-pink);
-    font-weight: 700;
+.root {
+  position: relative;
+  padding-block: var(--section-py) 0;
+  background: linear-gradient(180deg, var(--color-sky) 0%, var(--color-white) 70%);
+}
+
+// Cotton-candy band bridging Hero and Kingdom: it lifts out of this section to
+// settle over the bottom of the hero house, and lands back over the top of this
+// one. The translate is a percentage of the image's own height, which tracks its
+// width, so the overlap holds at every breakpoint.
+.cloud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: auto;
+  transform: translateY(-65%);
+  pointer-events: none;
+
+  // Desktop gives the hero far more headroom, so the same offset rides too high
+  // over the house -- ease it back down.
+  @include lg {
+    transform: translateY(-56%);
+  }
+}
+
+// Title and copy stay above the cloud.
+.inner {
+  position: relative;
+  z-index: 4;
+}
+
+// Thin line-art flourishes from the design board. Decorative only, and only
+// once there is room for them beside the copy.
+.doodleArrow,
+.doodleSpring {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  color: var(--color-blue);
+  opacity: 0.75;
+
+  @include lg {
+    display: block;
+  }
+}
+
+.doodleArrow {
+  top: 28%;
+  left: 36%;
+}
+
+.doodleSpring {
+  top: 34%;
+  right: 4%;
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  margin-top: clamp(1.25rem, 1rem + 2vw, 2.5rem);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text);
+
+  p {
+    max-width: 34ch;
+  }
+}
+
+// Second paragraph steps in from the first, as in the design board.
+.indented {
+  @include md {
+    margin-left: clamp(2rem, 1rem + 5vw, 7.5rem);
+  }
+}
+
+// Closing phrase of each paragraph: own line, display face, candy gradient.
+.accent {
+  display: block;
+  margin-top: 0.35em;
+  font-family: var(--font-display);
+  font-size: 1.9em;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+
+  @include gradient-text;
+}
+
+// The sugar mountains run full-bleed along the bottom of the section. The band
+// is deliberately shorter than the art's natural ratio so the cart towers over
+// the ridge; object-position pins the crop to the sand.
+.scene {
+  position: relative;
+  // Narrow screens need a boxier band for the mountains to read, but that box is
+  // taller than the art's ratio, so cover can no longer crop away its empty sky.
+  // Pull the whole band up instead -- that strip is transparent anyway.
+  margin-top: -18%;
+  aspect-ratio: 4 / 3;
+
+  @include md {
+    margin-top: clamp(-6rem, -6%, -1rem);
+    aspect-ratio: 16 / 8;
+  }
+
+  @include lg {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+.terrain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+
+.cart {
+  position: absolute;
+  right: 2%;
+  bottom: 11%;
+  z-index: 1;
+  width: min(70%, 1150px);
+  height: auto;
+  filter: drop-shadow(0 22px 30px rgba(76, 151, 187, 0.22));
+
+  @include lg {
+    width: min(74%, 1150px);
   }
 }

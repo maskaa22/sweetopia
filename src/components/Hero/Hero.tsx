@@ -6,6 +6,12 @@ import styles from './Hero.module.scss'
 const Hero = () => {
   return (
     <section id={SECTION_IDS.HERO} className={styles.root}>
+      <SvgIcon id="icon-doodle-thread" width={80} height={200} className={styles.thread} />
+      <SvgIcon id="icon-doodle-swirl" width={140} height={70} className={styles.swirl} />
+      <SvgIcon id="icon-doodle-swoosh" width={200} height={260} className={styles.swoosh} />
+      <SvgIcon id="icon-sparkle" width={26} height={26} className={styles.starLarge} />
+      <SvgIcon id="icon-sparkle" width={15} height={15} className={styles.starSmall} />
+
       <Container className={styles.inner}>
         <ul className={styles.topline}>
           <li>
