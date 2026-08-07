@@ -6,7 +6,7 @@ interface SectionTitleProps {
   children: ReactNode
   variant?: 'outline' | 'filled'
   tone?: 'blue' | 'pink' | 'mix'
-  kickerTone?: 'pink' | 'white' | 'blue'
+  kickerTone?: 'gradient' | 'pink' | 'white' | 'blue'
   align?: 'start' | 'center'
   as?: 'h1' | 'h2'
 }
@@ -16,7 +16,7 @@ const SectionTitle = ({
   children,
   variant = 'outline',
   tone = 'mix',
-  kickerTone = 'pink',
+  kickerTone = 'gradient',
   align = 'center',
   as: Tag = 'h2',
 }: SectionTitleProps) => {

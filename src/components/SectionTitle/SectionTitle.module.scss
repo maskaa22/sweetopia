@@ -24,6 +24,11 @@
   letter-spacing: 0.01em;
 }
 
+// Default: candy gradient running left to right across the phrase.
+.kicker-gradient {
+  @include gradient-text(linear-gradient(90deg, var(--color-pink) 0%, var(--color-blue) 100%));
+}
+
 .kicker-pink {
   color: var(--color-pink);
 }

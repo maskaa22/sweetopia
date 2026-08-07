@@ -13,7 +13,7 @@ interface StorySectionProps {
   mediaRatio?: 'square' | 'portrait' | 'landscape'
   titleVariant?: 'outline' | 'filled'
   titleTone?: 'blue' | 'pink' | 'mix'
-  kickerTone?: 'pink' | 'white' | 'blue'
+  kickerTone?: 'gradient' | 'pink' | 'white' | 'blue'
   reversed?: boolean
   className?: string
   footer?: ReactNode
@@ -28,7 +28,7 @@ const StorySection = ({
   mediaRatio = 'landscape',
   titleVariant = 'outline',
   titleTone = 'mix',
-  kickerTone = 'pink',
+  kickerTone = 'gradient',
   reversed = false,
   className,
   footer,
