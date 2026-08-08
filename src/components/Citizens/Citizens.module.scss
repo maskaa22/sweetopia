@@ -1,3 +1,214 @@
+@use '../../styles/mixins' as *;
+
 .root {
-  background: linear-gradient(180deg, var(--color-cotton-deep) 0%, var(--color-sky) 100%);
+  position: relative;
+  padding-block: var(--section-py);
+  // Soft pink field that lifts towards the centre, as on the design board.
+  // The top band opens on the exact colour the Kingdom sand ends on and fades
+  // out over the first fifth, so the two sections read as one surface. Fading
+  // to the same RGB at zero alpha keeps the ramp off grey.
+  background:
+    linear-gradient(180deg, #fcc9ce 0%, rgba(252, 201, 206, 0) 22%),
+    radial-gradient(120% 85% at 45% 55%, #fff7f9 0%, var(--color-cotton) 100%);
+  overflow: hidden;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-align: center;
+
+  @include gradient-text(linear-gradient(90deg, var(--color-pink) 0%, var(--color-blue) 100%));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 1rem + 5vw, 4rem);
+  align-items: center;
+  margin-top: clamp(2rem, 1.5rem + 3vw, 4rem);
+
+  @include lg {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.figure {
+  display: block;
+  // Below lg the grid is a single column, so the art has the full width to
+  // itself and has to be reined in. It only needs to read large next to the
+  // arch, which is a two-column arrangement.
+  width: min(100%, 400px);
+  max-width: none;
+  height: auto;
+  margin-inline: auto;
+  filter: drop-shadow(0 26px 40px rgba(209, 98, 142, 0.28));
+
+  // Tablets have width to spare in one column -- just not the full run of it.
+  @include md {
+    width: min(100%, 560px);
+  }
+
+  // Its generous transparent margins let it spill past the column here without
+  // crowding the arch. Transform keeps the lift out of the layout, so the
+  // section height holds.
+  @include lg {
+    width: min(108%, 700px);
+    transform: translateY(-8%);
+  }
+}
+
+.panel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  // Narrow on purpose: the copy wraps to more, shorter lines, which is what
+  // gives the arch its tall portrait proportion on the board. Narrower still on
+  // phones, so the orbit has room to pass around the outside of it.
+  width: min(100%, 260px);
+
+  @include md {
+    width: min(100%, 340px);
+  }
+  margin-inline: auto;
+  padding: clamp(4.5rem, 3rem + 8vw, 8rem) clamp(1.5rem, 1rem + 2vw, 2.25rem)
+    clamp(3rem, 2rem + 4vw, 4.5rem);
+}
+
+// preserveAspectRatio is off so the arch stretches to whatever the copy needs;
+// non-scaling-stroke keeps the rule hairline-thin regardless. overflow stays
+// visible because the orbit deliberately runs past the arch on both sides.
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+// The orbit has to clear the arch on both sides to read as wrapping it, and on
+// a phone that only works once the arch itself gives up some width. With a
+// 260px arch the ellipse lands at ~350px, leaving a 45px overhang each side --
+// wide enough to look deliberate rather than pinched against the walls.
+//
+// The nudge lines the ellipse's centre (x=150) up with the arch's (x=160);
+// without it the overhang is lopsided and the tighter side reads as a kink.
+.orbitBack,
+.orbitFront {
+  transform-box: view-box;
+  transform-origin: 150px 385px;
+  transform: translateX(10px) scale(0.942);
+
+  // One column, arch centred: the overhang has the whole gutter to live in.
+  @include md {
+    transform: none;
+  }
+
+  // Two columns push the arch against the right gutter, which at 1024 is only
+  // ~39px wide against a ~62px overhang -- the tail ran off the viewport and
+  // the section clipped it. Trim the orbit so it clears at the narrowest lg.
+  @include lg {
+    transform: scale(0.92);
+  }
+}
+
+// Positions are the midpoints of the two breaks, read off the same viewBox the
+// paths use, so each star lands inside its own gap at any panel size.
+.starTop,
+.starBottom,
+.starSmall {
+  position: absolute;
+  z-index: 2;
+  color: #4a3f8c;
+  transform: translate(-50%, -50%);
+}
+
+// Break in the arch, on the right shoulder of the dome.
+.starTop {
+  left: 99.4%;
+  top: 27.2%;
+}
+
+// Break in the near side of the orbit, off the arch's bottom-left corner.
+// Tracks the squeeze applied to the orbit on phones.
+.starBottom {
+  left: 4.1%;
+  top: 100.3%;
+
+  @include md {
+    left: -1.8%;
+    top: 101.4%;
+  }
+
+  @include lg {
+    left: 2.1%;
+    top: 99.9%;
+  }
+}
+
+.starSmall {
+  left: 76%;
+  top: 86%;
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 24ch;
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+// Line-art sweets scattered around the composition.
+.cake,
+.lollipop,
+.candy {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  height: auto;
+  pointer-events: none;
+
+  @include md {
+    display: block;
+  }
+}
+
+.cake {
+  top: 6%;
+  left: 3%;
+  width: clamp(150px, 18vw, 290px);
+}
+
+.lollipop {
+  top: 3%;
+  right: 5%;
+  width: clamp(90px, 10vw, 160px);
+}
+
+// In one column the centre belongs to the character, so the candy sits out by
+// the right edge; the gap beside the arch only exists at lg.
+.candy {
+  top: 30%;
+  right: 5%;
+  width: clamp(115px, 13vw, 215px);
+
+  // The larger tablet character reaches its widest right about here, so the
+  // candy moves up to where it narrows again.
+  @include md {
+    top: 21%;
+  }
+
+  @include lg {
+    top: 24%;
+    right: auto;
+    left: 45%;
+  }
 }
