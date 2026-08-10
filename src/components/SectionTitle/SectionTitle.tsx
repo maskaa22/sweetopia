@@ -9,6 +9,7 @@ interface SectionTitleProps {
   kickerTone?: 'gradient' | 'pink' | 'white' | 'blue'
   align?: 'start' | 'center'
   as?: 'h1' | 'h2'
+  className?: string
 }
 
 const SectionTitle = ({
@@ -19,8 +20,9 @@ const SectionTitle = ({
   kickerTone = 'gradient',
   align = 'center',
   as: Tag = 'h2',
+  className,
 }: SectionTitleProps) => {
-  const rootClass = [styles.root, styles[`align-${align}`]].join(' ')
+  const rootClass = [styles.root, styles[`align-${align}`], className].filter(Boolean).join(' ')
   const bigClass = [styles.big, styles[variant], styles[`tone-${tone}`]].join(' ')
 
   return (

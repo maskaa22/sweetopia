@@ -1,3 +1,120 @@
+@use '../../styles/mixins' as *;
+
 .root {
-  background: linear-gradient(180deg, var(--color-sky) 0%, var(--color-mint) 100%);
+  position: relative;
+  padding-block: var(--section-py);
+  // Opens on the exact colour Citizens ends on and washes out over the first
+  // third, so the two sections read as one surface. The pink lightens to near
+  // white before the blue arrives -- interpolated straight, pink to blue turns
+  // muddy through the middle -- and each stop fades to its own RGB at zero
+  // alpha, which keeps the ramp off grey.
+  background:
+    linear-gradient(180deg, #fbe4ee 0%, #fdf6f9 12%, rgba(253, 246, 249, 0) 32%),
+    linear-gradient(180deg, var(--color-sky) 0%, var(--color-mint) 100%);
+  overflow: hidden;
+}
+
+// Same display size as every other section title; kept on one line so the king
+// has a clean edge to ride over.
+.head {
+  position: relative;
+  z-index: 2;
+
+  h2 {
+    white-space: nowrap;
+  }
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(1rem, 0.5rem + 2vw, 2rem);
+  padding-inline: var(--gutter);
+
+  // The king is lifted out of the flow here and stands alongside, so the
+  // cupcake keeps the left of the section to itself.
+  @include lg {
+    width: 64%;
+  }
+}
+
+// The cupcake and the ring of traits share this box, and the ring's geometry is
+// written in the artwork's own frame, so the two stay concentric at any size.
+.cake {
+  position: relative;
+  aspect-ratio: 1536 / 1024;
+
+  // The ring only uses the middle ~68% of the frame, so on phones the frame can
+  // run wider than its column and still sit inside the viewport. That is what
+  // buys the curved text a readable size -- the arcs' capacity is fixed by the
+  // viewBox font, so enlarging the frame is the only lever left.
+  width: 140%;
+  margin-inline: -20%;
+
+  @include md {
+    width: min(100%, 620px);
+    margin-inline: auto;
+  }
+}
+
+// Pulled in slightly from the ring so the words have somewhere to sit. Scaled
+// about the cupcake's own centre, which is off the box's centre.
+.cakeArt {
+  width: 100%;
+  height: 100%;
+  transform-origin: 52.7% 47.6%;
+  transform: scale(0.9);
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--color-ink);
+  font-size: 34px; // user units in the viewBox, not screen pixels
+  font-weight: 400;
+}
+
+// The art carries a wide transparent margin on its left, so it is sized and
+// offset against that rather than against the king himself.
+.king {
+  height: auto;
+
+  // Phones: those margins are ~27% left and ~16% right, so at 100% the king
+  // himself only fills a bit over half the width. The frame runs past the
+  // viewport instead -- the section clips it -- and the left offset is what
+  // centres the king rather than the frame, since he does not sit centred in
+  // it. The negative top pulls him up under the cupcake.
+  width: 150%;
+  // The global img rule would cap this back to 100%, and the negative offset
+  // would then drag him off the left edge instead of centring him.
+  max-width: none;
+  margin: -12% 0 0 -33%;
+
+  @include md {
+    width: min(100%, 560px);
+    margin: clamp(1rem, 0.5rem + 2vw, 2rem) auto 0;
+  }
+
+  // Stands alongside the cupcake from lg up, overlapping the title row the way
+  // it does on the board.
+  // Anchored from the top rather than the bottom: what matters is that his
+  // crown rides over the title, and the title's position is fixed by the
+  // section padding, while the section's full height moves with the cupcake.
+  @include lg {
+    position: absolute;
+    top: clamp(4rem, 1rem + 7vw, 9rem);
+    right: -4%;
+    z-index: 3;
+    // The title is centred in the container while he is pinned to the section's
+    // right edge, so the two close in on each other as the viewport narrows.
+    // Held back here so he only clips the tail of the word, not half of it.
+    width: min(52%, 940px);
+    margin: 0;
+  }
+
+  @include xl {
+    width: min(60%, 940px);
+  }
 }
