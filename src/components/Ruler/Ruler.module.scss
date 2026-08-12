@@ -2,7 +2,10 @@
 
 .root {
   position: relative;
-  padding-block: var(--section-py);
+  // Trimmed at the bottom: the cupcake's frame already carries empty space
+  // below the base, so a full section pad on top of it reads as a hole before
+  // the next section.
+  padding-block: var(--section-py) clamp(1rem, 0.5rem + 2vw, 2.5rem);
   // Opens on the exact colour Citizens ends on and washes out over the first
   // third, so the two sections read as one surface. The pink lightens to near
   // white before the blue arrives -- interpolated straight, pink to blue turns
