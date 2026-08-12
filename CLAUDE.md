@@ -107,10 +107,20 @@ guessing. They send annotated screenshots (red boxes/lines) marking what to move
 They supply artwork mid-task, sometimes replacing a file silently — re-check
 asset mtime/size when something looks different. Ask before large asset surgery.
 
+## Settled — do not reopen
+
+- `hero-2.png` is the alpha I recovered, not a fresh export, and that is fine:
+  no checkerboard survives and the clear zone measures dead flat at alpha 0.
+- The Adventure window's close control and its accept/decline buttons are
+  decorative `span`s on purpose, so nothing announces itself as operable or
+  takes focus. The copy inside is real text.
+- Adventure's hearts stay flat sprite hearts rather than 3D art.
+
 ## Open threads
 
-- `hero-2.png` (cloud, on the kingdom branch) is still my algorithmically
-  recovered version, not a clean export.
 - Sparkle colour `#4a3f8c` (Citizens) is the only colour outside the tokens.
-- Seam Citizens↔Ruler is done; other section boundaries are still hard cuts.
-- Adventure onward still sit on `StorySection` with `MediaFrame` placeholders.
+- Seams Kingdom↔Citizens, Citizens↔Ruler and Ruler↔Adventure are done; the
+  remaining boundaries are still hard cuts.
+- Characters onward still sit on `StorySection` with `MediaFrame` placeholders.
+- Nothing is merged to `main` yet — the four section branches are chained, so a
+  PR for the newest shows all of them. Merge bottom-up to split them.
