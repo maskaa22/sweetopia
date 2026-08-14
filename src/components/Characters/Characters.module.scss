@@ -1,21 +1,191 @@
 @use '../../styles/mixins' as *;
 
+// Opens on the colour Adventure closes on, so that seam needs no ramp.
 .root {
-  padding-block: var(--section-py);
-  background: linear-gradient(180deg, var(--color-sky) 0%, var(--color-mint) 100%);
+  position: relative;
+  padding-block: clamp(1.5rem, 1rem + 2vw, 3rem) var(--section-py);
+  background: linear-gradient(180deg, var(--color-sky-deep) 0%, var(--color-mint) 100%);
+  overflow: hidden;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(1rem, 0.5rem + 2vw, 2rem);
-  margin-top: clamp(1.75rem, 1rem + 3vw, 3.5rem);
-
-  @include sm {
-    grid-template-columns: repeat(2, 1fr);
-  }
+// Below lg everything simply stacks; from lg the stage becomes a fixed canvas
+// and each card takes its own slot on it, as on the board.
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 3vw, 2.5rem);
+  padding-inline: var(--gutter);
 
   @include lg {
-    grid-template-columns: repeat(3, 1fr);
+    position: relative;
+    display: block;
+    aspect-ratio: 1192 / 900;
+    padding-inline: 0;
+  }
+}
+
+.title {
+  order: -1;
+  max-width: 22ch;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+  text-align: center;
+
+  @include gradient-text(linear-gradient(100deg, var(--color-pink) 0%, var(--color-blue) 100%));
+
+  @include lg {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    max-width: 14ch;
+    text-align: left;
+  }
+}
+
+// --- card slots -------------------------------------------------------------
+
+// Slots are written as `.stage > .id` on purpose: `.stage > article` is a class
+// plus an element, so a bare `.id` would lose to it and the shared width would
+// stick, leaving every card sized to its own artwork.
+.stage > article {
+  width: min(100%, 340px);
+
+  @include lg {
+    position: absolute;
+  }
+}
+
+// The arches are held narrower than the rest when stacked: at full column width
+// their domes flatten out and stop reading as arches.
+.stage > .sugar-tree {
+  width: min(100%, 260px);
+
+  @include lg {
+    top: 6%;
+    left: 10%;
+    width: 19%;
+  }
+}
+
+.stage > .dark-choco {
+  @include lg {
+    top: 14%;
+    left: 37%;
+    width: 15%;
+  }
+}
+
+.stage > .sugar-thief {
+  @include lg {
+    top: 13%;
+    left: 62%;
+    width: 26%;
+  }
+}
+
+.stage > .sugar-queen {
+  width: min(100%, 260px);
+
+  @include lg {
+    top: 32%;
+    left: 54%;
+    width: 19%;
+  }
+}
+
+.stage > .mr-marshmallow {
+  @include lg {
+    top: 33%;
+    left: 81%;
+    width: 14%;
+  }
+}
+
+// --- scenery ----------------------------------------------------------------
+
+.orbit,
+.spark,
+.lollipop {
+  display: none;
+
+  @include lg {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    pointer-events: none;
+  }
+}
+
+// Sized against the queen's slot so it rings her card rather than the stage.
+.orbit {
+  @include lg {
+    top: 46%;
+    left: 47%;
+    width: 33%;
+    max-width: none;
+    height: auto;
+    opacity: 0.8;
+  }
+}
+
+.spark {
+  @include lg {
+    color: #4a3f8c;
+  }
+}
+
+.sparkA {
+  @include lg {
+    top: 5%;
+    left: 8%;
+    width: 46px;
+    height: 46px;
+  }
+}
+
+.sparkB {
+  @include lg {
+    top: 24%;
+    left: 51%;
+  }
+}
+
+.sparkC {
+  @include lg {
+    top: 32%;
+    left: 68%;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.sparkD {
+  @include lg {
+    top: 25%;
+    left: 88%;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.sparkE {
+  @include lg {
+    top: 62%;
+    left: 84%;
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.lollipop {
+  @include lg {
+    top: 72%;
+    left: 14%;
+    width: 17%;
+    height: auto;
+    transform: rotate(-8deg);
   }
 }

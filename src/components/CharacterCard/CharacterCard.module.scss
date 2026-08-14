@@ -1,45 +1,111 @@
+@use '../../styles/mixins' as *;
+
 .root {
+  position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(6px);
+  padding: clamp(1rem, 0.7rem + 1.2vw, 1.75rem);
   text-align: center;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+}
 
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-card);
-  }
+// The outline sits behind the content and stretches with the card.
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .art {
-  margin-bottom: 0.35rem;
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-.role {
-  font-size: var(--fs-kicker);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-blue);
+.text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .name {
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
   font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-pink);
+  line-height: 1.15;
+  color: var(--color-ink);
 }
 
 .desc {
-  font-size: var(--fs-body);
+  font-size: clamp(0.68rem, 0.6rem + 0.3vw, 0.82rem);
+  line-height: 1.35;
   color: var(--color-text-muted);
+}
+
+// --- shapes -----------------------------------------------------------------
+
+// Rounded top, flat bottom: the dome needs headroom, the base does not. How
+// wide an arch gets is set by the layout that places it -- at full column width
+// the dome flattens and stops reading as an arch.
+//
+// The ratio is pinned rather than left to the content, which would let a longer
+// description square the card off. Name and description sit on the base, and
+// the art floats in the space above them: auto block margins split the slack
+// evenly above and below it, so it centres itself whatever the copy runs to.
+.arch {
+  aspect-ratio: 3 / 4;
+  padding-top: clamp(2.75rem, 2rem + 3.5vw, 4.5rem);
+  padding-bottom: clamp(1.25rem, 1rem + 1.4vw, 2rem);
+
+  .art {
+    width: 96%;
+    flex: none;
+    margin-block: auto;
+    margin-inline: auto;
+  }
+}
+
+// Sits in the break on the left shoulder, centred on it.
+.gapStar {
+  position: absolute;
+  left: 0.6%;
+  top: 27.2%;
+  z-index: 1;
+  color: #4a3f8c;
+  transform: translate(-50%, -50%);
+}
+
+.pill {
+  padding-block: clamp(1.75rem, 1.2rem + 2.4vw, 3.25rem);
+}
+
+.wide {
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(0.5rem, 0.3rem + 1vw, 1rem);
+  padding: clamp(0.5rem, 0.4rem + 0.6vw, 0.9rem) clamp(1.25rem, 1rem + 1.6vw, 2.25rem);
+  text-align: left;
+
+  .art {
+    width: 38%;
+    flex: none;
+  }
+}
+
+// --- content order ----------------------------------------------------------
+
+.art-first {
+  flex-direction: column;
+}
+
+.text-first {
+  flex-direction: column-reverse;
+}
+
+.row {
+  flex-direction: row;
 }
