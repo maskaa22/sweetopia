@@ -22,13 +22,29 @@ interface CharacterCardProps {
 // the right. The break is cut into the geometry rather than dashed, because a
 // dash pattern is measured after preserveAspectRatio stretches the box and
 // would not stay put. `gapStar` marks the midpoint of that break.
-const FRAMES: Record<CardShape, { viewBox: string; paths: string[]; gapStar?: boolean }> = {
+const FRAMES: Record<
+  CardShape,
+  { viewBox: string; paths: string[]; gapStar?: boolean; echo?: boolean }
+> = {
   arch: {
     viewBox: '0 0 320 470',
     paths: ['M319 469V160A159 159 0 0 0 15.9 92.8', 'M1 170V469H319'],
     gapStar: true,
   },
-  pill: { viewBox: '0 0 100 140', paths: ['M1 46A48 45 0 0 1 99 46V94A48 45 0 0 1 1 94Z'] },
+  // One unbroken run from partway down the right edge, round the bottom, up the
+  // left and back over the cap -- what is left out is the break on the right
+  // shoulder, where its own star sits.
+  //
+  // The caps are rx 49 about x=50 so they meet the walls at x=1 and x=99. At 48
+  // they stop short, which puts the wall's own endpoint outside the ellipse;
+  // SVG then rescales the radii to reach it and the arc swings the wrong way,
+  // tearing a second gap open at the top.
+  pill: {
+    viewBox: '0 0 100 140',
+    paths: ['M99 62V94A49 45 0 0 1 1 94V46A49 45 0 0 1 94.4 27'],
+    gapStar: true,
+    echo: true,
+  },
   wide: { viewBox: '0 0 200 70', paths: ['M35 1H165A34 34 0 0 1 165 69H35A34 34 0 0 1 35 1Z'] },
 }
 
@@ -69,6 +85,29 @@ const CharacterCard = ({
           />
         ))}
       </svg>
+
+      {/* Second copy of the outline, offset. It reuses the gradient defined
+          above rather than declaring its own -- url(#id) resolves across the
+          document, not just within one svg. */}
+      {frame.echo ? (
+        <svg
+          className={styles.frameEcho}
+          viewBox={frame.viewBox}
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {frame.paths.map((d) => (
+            <path
+              key={d}
+              d={d}
+              fill="none"
+              stroke={`url(#${gradientId})`}
+              strokeWidth="1.4"
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+        </svg>
+      ) : null}
 
       {frame.gapStar ? (
         <SvgIcon id="icon-star-4" width={28} height={28} className={styles.gapStar} />

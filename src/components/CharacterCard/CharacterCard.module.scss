@@ -11,11 +11,17 @@
 }
 
 // The outline sits behind the content and stretches with the card.
-.frame {
+.frame,
+.frameEcho {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+// Offset copy, sitting low and to one side of the first.
+.frameEcho {
+  transform: translate(-6%, 4%);
 }
 
 .art {
@@ -69,18 +75,49 @@
   }
 }
 
-// Sits in the break on the left shoulder, centred on it.
+// Centred on the break in its own outline; each shape breaks somewhere else, so
+// the coordinates live with the shape.
 .gapStar {
   position: absolute;
-  left: 0.6%;
-  top: 27.2%;
   z-index: 1;
   color: #4a3f8c;
   transform: translate(-50%, -50%);
 }
 
+.arch .gapStar {
+  left: 0.6%;
+  top: 27.2%;
+}
+
+.pill .gapStar {
+  left: 98%;
+  top: 32%;
+}
+
+// Capsule. Ratio pinned for the same reason as the arch, and the artwork floats
+// in whatever the copy leaves it. Any tilt belongs to the card's slot, not to
+// the shape -- only some of the capsules are tipped.
 .pill {
-  padding-block: clamp(1.75rem, 1.2rem + 2.4vw, 3.25rem);
+  aspect-ratio: 3 / 4;
+  // Deeper at the top than the bottom, because the cap is still closing in
+  // there -- and the copy is held narrower for the same reason. Lowering it
+  // alone would not do: at the old height the capsule is only about 57% as wide
+  // as the card, so full-width text crossed the outline whatever its offset.
+  padding-top: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  padding-bottom: clamp(1.25rem, 1rem + 1.4vw, 2.25rem);
+
+  .text {
+    max-width: 76%;
+  }
+
+  // Full width on purpose: these assets carry wide transparent margins, so the
+  // character itself only fills about half of what the frame is given.
+  .art {
+    width: 100%;
+    flex: none;
+    margin-block: auto;
+    margin-inline: auto;
+  }
 }
 
 .wide {

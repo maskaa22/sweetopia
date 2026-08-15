@@ -70,7 +70,18 @@
   }
 }
 
+// Tipped off true, as on the board -- outline and content together. Transform
+// only, so the tilt costs nothing in the stacking flow.
 .stage > .dark-choco {
+  width: min(100%, 240px);
+  transform: rotate(-8deg);
+
+  // Turned back the other way and past upright, so the sweet itself leans right
+  // while the capsule around it leans left.
+  img {
+    transform: rotate(26deg);
+  }
+
   @include lg {
     top: 14%;
     left: 37%;
@@ -97,6 +108,8 @@
 }
 
 .stage > .mr-marshmallow {
+  width: min(100%, 240px);
+
   @include lg {
     top: 33%;
     left: 81%;
