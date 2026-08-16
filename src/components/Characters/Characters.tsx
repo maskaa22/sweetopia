@@ -9,7 +9,7 @@ import styles from './Characters.module.scss'
 // layout. Each card gets its own frame shape, content order and slot on the
 // scattered board.
 const CARDS: Record<string, { image: string; shape: CardShape; layout: CardLayout }> = {
-  'sugar-tree': { image: '/images/characters/1.png', shape: 'arch', layout: 'art-first' },
+  'sugar-tree': { image: '/images/characters/1.png', shape: 'arch-mirror', layout: 'art-first' },
   'dark-choco': { image: '/images/characters/2.png', shape: 'pill', layout: 'text-first' },
   'sugar-thief': { image: '/images/characters/3.png', shape: 'wide', layout: 'row' },
   'sugar-queen': { image: '/images/characters/4.png', shape: 'arch', layout: 'text-first' },

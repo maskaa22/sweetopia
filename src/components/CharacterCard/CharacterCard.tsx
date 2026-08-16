@@ -2,7 +2,7 @@ import type { Character } from '@/types/content'
 import SvgIcon from '@/components/SvgIcon'
 import styles from './CharacterCard.module.scss'
 
-export type CardShape = 'arch' | 'pill' | 'wide'
+export type CardShape = 'arch' | 'arch-mirror' | 'pill' | 'wide'
 export type CardLayout = 'art-first' | 'text-first' | 'row'
 
 interface CharacterCardProps {
@@ -17,16 +17,22 @@ interface CharacterCardProps {
 // whatever the card ends up being; non-scaling-stroke keeps the rule hairline
 // thin however far it is pulled.
 //
-// The arch is the Citizens panel mirrored: x' = 320 - x, which also flips the
-// sweep flag on the dome, so its break lands on the left shoulder instead of
-// the right. The break is cut into the geometry rather than dashed, because a
-// dash pattern is measured after preserveAspectRatio stretches the box and
-// would not stay put. `gapStar` marks the midpoint of that break.
+// The arch is the Citizens panel, and `arch-mirror` is the same geometry under
+// x' = 320 - x -- which also flips the sweep flag on the dome -- so its break
+// lands on the left shoulder rather than the right. The break is cut into the
+// geometry rather than dashed, because a dash pattern is measured after
+// preserveAspectRatio stretches the box and would not stay put. `gapStar` marks
+// the midpoint of that break.
 const FRAMES: Record<
   CardShape,
   { viewBox: string; paths: string[]; gapStar?: boolean; echo?: boolean }
 > = {
   arch: {
+    viewBox: '0 0 320 470',
+    paths: ['M1 469V160A159 159 0 0 1 304.1 92.8', 'M319 170V469H1'],
+    gapStar: true,
+  },
+  'arch-mirror': {
     viewBox: '0 0 320 470',
     paths: ['M319 469V160A159 159 0 0 0 15.9 92.8', 'M1 170V469H319'],
     gapStar: true,
@@ -45,7 +51,13 @@ const FRAMES: Record<
     gapStar: true,
     echo: true,
   },
-  wide: { viewBox: '0 0 200 70', paths: ['M35 1H165A34 34 0 0 1 165 69H35A34 34 0 0 1 35 1Z'] },
+  // Runs from partway along the bottom edge, round the left cap, across the top
+  // and down the right cap -- the break is what is left out, low on the right.
+  wide: {
+    viewBox: '0 0 200 70',
+    paths: ['M120 69H35A34 34 0 0 1 35 1H165A34 34 0 0 1 186.9 61'],
+    gapStar: true,
+  },
 }
 
 const CharacterCard = ({

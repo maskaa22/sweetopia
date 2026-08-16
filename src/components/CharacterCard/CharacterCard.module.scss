@@ -1,7 +1,13 @@
 @use '../../styles/mixins' as *;
 
+// A query container, so the copy inside can size against the card rather than
+// the viewport. The cards differ hugely in width -- a fifth of the stage in the
+// collage, a full column when stacked -- and viewport-based type stayed nearly
+// the same in both, which pushed text straight through the outline on narrower
+// cards.
 .root {
   position: relative;
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,10 +30,14 @@
   transform: translate(-6%, 4%);
 }
 
+// Takes whatever height the copy leaves and letterboxes inside it. Sizing by
+// width alone breaks on the portrait assets: at full card width they come out
+// taller than the card and spill past the outline top and bottom.
 .art {
   position: relative;
+  flex: 1 1 0;
+  min-height: 0;
   width: 100%;
-  height: auto;
   object-fit: contain;
 }
 
@@ -40,14 +50,14 @@
 
 .name {
   font-family: var(--font-body);
-  font-size: var(--fs-body);
+  font-size: clamp(0.7rem, 6.25cqw, 1.1rem);
   font-weight: 700;
   line-height: 1.15;
   color: var(--color-ink);
 }
 
 .desc {
-  font-size: clamp(0.68rem, 0.6rem + 0.3vw, 0.82rem);
+  font-size: clamp(0.55rem, 4.6cqw, 0.85rem);
   line-height: 1.35;
   color: var(--color-text-muted);
 }
@@ -62,15 +72,14 @@
 // description square the card off. Name and description sit on the base, and
 // the art floats in the space above them: auto block margins split the slack
 // evenly above and below it, so it centres itself whatever the copy runs to.
-.arch {
+.arch,
+.arch-mirror {
   aspect-ratio: 3 / 4;
   padding-top: clamp(2.75rem, 2rem + 3.5vw, 4.5rem);
   padding-bottom: clamp(1.25rem, 1rem + 1.4vw, 2rem);
 
   .art {
     width: 96%;
-    flex: none;
-    margin-block: auto;
     margin-inline: auto;
   }
 }
@@ -85,6 +94,11 @@
 }
 
 .arch .gapStar {
+  left: 99.4%;
+  top: 27.2%;
+}
+
+.arch-mirror .gapStar {
   left: 0.6%;
   top: 27.2%;
 }
@@ -94,11 +108,21 @@
   top: 32%;
 }
 
+// This one is drawn as an outline rather than solid. SvgIcon sets
+// `fill: currentColor` on itself, so both properties have to be reset here.
+.wide .gapStar {
+  left: 77%;
+  top: 98%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+}
+
 // Capsule. Ratio pinned for the same reason as the arch, and the artwork floats
 // in whatever the copy leaves it. Any tilt belongs to the card's slot, not to
 // the shape -- only some of the capsules are tipped.
 .pill {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   // Deeper at the top than the bottom, because the cap is still closing in
   // there -- and the copy is held narrower for the same reason. Lowering it
   // alone would not do: at the old height the capsule is only about 57% as wide
@@ -114,8 +138,6 @@
   // character itself only fills about half of what the frame is given.
   .art {
     width: 100%;
-    flex: none;
-    margin-block: auto;
     margin-inline: auto;
   }
 }

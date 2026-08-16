@@ -25,6 +25,26 @@ Hero, Kingdom, Citizens, Ruler, Adventure, Characters, Garden, House, Shop, Cont
 Copy is English throughout, brand `Sweetopia`. Display font Podarok (fallback
 Oswald), body Oswald.
 
+### Character cards (Characters section)
+
+`CharacterCard` takes `shape` + `layout`; the data in `lib/characters.ts` stays
+free of presentation, and which card gets which shape/slot lives in a `CARDS`
+map in `Characters.tsx`. Shapes are `arch` (break on the right shoulder),
+`arch-mirror` (same path under `x' = 320 - x`, break on the left), `pill`
+(break on the right, plus an offset second outline) and `wide` (break low right,
+and its star is the one drawn as an outline). Each shape's break is cut into the
+geometry and carries a `gapStar` positioned on that break.
+
+Two things that are load-bearing here:
+
+- The card is a **query container** and the copy sizes in `cqw`. Viewport-based
+  type stayed nearly the same whether the card was a fifth of the collage or a
+  full stacked column, which pushed text straight through the outline on the
+  narrow ones.
+- `.art` is `flex: 1 1 0` + `object-fit: contain`, not width-driven. Sizing by
+  width alone spills the portrait assets (the queen is 1024x1536) past the
+  outline top and bottom.
+
 ### Shared section pieces
 
 `StorySection` is the original generic layout (title + copy + `MediaFrame`
@@ -59,6 +79,17 @@ says. Then open the next section on exactly that colour and fade out over
 ~20–30%. Fade to *the same RGB at zero alpha*, never `transparent` (that is
 black at zero alpha and greys the ramp). Pink→blue needs a near-white waypoint
 or the middle goes muddy.
+
+**Specificity in the collage.** Card slots are written `.stage > .id`, not
+`.id` — the shared `.stage > article` rule is a class *plus* an element, so a
+bare class loses to it and every card keeps the shared width. Cost an hour when
+each card sized itself to its own artwork.
+
+**SVG arcs silently rescale.** If an arc's endpoint is unreachable with the
+radii given, the spec says to scale the radii up rather than error — the curve
+then takes a different route and tears a gap somewhere you did not ask for. Hit
+this when a capsule's walls sat at `x=1..99` but its caps were `rx=48` about
+`x=50`, which spans only `2..98`. Make the wall and cap geometry agree.
 
 **SVG `textPath`:**
 - Arc direction sets glyph rotation. On the lower half of a ring, an arc swept
@@ -96,7 +127,8 @@ capture tall and crop by offset.
 
 Branch per section, chained off the previous one (not off `main`), because each
 builds on shared changes from the last: `feat/kingdom-section` →
-`feat/citizens-section` → `feat/ruler-section` → `feat/adventure-section`.
+`feat/citizens-section` → `feat/ruler-section` → `feat/adventure-section` →
+`feat/characters-section`.
 Conventional commits, body explains *why*. Remote `origin` = maskaa22/sweetopia.
 
 ## Working style the user expects
@@ -116,11 +148,39 @@ asset mtime/size when something looks different. Ask before large asset surgery.
   takes focus. The copy inside is real text.
 - Adventure's hearts stay flat sprite hearts rather than 3D art.
 
+## Where this was left (shelved)
+
+On `feat/characters-section`. Hero, Kingdom, Citizens, Ruler and Adventure are
+finished and pushed. Characters is **mid-flight** — built and building clean,
+but only reviewed as far as the third card.
+
+Reviewed and signed off, mobile-first, card by card:
+
+1. **Sugar Tree** — arch narrowed and pinned to `3/4`, break and star mirrored
+   to the left, artwork centred with `margin-block: auto`. Done.
+2. **Dark Chocolate** — capsule tipped `-8°` (card and content together, the
+   user corrected an early attempt that tilted only the outline), the sweet
+   itself counter-turned to `26°`, ratio `4/5`, break and star on the right
+   shoulder, second outline offset `-6% / 4%`. Done.
+3. **Sugar Thief** — break low on the right; its star is the outlined one.
+   `SvgIcon` sets `fill: currentColor` on itself, so both `fill` and `stroke`
+   have to be reset to get an outline. Done.
+4. **Sugar Queen** — in progress. Switched to `arch` so the break sits right,
+   given her own `5/8` ratio because her art is portrait. Last screenshot still
+   showed her overflowing the arch at the bottom — **start here**.
+5. **Mr. Marshmallow** — untouched. He is a `pill`, so he currently inherits the
+   break, star and doubled outline meant for Dark Chocolate. The board shows his
+   card plainer; ask before splitting the shape.
+
+Also unreviewed: the whole collage from `lg` up (slot positions are first-pass
+guesses), and the section's own title/lollipop/orbit placement.
+
 ## Open threads
 
-- Sparkle colour `#4a3f8c` (Citizens) is the only colour outside the tokens.
+- Sparkle colour `#4a3f8c` (Citizens, Characters) is the only colour outside the
+  tokens.
 - Seams Kingdom↔Citizens, Citizens↔Ruler and Ruler↔Adventure are done; the
   remaining boundaries are still hard cuts.
-- Characters onward still sit on `StorySection` with `MediaFrame` placeholders.
-- Nothing is merged to `main` yet — the four section branches are chained, so a
+- Garden onward still sit on `StorySection` with `MediaFrame` placeholders.
+- Nothing is merged to `main` yet — the five section branches are chained, so a
   PR for the newest shows all of them. Merge bottom-up to split them.

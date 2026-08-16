@@ -82,10 +82,12 @@
     transform: rotate(26deg);
   }
 
+  // Wider than the board suggests, because the copy does not shrink with the
+  // card: at 15% the description ran to a column of one-word lines.
   @include lg {
     top: 14%;
-    left: 37%;
-    width: 15%;
+    left: 35%;
+    width: 20%;
   }
 }
 
@@ -97,8 +99,11 @@
   }
 }
 
+// Taller than the other arch: her artwork is portrait, so the card has to be
+// too or she letterboxes down to nothing.
 .stage > .sugar-queen {
   width: min(100%, 260px);
+  aspect-ratio: 5 / 8;
 
   @include lg {
     top: 32%;
