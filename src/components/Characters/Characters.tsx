@@ -8,11 +8,19 @@ import styles from './Characters.module.scss'
 // Presentation only, keyed by character id, so the data file stays free of
 // layout. Each card gets its own frame shape, content order and slot on the
 // scattered board.
-const CARDS: Record<string, { image: string; shape: CardShape; layout: CardLayout }> = {
+const CARDS: Record<
+  string,
+  { image: string; shape: CardShape; layout: CardLayout; orbit?: boolean }
+> = {
   'sugar-tree': { image: '/images/characters/1.png', shape: 'arch-mirror', layout: 'art-first' },
   'dark-choco': { image: '/images/characters/2.png', shape: 'pill', layout: 'text-first' },
   'sugar-thief': { image: '/images/characters/3.png', shape: 'wide', layout: 'row' },
-  'sugar-queen': { image: '/images/characters/4.png', shape: 'arch', layout: 'text-first' },
+  'sugar-queen': {
+    image: '/images/characters/4.png',
+    shape: 'arch',
+    layout: 'text-first',
+    orbit: true,
+  },
   'mr-marshmallow': { image: '/images/characters/5.png', shape: 'pill', layout: 'text-first' },
 }
 
@@ -33,30 +41,11 @@ const Characters = () => {
               image={card.image}
               shape={card.shape}
               layout={card.layout}
+              orbit={card.orbit}
               className={styles[character.id]}
             />
           )
         })}
-
-        {/* The queen's card is ringed, the way the arch is in Citizens. */}
-        <svg className={styles.orbit} viewBox="0 0 400 200" aria-hidden="true">
-          <defs>
-            <linearGradient id="characters-orbit" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="var(--color-pink)" />
-              <stop offset="100%" stopColor="var(--color-blue)" />
-            </linearGradient>
-          </defs>
-          <ellipse
-            cx="200"
-            cy="100"
-            rx="196"
-            ry="70"
-            fill="none"
-            stroke="url(#characters-orbit)"
-            strokeWidth="1.6"
-            transform="rotate(-9 200 100)"
-          />
-        </svg>
 
         {SPARKS.map((spark) => (
           <SvgIcon

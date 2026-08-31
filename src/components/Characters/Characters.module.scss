@@ -124,7 +124,6 @@
 
 // --- scenery ----------------------------------------------------------------
 
-.orbit,
 .spark,
 .lollipop {
   display: none;
@@ -134,18 +133,6 @@
     z-index: 1;
     display: block;
     pointer-events: none;
-  }
-}
-
-// Sized against the queen's slot so it rings her card rather than the stage.
-.orbit {
-  @include lg {
-    top: 46%;
-    left: 47%;
-    width: 33%;
-    max-width: none;
-    height: auto;
-    opacity: 0.8;
   }
 }
 

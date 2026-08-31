@@ -10,6 +10,7 @@ interface CharacterCardProps {
   image: string
   shape?: CardShape
   layout?: CardLayout
+  orbit?: boolean
   className?: string
 }
 
@@ -65,6 +66,7 @@ const CharacterCard = ({
   image,
   shape = 'arch',
   layout = 'art-first',
+  orbit = false,
   className,
 }: CharacterCardProps) => {
   const frame = FRAMES[shape]
@@ -118,6 +120,25 @@ const CharacterCard = ({
               vectorEffect="non-scaling-stroke"
             />
           ))}
+        </svg>
+      ) : null}
+
+      {/* Ringed the way the Citizens arch is. It lives inside the card rather
+          than out on the stage, so it follows the card whether that is a slot
+          in the collage or a full-width row in the stack. */}
+      {orbit ? (
+        <svg className={styles.orbit} viewBox="0 0 400 200" aria-hidden="true">
+          <ellipse
+            cx="200"
+            cy="100"
+            rx="196"
+            ry="70"
+            fill="none"
+            stroke={`url(#${gradientId})`}
+            strokeWidth="1.6"
+            vectorEffect="non-scaling-stroke"
+            transform="rotate(-9 200 100)"
+          />
         </svg>
       ) : null}
 

@@ -168,3 +168,17 @@
 .row {
   flex-direction: row;
 }
+
+// Ring around the card. Wider than the card on purpose, so it reads as passing
+// around it -- the global svg rule would cap that back to the card's own width.
+.orbit {
+  position: absolute;
+  left: -20%;
+  top: 44%;
+  z-index: 0;
+  width: 140%;
+  max-width: none;
+  height: auto;
+  opacity: 0.85;
+  pointer-events: none;
+}
