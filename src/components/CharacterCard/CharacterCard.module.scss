@@ -16,13 +16,15 @@
   text-align: center;
 }
 
-// The outline sits behind the content and stretches with the card.
+// The outline sits behind the content and stretches with the card. overflow is
+// visible because the ring drawn alongside it runs past the card on both sides.
 .frame,
 .frameEcho {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
 // Offset copy, sitting low and to one side of the first.
@@ -167,18 +169,4 @@
 
 .row {
   flex-direction: row;
-}
-
-// Ring around the card. Wider than the card on purpose, so it reads as passing
-// around it -- the global svg rule would cap that back to the card's own width.
-.orbit {
-  position: absolute;
-  left: -20%;
-  top: 44%;
-  z-index: 0;
-  width: 140%;
-  max-width: none;
-  height: auto;
-  opacity: 0.85;
-  pointer-events: none;
 }

@@ -26,17 +26,27 @@ interface CharacterCardProps {
 // the midpoint of that break.
 const FRAMES: Record<
   CardShape,
-  { viewBox: string; paths: string[]; gapStar?: boolean; echo?: boolean }
+  {
+    viewBox: string
+    paths: string[]
+    gapStar?: boolean
+    echo?: boolean
+    // Closed outline of the same shape, used to mask the ring back out of the
+    // card's interior. Only needed by shapes that can carry a ring.
+    silhouette?: string
+  }
 > = {
   arch: {
     viewBox: '0 0 320 470',
     paths: ['M1 469V160A159 159 0 0 1 304.1 92.8', 'M319 170V469H1'],
     gapStar: true,
+    silhouette: 'M1 469V160A159 159 0 0 1 319 160V469Z',
   },
   'arch-mirror': {
     viewBox: '0 0 320 470',
     paths: ['M319 469V160A159 159 0 0 0 15.9 92.8', 'M1 170V469H319'],
     gapStar: true,
+    silhouette: 'M1 469V160A159 159 0 0 1 319 160V469Z',
   },
   // One unbroken run from partway down the right edge, round the bottom, up the
   // left and back over the cap -- what is left out is the break on the right
@@ -87,7 +97,40 @@ const CharacterCard = ({
             <stop offset="0%" stopColor="var(--color-pink)" />
             <stop offset="100%" stopColor="var(--color-blue)" />
           </linearGradient>
+          {orbit && frame.silhouette ? (
+            <mask
+              id={`${gradientId}-outside`}
+              maskUnits="userSpaceOnUse"
+              x="-320"
+              y="-200"
+              width="960"
+              height="880"
+            >
+              <rect x="-320" y="-200" width="960" height="880" fill="#fff" />
+              <path d={frame.silhouette} fill="#000" />
+            </mask>
+          ) : null}
         </defs>
+
+        {/* Drawn in the frame's own coordinates so the mask lines up with the
+            outline exactly -- a mask is evaluated in the space of the element
+            it sits on, so a ring in its own viewBox could not be cut by this
+            shape. Only what falls outside the card survives. */}
+        {orbit && frame.silhouette ? (
+          <ellipse
+            cx="160"
+            cy="310"
+            rx="224"
+            ry="78"
+            mask={`url(#${gradientId}-outside)`}
+            fill="none"
+            stroke={`url(#${gradientId})`}
+            strokeWidth="1.6"
+            vectorEffect="non-scaling-stroke"
+            transform="rotate(-9 160 310)"
+          />
+        ) : null}
+
         {frame.paths.map((d) => (
           <path
             key={d}
@@ -120,25 +163,6 @@ const CharacterCard = ({
               vectorEffect="non-scaling-stroke"
             />
           ))}
-        </svg>
-      ) : null}
-
-      {/* Ringed the way the Citizens arch is. It lives inside the card rather
-          than out on the stage, so it follows the card whether that is a slot
-          in the collage or a full-width row in the stack. */}
-      {orbit ? (
-        <svg className={styles.orbit} viewBox="0 0 400 200" aria-hidden="true">
-          <ellipse
-            cx="200"
-            cy="100"
-            rx="196"
-            ry="70"
-            fill="none"
-            stroke={`url(#${gradientId})`}
-            strokeWidth="1.6"
-            vectorEffect="non-scaling-stroke"
-            transform="rotate(-9 200 100)"
-          />
         </svg>
       ) : null}
 
