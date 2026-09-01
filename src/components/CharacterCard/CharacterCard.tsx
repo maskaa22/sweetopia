@@ -1,5 +1,6 @@
 import type { Character } from '@/types/content'
 import SvgIcon from '@/components/SvgIcon'
+import ArchPanel from '@/components/ArchPanel'
 import styles from './CharacterCard.module.scss'
 
 export type CardShape = 'arch' | 'arch-mirror' | 'pill' | 'wide'
@@ -18,36 +19,19 @@ interface CharacterCardProps {
 // whatever the card ends up being; non-scaling-stroke keeps the rule hairline
 // thin however far it is pulled.
 //
-// The arch is the Citizens panel, and `arch-mirror` is the same geometry under
-// x' = 320 - x -- which also flips the sweep flag on the dome -- so its break
-// lands on the left shoulder rather than the right. The break is cut into the
-// geometry rather than dashed, because a dash pattern is measured after
-// preserveAspectRatio stretches the box and would not stay put. `gapStar` marks
-// the midpoint of that break.
+// Breaks are cut into the geometry rather than dashed, because a dash pattern
+// is measured after preserveAspectRatio stretches the box and would not stay
+// put. `gapStar` marks the midpoint of that break. The arches are not here --
+// they come from ArchPanel, shared with Citizens.
 const FRAMES: Record<
-  CardShape,
+  Exclude<CardShape, 'arch' | 'arch-mirror'>,
   {
     viewBox: string
     paths: string[]
     gapStar?: boolean
     echo?: boolean
-    // Closed outline of the same shape, used to mask the ring back out of the
-    // card's interior. Only needed by shapes that can carry a ring.
-    silhouette?: string
   }
 > = {
-  arch: {
-    viewBox: '0 0 320 470',
-    paths: ['M1 469V160A159 159 0 0 1 304.1 92.8', 'M319 170V469H1'],
-    gapStar: true,
-    silhouette: 'M1 469V160A159 159 0 0 1 319 160V469Z',
-  },
-  'arch-mirror': {
-    viewBox: '0 0 320 470',
-    paths: ['M319 469V160A159 159 0 0 0 15.9 92.8', 'M1 170V469H319'],
-    gapStar: true,
-    silhouette: 'M1 469V160A159 159 0 0 1 319 160V469Z',
-  },
   // One unbroken run from partway down the right edge, round the bottom, up the
   // left and back over the cap -- what is left out is the break on the right
   // shoulder, where its own star sits.
@@ -79,13 +63,42 @@ const CharacterCard = ({
   orbit = false,
   className,
 }: CharacterCardProps) => {
+  const rootClass = [styles.root, styles[shape], styles[layout], className]
+    .filter(Boolean)
+    .join(' ')
+
+  const body = (
+    <>
+      <img className={styles.art} src={image} alt="" aria-hidden="true" />
+
+      <div className={styles.text}>
+        <h3 className={styles.name}>{character.name}</h3>
+        <p className={styles.desc}>{character.description}</p>
+      </div>
+    </>
+  )
+
+  // The arch is the same panel Citizens uses, so it comes from there rather
+  // than being drawn again here -- outline, ring and break stars included.
+  if (shape === 'arch' || shape === 'arch-mirror') {
+    return (
+      <ArchPanel
+        as="article"
+        id={`character-${character.id}`}
+        mirror={shape === 'arch-mirror'}
+        orbit={orbit}
+        className={rootClass}
+      >
+        {body}
+      </ArchPanel>
+    )
+  }
+
   const frame = FRAMES[shape]
   const gradientId = `character-frame-${character.id}`
 
   return (
-    <article
-      className={[styles.root, styles[shape], styles[layout], className].filter(Boolean).join(' ')}
-    >
+    <article className={rootClass}>
       <svg
         className={styles.frame}
         viewBox={frame.viewBox}
@@ -97,40 +110,7 @@ const CharacterCard = ({
             <stop offset="0%" stopColor="var(--color-pink)" />
             <stop offset="100%" stopColor="var(--color-blue)" />
           </linearGradient>
-          {orbit && frame.silhouette ? (
-            <mask
-              id={`${gradientId}-outside`}
-              maskUnits="userSpaceOnUse"
-              x="-320"
-              y="-200"
-              width="960"
-              height="880"
-            >
-              <rect x="-320" y="-200" width="960" height="880" fill="#fff" />
-              <path d={frame.silhouette} fill="#000" />
-            </mask>
-          ) : null}
         </defs>
-
-        {/* Drawn in the frame's own coordinates so the mask lines up with the
-            outline exactly -- a mask is evaluated in the space of the element
-            it sits on, so a ring in its own viewBox could not be cut by this
-            shape. Only what falls outside the card survives. */}
-        {orbit && frame.silhouette ? (
-          <ellipse
-            cx="160"
-            cy="310"
-            rx="224"
-            ry="78"
-            mask={`url(#${gradientId}-outside)`}
-            fill="none"
-            stroke={`url(#${gradientId})`}
-            strokeWidth="1.6"
-            vectorEffect="non-scaling-stroke"
-            transform="rotate(-9 160 310)"
-          />
-        ) : null}
-
         {frame.paths.map((d) => (
           <path
             key={d}
@@ -170,12 +150,7 @@ const CharacterCard = ({
         <SvgIcon id="icon-star-4" width={28} height={28} className={styles.gapStar} />
       ) : null}
 
-      <img className={styles.art} src={image} alt="" aria-hidden="true" />
-
-      <div className={styles.text}>
-        <h3 className={styles.name}>{character.name}</h3>
-        <p className={styles.desc}>{character.description}</p>
-      </div>
+      {body}
     </article>
   )
 }

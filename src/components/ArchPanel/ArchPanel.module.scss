@@ -1,0 +1,82 @@
+@use '../../styles/mixins' as *;
+
+// Only a positioning context: the outline is the panel's business, how the box
+// is laid out is the caller's.
+.root {
+  position: relative;
+}
+
+// preserveAspectRatio is off so the arch stretches to whatever the content
+// needs; non-scaling-stroke keeps the rule hairline-thin regardless. overflow
+// stays visible because the orbit deliberately runs past the arch on both sides.
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+// The orbit has to clear the arch on both sides to read as wrapping it, and on
+// a phone that only works once the arch itself gives up some width. With a
+// 260px arch the ellipse lands at ~350px, leaving a 45px overhang each side --
+// wide enough to look deliberate rather than pinched against the walls.
+//
+// The nudge lines the ellipse's centre (x=150) up with the arch's (x=160);
+// without it the overhang is lopsided and the tighter side reads as a kink.
+.orbitBack,
+.orbitFront {
+  transform-box: view-box;
+  transform-origin: 150px 385px;
+  transform: translateX(10px) scale(0.942);
+
+  // One column, arch centred: the overhang has the whole gutter to live in.
+  @include md {
+    transform: none;
+  }
+
+  // Two columns push the arch against the right gutter, which at 1024 is only
+  // ~39px wide against a ~62px overhang -- the tail ran off the viewport and
+  // the section clipped it. Trim the orbit so it clears at the narrowest lg.
+  @include lg {
+    transform: scale(0.92);
+  }
+}
+
+// Positions are the midpoints of the two breaks, read off the same viewBox the
+// paths use, so each star lands inside its own gap at any panel size.
+.starTop,
+.starBottom {
+  position: absolute;
+  z-index: 2;
+  color: #4a3f8c;
+  transform: translate(-50%, -50%);
+}
+
+// Break in the arch, on the right shoulder of the dome.
+.starTop {
+  left: 99.4%;
+  top: 27.2%;
+}
+
+// Mirrored geometry puts that break on the left instead.
+.mirror .starTop {
+  left: 0.6%;
+}
+
+// Break in the near side of the orbit, off the arch's bottom-left corner.
+// Tracks the squeeze applied to the orbit on phones.
+.starBottom {
+  left: 4.1%;
+  top: 100.3%;
+
+  @include md {
+    left: -1.8%;
+    top: 101.4%;
+  }
+
+  @include lg {
+    left: 2.1%;
+    top: 99.9%;
+  }
+}
