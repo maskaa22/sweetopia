@@ -52,14 +52,14 @@
 
 .name {
   font-family: var(--font-body);
-  font-size: clamp(0.7rem, 6.25cqw, 1.1rem);
+  font-size: clamp(0.8rem, 7.6cqw, 1.3rem);
   font-weight: 700;
   line-height: 1.15;
   color: var(--color-ink);
 }
 
 .desc {
-  font-size: clamp(0.55rem, 4.6cqw, 0.85rem);
+  font-size: clamp(0.65rem, 5.6cqw, 1rem);
   line-height: 1.35;
   color: var(--color-text-muted);
 }
@@ -144,6 +144,16 @@
   .art {
     width: 38%;
     flex: none;
+  }
+
+  // Held at the old scale: this card is far wider than the others, so the same
+  // cqw already buys it more type than they get.
+  .name {
+    font-size: clamp(0.7rem, 6.25cqw, 1.1rem);
+  }
+
+  .desc {
+    font-size: clamp(0.55rem, 4.6cqw, 0.85rem);
   }
 }
 
