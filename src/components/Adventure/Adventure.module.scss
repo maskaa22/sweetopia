@@ -23,7 +23,7 @@
   top: 40%;
   left: -6%;
 
-  @include lg {
+  @include md {
     top: -4%;
   }
   z-index: 0;
@@ -44,9 +44,9 @@
   padding-inline: var(--gutter);
 
   // Stacked, the source order is already the one wanted on a phone: headline,
-  // note, plane, then the window. At lg named areas put each back where the
+  // note, plane, then the window. From md named areas put each back where the
   // board has it, without the markup having to change.
-  @include lg {
+  @include md {
     grid-template-columns: 1.05fr 0.95fr;
     grid-template-areas:
       'plane side'
@@ -65,7 +65,7 @@
   margin-inline: auto;
   filter: drop-shadow(0 30px 40px rgba(76, 151, 187, 0.28));
 
-  @include lg {
+  @include md {
     grid-area: plane;
     width: min(104%, 690px);
     margin-inline: -9% auto;
@@ -75,7 +75,7 @@
 .side {
   position: relative;
 
-  @include lg {
+  @include md {
     grid-area: side;
     align-self: end;
   }
@@ -97,7 +97,7 @@
   backdrop-filter: blur(6px);
   overflow: hidden;
 
-  @include lg {
+  @include md {
     margin-inline: 0 0;
   }
 }
@@ -161,7 +161,7 @@
   align-self: center;
   color: var(--color-pink);
 
-  @include lg {
+  @include md {
     align-self: flex-start;
     margin-left: 8%;
   }
@@ -177,12 +177,18 @@
 
   @include gradient-text(linear-gradient(100deg, var(--color-pink) 0%, var(--color-blue) 100%));
 
-  @include lg {
+  @include md {
     grid-area: title;
     align-self: start;
-    max-width: 15ch;
+    // Narrower measure rather than smaller type -- the column is tighter here,
+    // so the headline takes an extra line instead of shrinking.
+    max-width: 11ch;
     margin-left: auto;
     text-align: right;
+  }
+
+  @include lg {
+    max-width: 15ch;
   }
 }
 
@@ -192,8 +198,8 @@
   max-width: 46ch;
   margin-inline: auto;
 
-  // No margin of its own at lg: the grid's row gap already separates it.
-  @include lg {
+  // No margin of its own here: the grid's row gap already separates it.
+  @include md {
     grid-area: note;
   }
   font-size: var(--fs-lead);
@@ -218,10 +224,20 @@
 }
 
 .balloon {
-  top: 4%;
   right: -3%;
   width: clamp(90px, 11vw, 190px);
   height: auto;
+
+  // The window claims the top right on a tablet, where the columns are too
+  // tight for both, so the balloon drops below the headline instead.
+  @include md {
+    bottom: 4%;
+  }
+
+  @include lg {
+    top: 4%;
+    bottom: auto;
+  }
 }
 
 .candy {
@@ -229,16 +245,9 @@
   height: auto;
   transform: rotate(-14deg);
 
-  // Stacked, the headline holds the top of the section, so the candy drops
-  // clear of it and sits beside the plane instead.
-  @include md {
-    top: 29%;
-    left: 19%;
-  }
-
   // Kept left of the dialog: the tighter top padding raised the window into the
   // band the candy used to have to itself.
-  @include lg {
+  @include md {
     top: 4%;
     left: 31%;
   }
