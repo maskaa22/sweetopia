@@ -46,13 +46,22 @@
   // Stacked, the source order is already the one wanted on a phone: headline,
   // note, plane, then the window. From md named areas put each back where the
   // board has it, without the markup having to change.
+  // Tablet packs it into four cells: the plane over the note on the left, the
+  // window over the headline on the right. At lg there is room for the plane to
+  // run down both rows and for the note to sit right across the bottom.
   @include md {
     grid-template-columns: 1.05fr 0.95fr;
     grid-template-areas:
       'plane side'
+      'note title';
+    align-items: center;
+  }
+
+  @include lg {
+    grid-template-areas:
+      'plane side'
       'plane title'
       'note note';
-    align-items: center;
   }
 }
 
@@ -97,8 +106,14 @@
   backdrop-filter: blur(6px);
   overflow: hidden;
 
+  // Smaller on a tablet, where it shares the row with the plane.
   @include md {
+    width: min(100%, 290px);
     margin-inline: 0 0;
+  }
+
+  @include lg {
+    width: min(100%, 370px);
   }
 }
 
@@ -228,15 +243,16 @@
   width: clamp(90px, 11vw, 190px);
   height: auto;
 
-  // The window claims the top right on a tablet, where the columns are too
-  // tight for both, so the balloon drops below the headline instead.
+  // The window sits low enough on a tablet to leave the top right corner free,
+  // but not much of it -- so the balloon goes back up there, smaller.
   @include md {
-    bottom: 4%;
+    top: 2%;
+    width: 78px;
   }
 
   @include lg {
     top: 4%;
-    bottom: auto;
+    width: clamp(90px, 11vw, 190px);
   }
 }
 
