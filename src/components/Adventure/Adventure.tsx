@@ -1,5 +1,4 @@
 import { SECTION_IDS } from '@/lib/constants'
-import Container from '@/components/Container'
 import SvgIcon from '@/components/SvgIcon'
 import styles from './Adventure.module.scss'
 
@@ -53,6 +52,14 @@ const Adventure = () => {
       ))}
 
       <div className={styles.stage}>
+        {/* Title and note are grid items of the stage, not children of the
+            column beside the plane. Stacked they come first, which is where
+            they belong on a phone; at lg named areas put them back. */}
+        <h2 className={styles.title}>Every flight here is an unforgettable trip</h2>
+        <p className={styles.note}>
+          Buckle up your marshmallow seatbelts and set off on the sweetest journey of your life.
+        </p>
+
         <img
           className={styles.plane}
           src="/images/adventure-fly.png"
@@ -86,16 +93,9 @@ const Adventure = () => {
           </div>
 
           <SvgIcon id="icon-star-4" width={26} height={26} className={styles.spark} />
-
-          <h2 className={styles.title}>Every flight here is an unforgettable trip</h2>
         </div>
       </div>
 
-      <Container>
-        <p className={styles.note}>
-          Buckle up your marshmallow seatbelts and set off on the sweetest journey of your life.
-        </p>
-      </Container>
     </section>
   )
 }

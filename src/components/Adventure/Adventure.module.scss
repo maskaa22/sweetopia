@@ -14,12 +14,18 @@
   overflow: hidden;
 }
 
-// Cloud bank across the top, behind everything. Run wider than the section so
-// the bank reads as continuous rather than ending at the viewport edges.
+// Cloud bank behind everything. Run wider than the section so the bank reads as
+// continuous rather than ending at the viewport edges. Stacked, the headline
+// holds the top of the section, so the bank drops to sit under the plane; at lg
+// it goes back across the top.
 .clouds {
   position: absolute;
-  top: -4%;
+  top: 40%;
   left: -6%;
+
+  @include lg {
+    top: -4%;
+  }
   z-index: 0;
   width: 112%;
   max-width: none;
@@ -37,27 +43,42 @@
   align-items: center;
   padding-inline: var(--gutter);
 
+  // Stacked, the source order is already the one wanted on a phone: headline,
+  // note, plane, then the window. At lg named areas put each back where the
+  // board has it, without the markup having to change.
   @include lg {
     grid-template-columns: 1.05fr 0.95fr;
+    grid-template-areas:
+      'plane side'
+      'plane title'
+      'note note';
+    align-items: center;
   }
 }
 
 // The art runs wing-tip to wing-tip, so it is allowed past its column; the
 // section clips the overhang.
 .plane {
-  width: min(104%, 690px);
+  width: min(84%, 460px);
   max-width: none;
   height: auto;
   margin-inline: auto;
   filter: drop-shadow(0 30px 40px rgba(76, 151, 187, 0.28));
 
   @include lg {
+    grid-area: plane;
+    width: min(104%, 690px);
     margin-inline: -9% auto;
   }
 }
 
 .side {
   position: relative;
+
+  @include lg {
+    grid-area: side;
+    align-self: end;
+  }
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 1rem + 2vw, 2.25rem);
@@ -157,6 +178,8 @@
   @include gradient-text(linear-gradient(100deg, var(--color-pink) 0%, var(--color-blue) 100%));
 
   @include lg {
+    grid-area: title;
+    align-self: start;
     max-width: 15ch;
     margin-left: auto;
     text-align: right;
@@ -167,7 +190,12 @@
   position: relative;
   z-index: 2;
   max-width: 46ch;
-  margin: clamp(2rem, 1.5rem + 3vw, 3.5rem) auto 0;
+  margin-inline: auto;
+
+  // No margin of its own at lg: the grid's row gap already separates it.
+  @include lg {
+    grid-area: note;
+  }
   font-size: var(--fs-lead);
   line-height: 1.5;
   color: var(--color-text);
@@ -196,14 +224,24 @@
   height: auto;
 }
 
-// Kept left of the dialog: the tighter top padding raised the window into the
-// band the candy used to have to itself.
 .candy {
-  top: 4%;
-  left: 31%;
   width: clamp(100px, 12vw, 200px);
   height: auto;
   transform: rotate(-14deg);
+
+  // Stacked, the headline holds the top of the section, so the candy drops
+  // clear of it and sits beside the plane instead.
+  @include md {
+    top: 29%;
+    left: 19%;
+  }
+
+  // Kept left of the dialog: the tighter top padding raised the window into the
+  // band the candy used to have to itself.
+  @include lg {
+    top: 4%;
+    left: 31%;
+  }
 }
 
 .trail {
