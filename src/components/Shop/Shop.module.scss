@@ -1,10 +1,15 @@
 @use '../../styles/mixins' as *;
 
+// Opens and closes on the same pink, because both neighbours meet it on that
+// colour: Citizens ends there, and Ruler's own opening ramp starts there. Only
+// the middle is free, so the field lifts towards near-white through it and
+// comes back -- otherwise the section is a flat slab. The bloom is held off
+// both edges for the same reason.
 .root {
   padding-block: var(--section-py);
   background:
-    radial-gradient(90% 60% at 50% 0%, rgba(255, 255, 255, 0.6), transparent 70%),
-    linear-gradient(180deg, var(--color-mint) 0%, var(--color-cotton) 100%);
+    radial-gradient(85% 55% at 50% 50%, rgba(255, 255, 255, 0.55), transparent 72%),
+    linear-gradient(180deg, #fbe4ee 0%, #fdf3f7 48%, #fbe4ee 100%);
 }
 
 .lead {
