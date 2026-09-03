@@ -153,6 +153,12 @@
   @include lg {
     transform: translateX(-7%);
   }
+
+  // Further onto that peak on a large screen, and down into the bank with it:
+  // the bank is at its deepest here, so he can sit lower in it.
+  @include xl {
+    transform: translate(-14%, 6%);
+  }
 }
 
 // Tipped a few degrees each, as on the board, so they read as stuck on rather
