@@ -6,25 +6,50 @@ import styles from './Contact.module.scss'
 
 // The board fills the whole frame with line-art sweets, at every size and
 // angle. Placement is data, not layout -- there is no rule to it beyond "no
-// two alike", so it lives here rather than as sixteen rules in the stylesheet.
-// `keep` marks the few that still have room on a phone.
+// two alike" -- so it lives here rather than as three dozen rules in the
+// stylesheet. Loosely banded by `top` so the cover stays even; everything
+// else is jittered. `keep` marks the few that still have room on a phone.
 const SCATTER = [
-  { src: 'sweet-4.png', top: 20, left: 13, w: 5, rot: -10, keep: true },
-  { src: 'sweet-3.png', top: 31, left: 1, w: 12, rot: 18 },
-  { src: 'sweet-2.png', top: 47, left: 5, w: 9, rot: -25, keep: true },
-  { src: 'sweet-1.png', top: 29, left: 19, w: 13, rot: 8 },
-  { src: 'sweet-3.png', top: 16, left: 28, w: 10, rot: -30, keep: true },
-  { src: 'sweet-2.png', top: 54, left: 21, w: 8, rot: 15 },
-  { src: 'sweet-1.png', top: 18, left: 43, w: 11, rot: -8 },
-  { src: 'sweet-4.png', top: 41, left: 37, w: 4, rot: 24 },
-  { src: 'sweet-3.png', top: 25, left: 57, w: 10, rot: 12, keep: true },
-  { src: 'sweet-2.png', top: 45, left: 62, w: 8, rot: -20 },
-  { src: 'sweet-1.png', top: 21, left: 69, w: 12, rot: 14 },
-  { src: 'sweet-4.png', top: 35, left: 81, w: 5, rot: -16, keep: true },
-  { src: 'sweet-3.png', top: 49, left: 85, w: 11, rot: 26 },
-  { src: 'sweet-2.png', top: 15, left: 89, w: 8, rot: -12 },
-  { src: 'sweet-1.png', top: 53, left: 47, w: 11, rot: -18 },
-  { src: 'sweet-4.png', top: 13, left: 76, w: 4, rot: 30, keep: true },
+  { src: 'sweet-4.png', top: 12, left: 3, w: 4, rot: -14 },
+  { src: 'sweet-3.png', top: 10, left: 12, w: 9, rot: 22 },
+  { src: 'sweet-1.png', top: 15, left: 24, w: 10, rot: -9 },
+  { src: 'sweet-3.png', top: 11, left: 37, w: 9, rot: -28, keep: true },
+  { src: 'sweet-2.png', top: 13, left: 48, w: 7, rot: 16 },
+  { src: 'sweet-1.png', top: 12, left: 58, w: 10, rot: 10 },
+  { src: 'sweet-4.png', top: 9, left: 71, w: 4, rot: 28 },
+  { src: 'sweet-2.png', top: 14, left: 79, w: 7, rot: -18 },
+  { src: 'sweet-3.png', top: 12, left: 89, w: 9, rot: 14 },
+
+  { src: 'sweet-2.png', top: 24, left: 1, w: 8, rot: -22, keep: true },
+  { src: 'sweet-4.png', top: 22, left: 11, w: 5, rot: 8 },
+  { src: 'sweet-1.png', top: 26, left: 19, w: 11, rot: 12 },
+  { src: 'sweet-3.png', top: 23, left: 32, w: 9, rot: -16 },
+  { src: 'sweet-1.png', top: 21, left: 44, w: 10, rot: -6 },
+  { src: 'sweet-2.png', top: 27, left: 56, w: 8, rot: 20 },
+  { src: 'sweet-1.png', top: 24, left: 66, w: 11, rot: -12, keep: true },
+  { src: 'sweet-4.png', top: 26, left: 80, w: 5, rot: 18 },
+  { src: 'sweet-3.png', top: 22, left: 88, w: 10, rot: 26 },
+
+  { src: 'sweet-1.png', top: 37, left: 2, w: 10, rot: 15 },
+  { src: 'sweet-2.png', top: 35, left: 14, w: 8, rot: -26, keep: true },
+  { src: 'sweet-4.png', top: 39, left: 25, w: 5, rot: 10 },
+  { src: 'sweet-3.png', top: 36, left: 33, w: 9, rot: 24 },
+  { src: 'sweet-4.png', top: 34, left: 61, w: 5, rot: -20 },
+  { src: 'sweet-2.png', top: 38, left: 69, w: 8, rot: 12 },
+  { src: 'sweet-3.png', top: 36, left: 82, w: 10, rot: -14, keep: true },
+  { src: 'sweet-1.png', top: 34, left: 91, w: 10, rot: 20 },
+
+  { src: 'sweet-2.png', top: 49, left: 3, w: 9, rot: 18 },
+  { src: 'sweet-1.png', top: 47, left: 14, w: 11, rot: -14 },
+  { src: 'sweet-3.png', top: 51, left: 27, w: 9, rot: 12 },
+  { src: 'sweet-4.png', top: 48, left: 74, w: 5, rot: -24 },
+  { src: 'sweet-2.png', top: 50, left: 82, w: 8, rot: 22, keep: true },
+  { src: 'sweet-1.png', top: 46, left: 90, w: 11, rot: -10 },
+
+  { src: 'sweet-3.png', top: 58, left: 8, w: 9, rot: -20 },
+  { src: 'sweet-2.png', top: 60, left: 20, w: 7, rot: 14 },
+  { src: 'sweet-1.png', top: 57, left: 76, w: 10, rot: 16 },
+  { src: 'sweet-3.png', top: 59, left: 88, w: 9, rot: -24 },
 ]
 
 const Contact = () => {

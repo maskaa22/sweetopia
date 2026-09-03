@@ -97,7 +97,7 @@
 }
 
 .cat {
-  width: min(78%, 430px);
+  width: min(62%, 330px);
   max-width: none;
   height: auto;
   filter: drop-shadow(0 26px 40px rgba(76, 151, 187, 0.25));
@@ -138,7 +138,7 @@
   // Brought in onto the cat's own fur, as on the board, once there is room to
   // sit over it rather than beside it.
   @include md {
-    left: 32%;
+    left: 35%;
   }
 
   &::after {
@@ -152,7 +152,7 @@
   transform: rotate(4deg);
 
   @include md {
-    right: 30%;
+    right: 32%;
   }
 
   &::after {
