@@ -11,6 +11,9 @@ const Garden = () => {
           closes on to the one House opens with, so the ground either side of
           the curve matches its neighbour and neither seam shows. */}
       <div className={styles.dome}>
+        {/* Thin arcs echoing each edge, set in from it. Decorative only. */}
+        <span className={styles.archLine} aria-hidden="true" />
+
         <Container className={styles.inner}>
           <SectionTitle
             kicker="Step into the wonderful"
@@ -38,6 +41,12 @@ const Garden = () => {
           width={1536}
           height={1024}
         />
+
+        {/* The foot curves the same way the top does rather than mirroring it,
+            so it is a shape of its own: border-radius can only round a corner
+            inward, which would bow the base the other way. */}
+        <span className={styles.baseFill} aria-hidden="true" />
+        <span className={styles.baseLine} aria-hidden="true" />
       </div>
     </section>
   )

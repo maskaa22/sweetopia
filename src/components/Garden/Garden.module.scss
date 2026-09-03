@@ -7,17 +7,56 @@
   background: linear-gradient(180deg, var(--color-mint) 0%, var(--color-mint) 30%, var(--color-cotton) 70%);
 }
 
-// Curved top and bottom, as on the board. Horizontal radius at half the width,
-// so each edge is one unbroken arc with no straight run in the middle. The
-// vertical radius sets how gradual the sweep is: too little and the arc meets
-// the side wall almost square, reading as a cut; too much and it bows out like
-// a circle. This sits between the two.
+// Shallow arc across the top, sides left all but upright: horizontal radius at
+// half the width so the edge is one unbroken sweep, vertical radius small so
+// the sweep stays gentle. The foot is not rounded here -- it curves the same
+// way the top does, which a corner radius cannot do, so it is drawn separately.
 .dome {
   position: relative;
   padding-top: clamp(3rem, 2rem + 6vw, 7rem);
-  border-radius: 50% 50% 50% 50% / 27% 27% 19% 19%;
+  border-radius: 50% 50% 0 0 / 6% 6% 0 0;
   background: linear-gradient(180deg, #55bccd 0%, #45a9bd 100%);
   overflow: hidden;
+}
+
+// Echo of the top arc, set in below it. Its side walls fall outside the dome
+// and are clipped away, leaving just the curve.
+.archLine {
+  position: absolute;
+  top: clamp(0.9rem, 0.6rem + 1vw, 1.6rem);
+  left: -5%;
+  right: -5%;
+  height: 40%;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-bottom: none;
+  border-radius: 50% 50% 0 0 / 16% 16% 0 0;
+  pointer-events: none;
+}
+
+// The rising foot, in the colour House opens with, so the join needs no ramp.
+// Wider than the section, which is what keeps its arc shallow across the span.
+.baseFill,
+.baseLine {
+  position: absolute;
+  left: -22%;
+  right: -22%;
+  bottom: -16%;
+  height: 30%;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  pointer-events: none;
+}
+
+.baseFill {
+  background: var(--color-cotton);
+}
+
+// Same curve again, lifted clear of the fill. Carried at more weight than the
+// arc up top, because here it crosses the garden's own pale stonework rather
+// than flat teal.
+.baseLine {
+  bottom: -10%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-bottom: none;
 }
 
 .inner {
