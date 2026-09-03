@@ -189,12 +189,17 @@
   left: 0;
   transform: rotate(-6deg);
 
-  // Brought in onto the cat's own fur, as on the board, once there is room to
-  // sit over it rather than beside it -- and up onto his chest, clear of the
-  // bank, which stands highest against him in the middle of the range.
+  // Held off his fur and out to his flank, where there is room for it from md
+  // -- and high enough to clear the bank he stands in.
   @include md {
     bottom: 46%;
-    left: 35%;
+    left: 4%;
+  }
+
+  // The stage runs far wider than the cat from lg, so held in towards him
+  // rather than left out on the margin.
+  @include lg {
+    left: 12%;
   }
 
   &::after {
@@ -209,7 +214,11 @@
 
   @include md {
     bottom: 52%;
-    right: 32%;
+    right: 4%;
+  }
+
+  @include lg {
+    right: 14%;
   }
 
   &::after {
