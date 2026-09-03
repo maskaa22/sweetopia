@@ -10,10 +10,12 @@ const Garden = () => {
       {/* The teal lens sits on a field that runs from the colour Characters
           closes on to the one House opens with, so the ground either side of
           the curve matches its neighbour and neither seam shows. */}
-      <div className={styles.dome}>
-        {/* Thin arcs echoing each edge, set in from it. Decorative only. */}
-        <span className={styles.archLine} aria-hidden="true" />
+      {/* Crown and foot are both shapes of their own, each run wider than the
+          section so its turn happens off-screen and only the sweep shows. A
+          corner radius cannot do that: it has to turn at the section's edge. */}
+      <span className={styles.archFill} aria-hidden="true" />
 
+      <div className={styles.dome}>
         <Container className={styles.inner}>
           <SectionTitle
             kicker="Step into the wonderful"
@@ -48,6 +50,10 @@ const Garden = () => {
         <span className={styles.baseFill} aria-hidden="true" />
         <span className={styles.baseLine} aria-hidden="true" />
       </div>
+
+      {/* After the lens, so it draws over the teal the way the foot's echo
+          draws over the garden. */}
+      <span className={styles.archLine} aria-hidden="true" />
     </section>
   )
 }

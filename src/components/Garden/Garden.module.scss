@@ -3,34 +3,57 @@
 // The ground behind the lens: mint at the top, where Characters leaves off,
 // cotton at the bottom, where House picks up. Whatever shows either side of the
 // curve is then already the neighbour's colour.
+//
+// `--arch-rise` is how far the crown climbs above the section's shoulders; the
+// shape itself has to be a good deal taller than that, because only its middle
+// stretch is on screen (see .archFill).
 .root {
-  background: linear-gradient(180deg, var(--color-mint) 0%, var(--color-mint) 30%, var(--color-cotton) 70%);
-}
+  --arch-rise: clamp(2rem, 1rem + 5vw, 7rem);
 
-// Shallow arc across the top, sides left all but upright: horizontal radius at
-// half the width so the edge is one unbroken sweep, vertical radius small so
-// the sweep stays gentle. The foot is not rounded here -- it curves the same
-// way the top does, which a corner radius cannot do, so it is drawn separately.
-.dome {
   position: relative;
-  padding-top: clamp(3rem, 2rem + 6vw, 7rem);
-  border-radius: 50% 50% 0 0 / 6% 6% 0 0;
-  background: linear-gradient(180deg, #55bccd 0%, #45a9bd 100%);
+  padding-top: var(--arch-rise);
+  background: linear-gradient(180deg, var(--color-mint) 0%, var(--color-mint) 30%, var(--color-cotton) 70%);
   overflow: hidden;
 }
 
-// Echo of the top arc, set in below it. Its side walls fall outside the dome
-// and are clipped away, leaving just the curve.
+// Crown and foot are built the same way, and that is the whole point: an
+// ellipse run far wider than the section, so the only part on screen is the
+// gentle middle of its sweep and the turn back down happens out of frame. A
+// corner radius cannot do this -- it has to complete its turn at the section's
+// own edge, which is what made the top read as cut rather than curved.
+//
+// At the section's edges the shape's own top edge has already dropped about
+// 0.28 of its height, so the height is set to bring that drop out at
+// `--arch-rise` and the lens below starts at exactly the same line.
+.archFill,
 .archLine {
   position: absolute;
-  top: clamp(0.9rem, 0.6rem + 1vw, 1.6rem);
-  left: -5%;
-  right: -5%;
-  height: 40%;
+  left: -22%;
+  right: -22%;
+  height: calc(var(--arch-rise) * 3.6);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  pointer-events: none;
+}
+
+.archFill {
+  top: 0;
+  background: #55bccd; // top of the lens gradient, so the join is invisible
+}
+
+// Same curve again, set down inside the fill.
+.archLine {
+  top: calc(var(--arch-rise) * 0.55);
   border: 1.5px solid rgba(255, 255, 255, 0.45);
   border-bottom: none;
-  border-radius: 50% 50% 0 0 / 16% 16% 0 0;
-  pointer-events: none;
+}
+
+// Square-topped: the crown above supplies the curve, and this only has to meet
+// it. Clips the foot's overhang.
+.dome {
+  position: relative;
+  padding-top: clamp(1.5rem, 1rem + 3vw, 3.5rem);
+  background: linear-gradient(180deg, #55bccd 0%, #45a9bd 100%);
+  overflow: hidden;
 }
 
 // The rising foot, in the colour House opens with, so the join needs no ramp.
