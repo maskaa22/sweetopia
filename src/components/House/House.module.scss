@@ -160,18 +160,20 @@
   // straight across the seam into Contact -- so it is faded out just above the
   // cut. How far it is pushed out sets where that fade has to land, so the two
   // are tied to one value: the band ends at `100% - drop`, the section's cut,
-  // and the fade runs into it over the 15% above.
+  // and the fade runs into it over the 8% above -- kept short, or the two
+  // banks wash out well before the seam and leave a pale band across it
+  // instead of a line.
   --cloud-drop: 44%;
 
   transform: translateY(var(--cloud-drop));
   -webkit-mask-image: linear-gradient(
     180deg,
-    #000 calc(85% - var(--cloud-drop)),
+    #000 calc(92% - var(--cloud-drop)),
     transparent calc(100% - var(--cloud-drop))
   );
   mask-image: linear-gradient(
     180deg,
-    #000 calc(85% - var(--cloud-drop)),
+    #000 calc(92% - var(--cloud-drop)),
     transparent calc(100% - var(--cloud-drop))
   );
   pointer-events: none;

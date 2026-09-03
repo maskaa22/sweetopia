@@ -48,12 +48,12 @@
   transform: translateY(calc(-1 * var(--top-drop))) scaleY(-1);
   -webkit-mask-image: linear-gradient(
     180deg,
-    #000 calc(85% - var(--top-drop)),
+    #000 calc(92% - var(--top-drop)),
     transparent calc(100% - var(--top-drop))
   );
   mask-image: linear-gradient(
     180deg,
-    #000 calc(85% - var(--top-drop)),
+    #000 calc(92% - var(--top-drop)),
     transparent calc(100% - var(--top-drop))
   );
 }
