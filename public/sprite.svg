@@ -68,14 +68,4 @@
       stroke-linecap="round"
     />
   </symbol>
-  <symbol id="icon-doodle-planet" viewBox="0 0 130 96">
-    <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="70" cy="42" r="27" />
-      <path d="M45 31C22 25 4 27 2 37c-2 12 22 27 54 33s58 1 60-11c1-8-11-17-30-23" />
-    </g>
-    <path
-      d="M30 62c.7 9.4 5.7 14.4 15 15-9.3.5-14.3 5.5-15 15-.7-9.4-5.7-14.4-15-15 9.3-.5 14.3-5.5 15-15Z"
-      fill="currentColor"
-    />
-  </symbol>
 </svg>

@@ -26,8 +26,6 @@ const House = () => {
         height={308}
       />
 
-      <SvgIcon id="icon-doodle-planet" width={130} height={96} className={styles.planet} />
-
       <Container className={styles.stage}>
         <div className={styles.head}>
           {/* Broken by hand: the board sets it as two stacked lines, and at
