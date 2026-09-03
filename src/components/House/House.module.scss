@@ -42,13 +42,11 @@
     align-self: center;
   }
 
+  // No size of its own: the headline runs at the shared display scale, the
+  // same as every other section.
   h2 {
-    // Far past the shared display size: on the board the headline is the
-    // section, running about three quarters of the measure on its first line.
-    font-size: clamp(2.6rem, 0.2rem + 15.5vw, 14.5rem);
-    letter-spacing: 0.02em;
-    // The shared line-height is under 1, so at this size the caps climb into
-    // the kicker. Bought back in ems, to hold as the type scales.
+    // The shared line-height is under 1, so the caps overflow their box and
+    // climb into the kicker. Bought back in ems, to hold as the type scales.
     margin-top: 0.12em;
   }
 }
@@ -135,11 +133,11 @@
     grid-area: art;
     justify-self: end;
     width: min(126%, 780px);
-    margin: -22% -10% 0 0;
+    margin: -26% -10% 0 0;
   }
 
   @include lg {
-    margin-top: -20%;
+    margin-top: -24%;
   }
 }
 
