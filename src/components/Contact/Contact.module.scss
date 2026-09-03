@@ -48,12 +48,22 @@
 // tied to one value: the bank ends at `100% - drop`, which is the section's
 // cut, and the fade runs into it over the 15% above.
 .cloudBase {
-  // The bank's depth follows the viewport width while the cat is capped in
-  // pixels, so on a phone the same drop leaves the cat in mid-air. Held back
-  // there, and let out again once the bank is deep enough to reach him.
+  // How far the bank is pushed out has to grow with the viewport: its depth
+  // follows the width, while the cat is capped in pixels and the section's
+  // foot padding all but caps too. One value for the lot either strands him
+  // in mid-air at the wide end or buries him at the narrow end.
+  //
+  // The cloud's silhouette has a notch between two puffs, and where it lands
+  // is fixed to the section's width -- through the middle of the range it
+  // falls almost under the cat, so the bank has to clear his paws at the
+  // notch, not just at the puffs.
   --base-drop: 24%;
 
   @include md {
+    --base-drop: 30%;
+  }
+
+  @include lg {
     --base-drop: 40%;
   }
 
@@ -181,7 +191,7 @@
   // sit over it rather than beside it -- and up onto his chest, clear of the
   // bank, which stands highest against him in the middle of the range.
   @include md {
-    bottom: 40%;
+    bottom: 46%;
     left: 35%;
   }
 
@@ -196,6 +206,7 @@
   transform: rotate(4deg);
 
   @include md {
+    bottom: 52%;
     right: 32%;
   }
 
