@@ -212,13 +212,15 @@
   right: 0;
   transform: rotate(4deg);
 
+  // Closer in than its opposite number: the cat is shifted left, so the gap
+  // on this side is the wider one.
   @include md {
     bottom: 52%;
-    right: 4%;
+    right: 18%;
   }
 
   @include lg {
-    right: 14%;
+    right: 20%;
   }
 
   &::after {
