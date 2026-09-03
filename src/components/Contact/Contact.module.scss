@@ -30,6 +30,20 @@
   max-width: none;
   height: auto;
   pointer-events: none;
+
+  // Bigger through the tablet range, where the section is wide but the cat
+  // stays capped in pixels -- at the same size the banks read as a thin strip
+  // against him. Widening deepens them too, the aspect being fixed, so the
+  // foot bank's drop is let out to match.
+  @include md {
+    left: -25%;
+    width: 150%;
+  }
+
+  @include lg {
+    left: -10%;
+    width: 120%;
+  }
 }
 
 // Flipped, so the puffy edge faces down into the section instead of up out
@@ -60,7 +74,7 @@
   --base-drop: 24%;
 
   @include md {
-    --base-drop: 30%;
+    --base-drop: 38%;
   }
 
   @include lg {
@@ -191,7 +205,7 @@
   // sit over it rather than beside it -- and up onto his chest, clear of the
   // bank, which stands highest against him in the middle of the range.
   @include md {
-    bottom: 46%;
+    bottom: 52%;
     left: 35%;
   }
 
@@ -206,7 +220,7 @@
   transform: rotate(4deg);
 
   @include md {
-    bottom: 52%;
+    bottom: 58%;
     right: 32%;
   }
 
