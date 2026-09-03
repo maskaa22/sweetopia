@@ -4,6 +4,12 @@
 .root {
   position: relative;
   padding-block: clamp(1.5rem, 1rem + 2vw, 3rem) var(--section-py);
+
+  // The collage already opens with a band of clear sky above the first card, so
+  // a full pad on top of that reads as a hole after Adventure.
+  @include lg {
+    padding-top: 0.75rem;
+  }
   background: linear-gradient(180deg, var(--color-sky-deep) 0%, var(--color-mint) 100%);
   overflow: hidden;
 }

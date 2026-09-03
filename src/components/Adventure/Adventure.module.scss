@@ -12,7 +12,7 @@
   // The note is lifted onto the cloud bank at lg, which would otherwise leave a
   // deep empty floor beneath it before the next section.
   @include lg {
-    padding-bottom: 2rem;
+    padding-bottom: 0.5rem;
   }
   background:
     radial-gradient(55% 45% at 82% 78%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%),
