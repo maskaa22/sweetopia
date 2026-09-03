@@ -34,10 +34,28 @@
 
 // Flipped, so the puffy edge faces down into the section instead of up out
 // of it.
+//
+// House now closes on a bank of its own, so this one starting at full density
+// right on the boundary put a step across the seam. It is faded out into the
+// section's top edge the same way the foot bank is faded into its bottom one --
+// and the flip is symmetric about the element, so the stops work out to the
+// same expression.
 .cloudTop {
+  --top-drop: 52%;
+
   top: 0;
   z-index: 1;
-  transform: translateY(-52%) scaleY(-1);
+  transform: translateY(calc(-1 * var(--top-drop))) scaleY(-1);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 calc(85% - var(--top-drop)),
+    transparent calc(100% - var(--top-drop))
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 calc(85% - var(--top-drop)),
+    transparent calc(100% - var(--top-drop))
+  );
 }
 
 // In front of everything, including the cat, whose paws bed into it. The
