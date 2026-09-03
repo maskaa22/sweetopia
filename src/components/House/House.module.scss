@@ -1,13 +1,13 @@
 @use '../../styles/mixins' as *;
 
-// Flat ground, to the colour asked for. Outside the tokens on purpose: it is
-// this section's own, not a palette entry.
+// Flat ground. Garden's foot rises in the same colour, so the two meet with
+// nothing between them.
 .root {
   position: relative;
   // Keeps the cloud's z-index local, the way Hero does with its own house.
   isolation: isolate;
   padding-block: clamp(2rem, 1rem + 4vw, 4.5rem) clamp(4rem, 2rem + 9vw, 10rem);
-  background: rgb(254, 241, 248);
+  background: var(--color-blush);
   overflow: hidden;
 }
 

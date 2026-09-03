@@ -1,7 +1,7 @@
 @use '../../styles/mixins' as *;
 
 // The ground behind the lens: mint at the top, where Characters leaves off,
-// cotton at the bottom, where House picks up. Whatever shows either side of the
+// blush at the bottom, where House picks up. Whatever shows either side of the
 // curve is then already the neighbour's colour.
 //
 // `--arch-rise` is how far the crown climbs above the section's shoulders; the
@@ -12,7 +12,7 @@
 
   position: relative;
   padding-top: var(--arch-rise);
-  background: linear-gradient(180deg, var(--color-mint) 0%, var(--color-mint) 30%, var(--color-cotton) 70%);
+  background: linear-gradient(180deg, var(--color-mint) 0%, var(--color-mint) 30%, var(--color-blush) 70%);
   overflow: hidden;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .baseFill {
-  background: var(--color-cotton);
+  background: var(--color-blush);
 }
 
 // Same curve again, lifted clear of the fill. Carried at more weight than the
