@@ -30,20 +30,6 @@
   max-width: none;
   height: auto;
   pointer-events: none;
-
-  // Bigger through the tablet range, where the section is wide but the cat
-  // stays capped in pixels -- at the same size the banks read as a thin strip
-  // against him. Widening deepens them too, the aspect being fixed, so the
-  // foot bank's drop is let out to match.
-  @include md {
-    left: -25%;
-    width: 150%;
-  }
-
-  @include lg {
-    left: -10%;
-    width: 120%;
-  }
 }
 
 // Flipped, so the puffy edge faces down into the section instead of up out
@@ -74,7 +60,7 @@
   --base-drop: 24%;
 
   @include md {
-    --base-drop: 38%;
+    --base-drop: 30%;
   }
 
   @include lg {
@@ -156,8 +142,8 @@
   transform: translate(10%, 9%);
   filter: drop-shadow(0 26px 40px rgba(76, 151, 187, 0.25));
 
-  // Off centre the other way on a tablet: with the banks run wider there the
-  // near peak moves left, and dead centre leaves him over the notch beside it.
+  // Off centre the other way on a tablet, onto the bank's near peak: dead
+  // centre leaves him over the notch beside it.
   @include md {
     transform: translateX(-18%);
   }
@@ -207,7 +193,7 @@
   // sit over it rather than beside it -- and up onto his chest, clear of the
   // bank, which stands highest against him in the middle of the range.
   @include md {
-    bottom: 52%;
+    bottom: 46%;
     left: 35%;
   }
 
@@ -222,7 +208,7 @@
   transform: rotate(4deg);
 
   @include md {
-    bottom: 58%;
+    bottom: 52%;
     right: 32%;
   }
 
