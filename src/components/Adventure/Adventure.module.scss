@@ -8,6 +8,12 @@
   // Light on top: the cloud plate starts above the section edge anyway, so a
   // full pad here just widens the gap after Ruler.
   padding-block: clamp(1rem, 0.5rem + 2vw, 2.5rem) var(--section-py);
+
+  // The note is lifted onto the cloud bank at lg, which would otherwise leave a
+  // deep empty floor beneath it before the next section.
+  @include lg {
+    padding-bottom: 2rem;
+  }
   background:
     radial-gradient(55% 45% at 82% 78%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%),
     linear-gradient(180deg, var(--color-mint) 0%, var(--color-sky-deep) 100%);
@@ -216,6 +222,12 @@
   // No margin of its own here: the grid's row gap already separates it.
   @include md {
     grid-area: note;
+  }
+
+  // Pulled up onto the cloud bank rather than sitting in clear sky below it.
+  // The row is auto-sized, so this shortens the section by the same amount.
+  @include lg {
+    margin-top: -11rem;
   }
   font-size: var(--fs-lead);
   line-height: 1.5;
