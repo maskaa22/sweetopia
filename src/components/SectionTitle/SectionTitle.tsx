@@ -5,7 +5,7 @@ interface SectionTitleProps {
   kicker: string
   children: ReactNode
   variant?: 'outline' | 'filled'
-  tone?: 'blue' | 'pink' | 'mix'
+  tone?: 'blue' | 'pink' | 'mix' | 'white'
   kickerTone?: 'gradient' | 'pink' | 'white' | 'blue'
   align?: 'start' | 'center'
   as?: 'h1' | 'h2'

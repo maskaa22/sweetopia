@@ -77,6 +77,11 @@
     -webkit-text-stroke-color: color-mix(in srgb, var(--color-blue) 55%, var(--color-pink));
   }
 
+  // For titles set on artwork or a saturated field.
+  &.tone-white {
+    -webkit-text-stroke-color: var(--color-white);
+  }
+
   @include md {
     -webkit-text-stroke-width: 2.5px;
   }

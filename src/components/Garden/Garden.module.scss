@@ -1,24 +1,76 @@
+@use '../../styles/mixins' as *;
+
+// The ground behind the lens: mint at the top, where Characters leaves off,
+// cotton at the bottom, where House picks up. Whatever shows either side of the
+// curve is then already the neighbour's colour.
 .root {
-  padding-block: var(--section-py);
-  background: linear-gradient(180deg, var(--color-blue) 0%, #74b6d1 55%, var(--color-cotton) 100%);
+  background: linear-gradient(180deg, var(--color-mint) 0%, var(--color-mint) 30%, var(--color-cotton) 70%);
+}
+
+// Curved top and bottom, as on the board. The horizontal radius is half the
+// width so the arc spans the whole span; the vertical one is small, which is
+// what keeps it a shallow lens rather than a circle.
+.dome {
+  position: relative;
+  padding-top: clamp(3rem, 2rem + 6vw, 7rem);
+  border-radius: 50% 50% 50% 50% / 14% 14% 9% 9%;
+  background: linear-gradient(180deg, #55bccd 0%, #45a9bd 100%);
+  overflow: hidden;
 }
 
 .inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1.25rem, 0.8rem + 2vw, 2.5rem);
+  gap: clamp(0.75rem, 0.5rem + 1.2vw, 1.5rem);
+}
+
+// Bigger than the shared display size: on the board it runs nearly the width of
+// the lens.
+.head {
+  width: 100%;
+
+  h2 {
+    font-size: clamp(2.6rem, 0.5rem + 9vw, 9rem);
+    letter-spacing: 0.02em;
+    // The shared line-height is under 1, so at this size the caps climb into
+    // the kicker. Bought back in ems, to hold as the type scales.
+    margin-top: 0.15em;
+  }
 }
 
 .lead {
-  max-width: 52ch;
-  text-align: center;
-  font-size: var(--fs-lead);
+  max-width: 46ch;
+  font-size: var(--fs-body);
+  line-height: 1.5;
   color: var(--color-white);
+  text-align: center;
 }
 
+.sparkLeft,
+.sparkRight {
+  position: absolute;
+  color: var(--color-white);
+  opacity: 0.9;
+}
+
+.sparkLeft {
+  top: 42%;
+  left: 12%;
+}
+
+.sparkRight {
+  top: 30%;
+  right: 16%;
+}
+
+// The art carries its own empty sky, so it can sit flush at the foot of the
+// lens and let the teal show through above it.
 .art {
+  display: block;
   width: 100%;
-  max-width: 1000px;
-  box-shadow: var(--shadow-soft);
+  height: auto;
+  margin-top: clamp(-3rem, -4vw, -1rem);
 }
