@@ -121,7 +121,15 @@
   width: min(62%, 330px);
   max-width: none;
   height: auto;
+  // Off centre on a phone, onto the rise in the bank -- dead centre puts his
+  // paws over the dip between two puffs and he reads as hovering. Transform,
+  // so the bubbles keep their own placement against the stage.
+  transform: translateX(10%);
   filter: drop-shadow(0 26px 40px rgba(76, 151, 187, 0.25));
+
+  @include md {
+    transform: none;
+  }
 }
 
 // Tipped a few degrees each, as on the board, so they read as stuck on rather
