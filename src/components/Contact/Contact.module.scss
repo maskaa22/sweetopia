@@ -162,8 +162,10 @@
     transform: translateX(7%);
   }
 
+  // And back the other way on a desktop, where the bank's near peak sits left
+  // of centre.
   @include lg {
-    transform: none;
+    transform: translateX(-7%);
   }
 }
 
