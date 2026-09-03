@@ -43,12 +43,26 @@
 // In front of everything, including the cat, whose paws bed into it. The
 // section clips it, and at that depth the cloud is still dense -- so it is
 // faded out just above the cut, or the credits below start on a hard line.
+//
+// How far it is pushed out sets where that fade has to land, so the two are
+// tied to one value: the bank ends at `100% - drop`, which is the section's
+// cut, and the fade runs into it over the 15% above.
 .cloudBase {
+  --base-drop: 48%;
+
   bottom: 0;
   z-index: 3;
-  transform: translateY(53%);
-  -webkit-mask-image: linear-gradient(180deg, #000 32%, transparent 47%);
-  mask-image: linear-gradient(180deg, #000 32%, transparent 47%);
+  transform: translateY(var(--base-drop));
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 calc(85% - var(--base-drop)),
+    transparent calc(100% - var(--base-drop))
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 calc(85% - var(--base-drop)),
+    transparent calc(100% - var(--base-drop))
+  );
 }
 
 // --- the scatter ------------------------------------------------------------
@@ -131,7 +145,9 @@
 }
 
 .bubbleLeft {
-  bottom: 24%;
+  // Both sit clear of the bank the cat stands in -- the lower one is the one
+  // that has to watch it.
+  bottom: 34%;
   left: 0;
   transform: rotate(-6deg);
 
@@ -147,7 +163,7 @@
 }
 
 .bubbleRight {
-  bottom: 40%;
+  bottom: 46%;
   right: 0;
   transform: rotate(4deg);
 
