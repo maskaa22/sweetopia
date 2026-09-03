@@ -132,7 +132,13 @@
   transform: translate(10%, 9%);
   filter: drop-shadow(0 26px 40px rgba(76, 151, 187, 0.25));
 
+  // Still off centre on a tablet, where the dip between the puffs is still
+  // under him at dead centre, but with no drop -- the bank reaches him there.
   @include md {
+    transform: translateX(7%);
+  }
+
+  @include lg {
     transform: none;
   }
 }
