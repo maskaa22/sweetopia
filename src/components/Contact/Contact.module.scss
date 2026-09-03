@@ -48,7 +48,14 @@
 // tied to one value: the bank ends at `100% - drop`, which is the section's
 // cut, and the fade runs into it over the 15% above.
 .cloudBase {
-  --base-drop: 48%;
+  // The bank's depth follows the viewport width while the cat is capped in
+  // pixels, so on a phone the same drop leaves the cat in mid-air. Held back
+  // there, and let out again once the bank is deep enough to reach him.
+  --base-drop: 24%;
+
+  @include md {
+    --base-drop: 48%;
+  }
 
   bottom: 0;
   z-index: 3;
