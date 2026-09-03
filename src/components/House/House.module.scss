@@ -1,3 +1,204 @@
+@use '../../styles/mixins' as *;
+
+// Opens on the colour Garden's foot closes with, so that seam needs no ramp,
+// then thins out to almost nothing behind the cloud bank at the bottom.
 .root {
-  background: linear-gradient(180deg, var(--color-cotton) 0%, var(--color-sky) 100%);
+  position: relative;
+  // Keeps the cloud's z-index local, the way Hero does with its own house.
+  isolation: isolate;
+  padding-block: clamp(2rem, 1rem + 4vw, 4.5rem) clamp(4rem, 2rem + 9vw, 10rem);
+  background: linear-gradient(180deg, var(--color-cotton) 0%, #fdf1f6 48%, var(--color-sky) 100%);
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  gap: clamp(1.5rem, 1rem + 3vw, 2.5rem);
+
+  // The headline runs the full width and the pair below it splits: copy left,
+  // house right. The house then climbs back up beside the second title line,
+  // which is where the board has it.
+  @include md {
+    grid-template-columns: 0.92fr 1.08fr;
+    grid-template-areas:
+      'head head'
+      'copy art';
+    align-items: end;
+    gap: 0;
+  }
+}
+
+.head {
+  position: relative;
+
+  @include md {
+    grid-area: head;
+  }
+
+  // The kicker is centred over the block while the headline stays left, as on
+  // the board -- so the alignment is set per child, not on the group.
+  span:first-child {
+    align-self: center;
+  }
+
+  h2 {
+    // Far past the shared display size: on the board the headline is the
+    // section, running about three quarters of the measure on its first line.
+    font-size: clamp(2.6rem, 0.2rem + 15.5vw, 14.5rem);
+    letter-spacing: 0.02em;
+    // The shared line-height is under 1, so at this size the caps climb into
+    // the kicker. Bought back in ems, to hold as the type scales.
+    margin-top: 0.12em;
+  }
+}
+
+// Sitting over the hollow glyphs, so they are placed against the headline box
+// rather than the section.
+.sparkA,
+.sparkB,
+.sparkC {
+  position: absolute;
+  color: var(--color-blue);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.sparkA {
+  top: 44%;
+  left: 13%;
+}
+
+.sparkB {
+  top: 40%;
+  left: 39%;
+  color: var(--color-pink);
+}
+
+.sparkC {
+  top: 76%;
+  left: 16%;
+}
+
+.copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 46ch;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text);
+
+  // Held clear of the cloud bank, which climbs over the foot of the section.
+  @include md {
+    grid-area: copy;
+    max-width: 38ch;
+    padding-bottom: clamp(3rem, 1rem + 8vw, 8rem);
+  }
+}
+
+// Points from the copy across to the house. Only once the two sit side by side
+// -- stacked, there is nothing to point across.
+.arrow {
+  display: none;
+
+  @include md {
+    position: absolute;
+    right: -34%;
+    // Held above the cloud bank, which climbs high enough to swallow it.
+    bottom: 30%;
+    display: block;
+    width: clamp(70px, 9vw, 130px);
+    height: auto;
+    color: var(--color-blue);
+    opacity: 0.5;
+    // Drawn head-up; the board has it curling down towards the house.
+    transform: rotate(168deg);
+    pointer-events: none;
+  }
+}
+
+// Allowed past its column so the house keeps the scale it has on the board;
+// the section clips the overhang. Rises into the headline row on the negative
+// margin, which also shortens the section by the same amount.
+.art {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: min(104%, 560px);
+  max-width: none;
+  height: auto;
+  filter: drop-shadow(0 30px 44px rgba(76, 151, 187, 0.28));
+
+  @include md {
+    grid-area: art;
+    justify-self: end;
+    width: min(126%, 780px);
+    margin: -22% -10% 0 0;
+  }
+
+  @include lg {
+    margin-top: -20%;
+  }
+}
+
+// In front of the house, so its base is bedded into the bank rather than
+// standing on top of it.
+.cloud {
+  position: absolute;
+  left: -10%;
+  bottom: 0;
+  z-index: 2;
+  width: 120%;
+  max-width: none;
+  height: auto;
+  // The asset is a whole cloud and far taller than the band wanted here, so
+  // most of it is pushed below the section and clipped. Shifted by its own
+  // height rather than the section's, so the band stays the same depth
+  // whatever the copy does to the section.
+  transform: translateY(44%);
+  pointer-events: none;
+}
+
+// Line-art flourishes. Decorative, and only where there is room for them.
+.popsicle,
+.wrapper,
+.planet {
+  position: absolute;
+  z-index: 0;
+  display: none;
+  color: var(--color-blue);
+  opacity: 0.45;
+  pointer-events: none;
+
+  @include lg {
+    display: block;
+  }
+}
+
+// Half off the edge, as on the board.
+.popsicle {
+  top: 26%;
+  left: -2%;
+  transform: rotate(-16deg);
+}
+
+.wrapper {
+  top: 12%;
+  right: 1%;
+  transform: rotate(-14deg);
+}
+
+.planet {
+  right: 12%;
+  bottom: 6%;
+  // Above the cloud bank, which would otherwise swallow it.
+  z-index: 3;
+
+  // Out on the bank, so it has room a breakpoint earlier than the pair that
+  // have to share the top of the section with the headline.
+  @include md {
+    display: block;
+  }
 }

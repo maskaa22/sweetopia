@@ -68,4 +68,29 @@
       stroke-linecap="round"
     />
   </symbol>
+  <symbol id="icon-doodle-popsicle" viewBox="0 0 70 170">
+    <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M35 6c15 0 24 9 24 22v66c0 13-9 22-24 22s-24-9-24-22V28C11 15 20 6 35 6Z" />
+      <path d="M27 116v32a8 8 0 0 0 16 0v-32" />
+      <path d="M17 40c6 6 12 6 18 0s12-6 18 0" />
+    </g>
+  </symbol>
+  <symbol id="icon-doodle-wrapper" viewBox="0 0 140 70">
+    <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M47 13h46c11 0 20 10 20 22s-9 22-20 22H47c-11 0-20-10-20-22s9-22 20-22Z" />
+      <path d="M27 25 7 9v52l20-16" />
+      <path d="M113 25l20-16v52l-20-16" />
+      <path d="M57 30h.01M74 42h.01M89 27h.01" stroke-width="5" />
+    </g>
+  </symbol>
+  <symbol id="icon-doodle-planet" viewBox="0 0 130 96">
+    <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="70" cy="42" r="27" />
+      <path d="M45 31C22 25 4 27 2 37c-2 12 22 27 54 33s58 1 60-11c1-8-11-17-30-23" />
+    </g>
+    <path
+      d="M30 62c.7 9.4 5.7 14.4 15 15-9.3.5-14.3 5.5-15 15-.7-9.4-5.7-14.4-15-15 9.3-.5 14.3-5.5 15-15Z"
+      fill="currentColor"
+    />
+  </symbol>
 </svg>
