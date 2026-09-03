@@ -1,64 +1,161 @@
 @use '../../styles/mixins' as *;
 
+// Pale pink at both ends, where the cloud banks sit, and open sky between them
+// so the scatter of sweets has something to read against. The foot lands on
+// the colour the footer carries, so the two run together as one field.
 .root {
-  padding-block: var(--section-py);
-  background: linear-gradient(180deg, var(--color-cotton) 0%, var(--color-sky) 100%);
+  position: relative;
+  // Keeps the cloud banks' stacking local to the section.
+  isolation: isolate;
+  padding-block: clamp(2.5rem, 1.5rem + 5vw, 6rem) clamp(3.5rem, 2rem + 7vw, 8rem);
+  background: linear-gradient(
+    180deg,
+    var(--color-blush) 0%,
+    var(--color-sky) 38%,
+    var(--color-sky) 62%,
+    var(--color-cotton) 100%
+  );
+  overflow: hidden;
 }
 
+// Both banks are the same asset, far deeper than the band wanted, so each is
+// pushed most of the way out of the section by its own height and clipped.
+// Shifting by their own height rather than the section's keeps each band the
+// same depth however tall the section ends up.
+.cloudTop,
+.cloudBase {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+}
+
+// Flipped, so the puffy edge faces down into the section instead of up out
+// of it.
+.cloudTop {
+  top: 0;
+  z-index: 1;
+  transform: translateY(-52%) scaleY(-1);
+}
+
+// In front of everything, including the cat, whose paws bed into it. The
+// section clips it, and at that depth the cloud is still dense -- so it is
+// faded out just above the cut, or the credits below start on a hard line.
+.cloudBase {
+  bottom: 0;
+  z-index: 3;
+  transform: translateY(53%);
+  -webkit-mask-image: linear-gradient(180deg, #000 32%, transparent 47%);
+  mask-image: linear-gradient(180deg, #000 32%, transparent 47%);
+}
+
+// --- the scatter ------------------------------------------------------------
+
+// Sized against the section, so the whole scatter scales with it and no piece
+// drifts out of the arrangement.
+.sweet {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  // Sized up on a phone, where only a handful are shown and each has to hold
+  // its own; from md the whole scatter runs at the size it is placed at.
+  width: calc(var(--sweet-w) * 2.4);
+  height: auto;
+  max-width: none;
+  opacity: 0.85;
+  pointer-events: none;
+
+  @include md {
+    display: block;
+    width: var(--sweet-w);
+  }
+}
+
+// The handful that still have room beside the headline on a phone.
+.sweetKeep {
+  display: block;
+}
+
+// --- content ----------------------------------------------------------------
+
 .inner {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1.5rem, 1rem + 3vw, 3rem);
+  gap: clamp(1rem, 0.5rem + 2vw, 2rem);
 }
 
 .stage {
   position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
   width: 100%;
 }
 
 .cat {
-  width: min(320px, 70vw);
+  width: min(78%, 430px);
+  max-width: none;
+  height: auto;
+  filter: drop-shadow(0 26px 40px rgba(76, 151, 187, 0.25));
 }
 
+// Tipped a few degrees each, as on the board, so they read as stuck on rather
+// than laid out.
 .bubble {
-  position: relative;
-  padding: 0.6em 1.1em;
+  position: absolute;
+  z-index: 1;
+  padding: 0.55em 0.9em;
+  border-radius: 12px;
   background: var(--color-white);
-  border-radius: 999px;
+  font-size: var(--fs-kicker);
   font-weight: 500;
+  line-height: 1.25;
   color: var(--color-ink);
   box-shadow: var(--shadow-soft);
-  white-space: nowrap;
 
+  // The tail is a corner of the same square turned 45deg, so it takes the
+  // bubble's own fill with no second colour to keep in step.
   &::after {
     content: '';
     position: absolute;
-    bottom: -6px;
-    width: 14px;
-    height: 14px;
+    bottom: -5px;
+    width: 12px;
+    height: 12px;
     background: var(--color-white);
     transform: rotate(45deg);
   }
 }
 
 .bubbleLeft {
-  margin-right: -1.5rem;
-  z-index: 1;
+  bottom: 24%;
+  left: 0;
+  transform: rotate(-6deg);
+
+  // Brought in onto the cat's own fur, as on the board, once there is room to
+  // sit over it rather than beside it.
+  @include md {
+    left: 32%;
+  }
 
   &::after {
-    right: 24px;
+    right: 18px;
   }
 }
 
 .bubbleRight {
-  margin-left: -1.5rem;
-  z-index: 1;
+  bottom: 40%;
+  right: 0;
+  transform: rotate(4deg);
+
+  @include md {
+    right: 30%;
+  }
 
   &::after {
-    left: 24px;
+    left: 18px;
   }
 }
