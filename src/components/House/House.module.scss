@@ -168,8 +168,7 @@
   position: absolute;
   z-index: 0;
   display: none;
-  color: var(--color-blue);
-  opacity: 0.45;
+  height: auto;
   pointer-events: none;
 
   @include lg {
@@ -179,20 +178,23 @@
 
 // Half off the edge, as on the board.
 .popsicle {
-  top: 26%;
+  top: 23%;
   left: -2%;
-  transform: rotate(-16deg);
+  width: clamp(80px, 9vw, 140px);
 }
 
 .wrapper {
-  top: 12%;
-  right: 1%;
-  transform: rotate(-14deg);
+  // Above the headline's last letter rather than across it.
+  top: 5%;
+  right: 0;
+  width: clamp(90px, 9.5vw, 145px);
 }
 
 .planet {
   right: 12%;
   bottom: 6%;
+  color: var(--color-blue);
+  opacity: 0.45;
   // Above the cloud bank, which would otherwise swallow it.
   z-index: 3;
 

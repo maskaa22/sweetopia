@@ -7,8 +7,25 @@ import styles from './House.module.scss'
 const House = () => {
   return (
     <section id={SECTION_IDS.HOUSE} className={styles.root}>
-      <SvgIcon id="icon-doodle-popsicle" width={70} height={170} className={styles.popsicle} />
-      <SvgIcon id="icon-doodle-wrapper" width={140} height={70} className={styles.wrapper} />
+      {/* Both come with their own lean and their own pink-to-blue stroke, so
+          they are placed as they are -- no tilt, no tint. */}
+      <img
+        className={styles.popsicle}
+        src="/images/sweet-4.png"
+        alt=""
+        aria-hidden="true"
+        width={518}
+        height={1024}
+      />
+      <img
+        className={styles.wrapper}
+        src="/images/sweet-3.png"
+        alt=""
+        aria-hidden="true"
+        width={534}
+        height={308}
+      />
+
       <SvgIcon id="icon-doodle-planet" width={130} height={96} className={styles.planet} />
 
       <Container className={styles.stage}>
