@@ -9,12 +9,13 @@
 
 // Curved top and bottom, as on the board. Horizontal radius at half the width,
 // so each edge is one unbroken arc with no straight run in the middle. The
-// vertical radius is deep on purpose: at a shallow setting the arc meets the
-// side wall almost square and reads as a cut rather than an ellipse.
+// vertical radius sets how gradual the sweep is: too little and the arc meets
+// the side wall almost square, reading as a cut; too much and it bows out like
+// a circle. This sits between the two.
 .dome {
   position: relative;
   padding-top: clamp(3rem, 2rem + 6vw, 7rem);
-  border-radius: 50% 50% 50% 50% / 34% 34% 24% 24%;
+  border-radius: 50% 50% 50% 50% / 22% 22% 15% 15%;
   background: linear-gradient(180deg, #55bccd 0%, #45a9bd 100%);
   overflow: hidden;
 }
