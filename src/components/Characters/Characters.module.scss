@@ -23,6 +23,16 @@
   gap: clamp(1.5rem, 1rem + 3vw, 2.5rem);
   padding-inline: var(--gutter);
 
+  // Two up on a tablet, staggered so the pair in each row does not read as a
+  // rigid grid. Items sit at the top of their row, which is what lets the
+  // offset on every second card show.
+  @include md {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    justify-items: center;
+  }
+
   @include lg {
     position: relative;
     display: block;
@@ -41,6 +51,10 @@
   text-align: center;
 
   @include gradient-text(linear-gradient(100deg, var(--color-pink) 0%, var(--color-blue) 100%));
+
+  @include md {
+    grid-column: 1 / -1;
+  }
 
   @include lg {
     position: absolute;
@@ -80,6 +94,12 @@
 // only, so the tilt costs nothing in the stacking flow.
 .stage > .dark-choco {
   width: min(100%, 240px);
+
+  // Rides lower than its neighbour so the pair is not level. Margin, not
+  // transform -- one of these is tilted and a transform would drop that.
+  @include md {
+    margin-top: clamp(2rem, 1rem + 3vw, 3.5rem);
+  }
   transform: rotate(-8deg);
 
   // Turned back the other way and past upright, so the sweet itself leans right
@@ -90,14 +110,26 @@
 
   // Wider than the board suggests, because the copy does not shrink with the
   // card: at 15% the description ran to a column of one-word lines.
+  // The stagger above is a min-width rule, so it has to be undone here: on an
+  // absolutely placed card a stray margin just shifts it off its slot.
   @include lg {
     top: 14%;
     left: 35%;
     width: 20%;
+    margin-top: 0;
   }
 }
 
 .stage > .sugar-thief {
+  // A horizontal capsule squashed into half a row stops reading as one, so it
+  // takes the width -- and goes last, because a two-column item cannot fit the
+  // single free cell its place in the data would leave it, and would strand
+  // that cell empty.
+  @include md {
+    grid-column: 1 / -1;
+    order: 1;
+  }
+
   @include lg {
     top: 13%;
     left: 62%;
@@ -121,10 +153,17 @@
 .stage > .mr-marshmallow {
   width: min(100%, 240px);
 
+  // Rides lower than its neighbour so the pair is not level. Margin, not
+  // transform -- one of these is tilted and a transform would drop that.
+  @include md {
+    margin-top: clamp(2rem, 1rem + 3vw, 3.5rem);
+  }
+
   @include lg {
     top: 33%;
     left: 81%;
     width: 14%;
+    margin-top: 0;
   }
 }
 
