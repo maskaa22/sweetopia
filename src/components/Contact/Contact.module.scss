@@ -54,6 +54,10 @@
   --base-drop: 24%;
 
   @include md {
+    --base-drop: 40%;
+  }
+
+  @include xl {
     --base-drop: 48%;
   }
 
@@ -168,8 +172,10 @@
   transform: rotate(-6deg);
 
   // Brought in onto the cat's own fur, as on the board, once there is room to
-  // sit over it rather than beside it.
+  // sit over it rather than beside it -- and up onto his chest, clear of the
+  // bank, which stands highest against him in the middle of the range.
   @include md {
+    bottom: 40%;
     left: 35%;
   }
 
