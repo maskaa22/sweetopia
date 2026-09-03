@@ -9,6 +9,9 @@
 // stretch is on screen (see .archFill).
 .root {
   --arch-rise: clamp(2rem, 1rem + 5vw, 7rem);
+  // How far each echo line sits inside its own edge. One value for both, so
+  // the crown's line and the foot's line stand off by the same amount.
+  --echo-gap: calc(var(--arch-rise) * 0.55);
 
   position: relative;
   padding-top: var(--arch-rise);
@@ -42,7 +45,7 @@
 
 // Same curve again, set down inside the fill.
 .archLine {
-  top: calc(var(--arch-rise) * 0.55);
+  top: var(--echo-gap);
   border: 1.5px solid rgba(255, 255, 255, 0.45);
   border-bottom: none;
 }
@@ -73,11 +76,12 @@
   background: var(--color-blush);
 }
 
-// Same curve again, lifted clear of the fill. Carried at more weight than the
+// Same curve again, lifted clear of the fill -- by the same gap the crown's
+// line keeps, so both read as one treatment. Carried at more weight than the
 // arc up top, because here it crosses the garden's own pale stonework rather
 // than flat teal.
 .baseLine {
-  bottom: -10%;
+  bottom: calc(-16% + var(--echo-gap));
   border: 2px solid rgba(255, 255, 255, 0.8);
   border-bottom: none;
 }
