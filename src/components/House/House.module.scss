@@ -1,13 +1,13 @@
 @use '../../styles/mixins' as *;
 
-// Opens on the colour Garden's foot closes with, so that seam needs no ramp,
-// then thins out to almost nothing behind the cloud bank at the bottom.
+// Flat ground, to the colour asked for. Outside the tokens on purpose: it is
+// this section's own, not a palette entry.
 .root {
   position: relative;
   // Keeps the cloud's z-index local, the way Hero does with its own house.
   isolation: isolate;
   padding-block: clamp(2rem, 1rem + 4vw, 4.5rem) clamp(4rem, 2rem + 9vw, 10rem);
-  background: linear-gradient(180deg, var(--color-cotton) 0%, #fdf1f6 48%, var(--color-sky) 100%);
+  background: rgb(254, 241, 248);
   overflow: hidden;
 }
 
