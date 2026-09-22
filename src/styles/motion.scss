@@ -34,6 +34,34 @@
   }
 }
 
+@property --breath {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --tilt {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+// Breathing, for the cat. `scale` and `rotate` are their own properties, so
+// they compose with the `transform` that already places him rather than
+// replacing it -- he is shifted onto the cloud differently at every
+// breakpoint, and an animation on `transform` would undo all of that.
+@keyframes breathe {
+  from {
+    --breath: 1;
+    --tilt: calc(var(--lean, 0deg) * -1);
+  }
+
+  to {
+    --breath: var(--swell, 1);
+    --tilt: var(--lean, 0deg);
+  }
+}
+
 // Vertical bob, for things actually in flight.
 @keyframes bob {
   from {

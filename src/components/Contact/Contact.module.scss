@@ -164,6 +164,8 @@
   transform: translate(10%, 9%);
   filter: drop-shadow(0 26px 40px rgba(76, 151, 187, 0.25));
 
+  @include breathe(1.014, 0.5deg, 4.3s);
+
   // Off centre the other way on a tablet, onto the bank's near peak: dead
   // centre leaves him over the notch beside it.
   @include md {
