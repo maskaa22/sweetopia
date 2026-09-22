@@ -34,6 +34,13 @@
 
 // `contain`, not `cover`: the five pieces are portrait, square and landscape,
 // and cropping them to a common box cuts the tops off the tall ones.
+// The box is already square, so the frame just fills it rather than setting a
+// second ratio of its own.
+.slot {
+  width: 100%;
+  height: 100%;
+}
+
 .art {
   display: block;
   width: 100%;

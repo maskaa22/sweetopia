@@ -9,7 +9,9 @@ export interface Product {
   id: string
   name: string
   description: string
-  image: string
+  // Optional: a product still waiting on its photo falls back to the
+  // placeholder frame, which is what that component is for.
+  image?: string
   price: number
   tag?: string
 }
