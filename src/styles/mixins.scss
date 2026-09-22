@@ -86,6 +86,27 @@ $bp-xl: 1280px;
   @include drifts(bob, $duration);
 }
 
+// Flying in and back out: away to one side and smaller, towards the other and
+// larger.
+@mixin approach($reach, $recede, $swell, $duration) {
+  --reach: #{$reach};
+  --recede: #{$recede};
+  --swell: #{$swell};
+  --kf: approach;
+
+  translate: calc(var(--drift) + var(--parallax, 0px))
+    calc(var(--rise) + var(--parallax-y, 0px));
+  scale: var(--breath);
+
+  @include motion-safe {
+    animation-name: var(--kf);
+    animation-duration: $duration;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+}
+
 // Breathing. Swells from the foot, so he settles into what he is sitting on
 // rather than growing out of it in both directions.
 @mixin breathe($swell, $lean, $duration) {

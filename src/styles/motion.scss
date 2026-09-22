@@ -62,6 +62,21 @@
   }
 }
 
+// Coming in and going back out: sideways and larger one way, sideways the
+// other and smaller. One keyframe pair drives both, so the two never drift out
+// of step with each other the way two separate animations would.
+@keyframes approach {
+  from {
+    --drift: calc(var(--reach, 0px) * -1);
+    --breath: var(--recede, 1);
+  }
+
+  to {
+    --drift: var(--reach, 0px);
+    --breath: var(--swell, 1);
+  }
+}
+
 // Vertical bob, for things actually in flight.
 @keyframes bob {
   from {

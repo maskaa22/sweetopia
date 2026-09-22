@@ -97,7 +97,7 @@
   margin-inline: auto;
   filter: drop-shadow(0 30px 40px rgba(76, 151, 187, 0.28));
 
-  @include bob(clamp(8px, 1.1vw, 16px), 5.3s);
+  @include approach(clamp(10px, 2.5vw, 36px), 0.97, 1.03, 9.2s);
 
   @include md {
     grid-area: plane;
