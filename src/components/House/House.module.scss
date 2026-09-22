@@ -177,6 +177,8 @@
     transparent calc(100% - var(--cloud-drop))
   );
   pointer-events: none;
+
+  @include sway(18px, 61s);
 }
 
 // Line-art flourishes. Decorative, and only where there is room for them.

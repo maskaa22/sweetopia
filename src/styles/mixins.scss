@@ -43,3 +43,44 @@ $bp-xl: 1280px;
     @content;
   }
 }
+
+// Ambient motion. The keyframes and the properties they drive live in
+// `motion.scss`, which is loaded once; these only turn them on, and only for
+// people who have not asked for less of it.
+//
+// The name goes through a custom property on purpose. CSS Modules rewrites
+// every animation name it finds in a stylesheet, whether or not that file
+// declares the keyframes -- so a plain `animation: sway` here compiled to
+// `_sway_19ebb_1`, which matches nothing, and none of this ran. A value it
+// cannot resolve statically is left alone.
+//
+// Durations are deliberately awkward numbers: with round ones the pieces come
+// back into step every so often and the whole scene visibly repeats.
+@mixin drifts($name, $duration) {
+  --kf: #{$name};
+
+  translate: calc(var(--drift) + var(--parallax, 0px)) var(--rise);
+
+  @include motion-safe {
+    animation-name: var(--kf);
+    animation-duration: $duration;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+}
+
+// Sideways, for the cloud banks -- each runs wider than its section exactly so
+// it can move without either edge coming into view.
+@mixin sway($distance, $duration) {
+  --sway: #{$distance};
+
+  @include drifts(sway, $duration);
+}
+
+// Vertical, for the things actually in flight.
+@mixin bob($distance, $duration) {
+  --lift: #{$distance};
+
+  @include drifts(bob, $duration);
+}

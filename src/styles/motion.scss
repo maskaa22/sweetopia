@@ -1,0 +1,46 @@
+// Ambient motion shared across the sections.
+//
+// Every moving piece of scenery writes into the same two custom properties and
+// composes them in one `translate`. That matters here: most of this scenery is
+// already placed with `transform` (the cloud banks are pushed out of their
+// sections by it), and an animation on `transform` would overwrite that
+// placement rather than add to it. `translate` is applied before `transform`,
+// so the two live side by side.
+//
+// Registering the properties is what lets them interpolate -- an unregistered
+// custom property animates by snapping between keyframes.
+@property --drift {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --rise {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+// Sideways sway, for the cloud banks. Each bank runs wider than its section
+// exactly so it can move without either edge coming into view, and `--sway`
+// stays well inside that overhang.
+@keyframes sway {
+  from {
+    --drift: calc(var(--sway, 0px) * -1);
+  }
+
+  to {
+    --drift: var(--sway, 0px);
+  }
+}
+
+// Vertical bob, for things actually in flight.
+@keyframes bob {
+  from {
+    --rise: calc(var(--lift, 0px) * -1);
+  }
+
+  to {
+    --rise: var(--lift, 0px);
+  }
+}
