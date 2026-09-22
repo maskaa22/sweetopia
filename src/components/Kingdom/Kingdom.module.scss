@@ -9,6 +9,11 @@
 // `transparent` is black at zero alpha and greys the ramp.
 .root {
   position: relative;
+  // The cloud runs past both edges so it has somewhere to drift, which put a
+  // horizontal scrollbar on the page. `clip` rather than `hidden`: hidden on
+  // one axis forces the other to become a scroll container, and this cloud has
+  // to keep rising out of the top of the section into Hero.
+  overflow-x: clip;
   padding-block: var(--section-py) 0;
   background:
     linear-gradient(180deg, var(--color-cotton) 0%, #fdf2f7 38%, rgba(253, 242, 247, 0) 100%) top
