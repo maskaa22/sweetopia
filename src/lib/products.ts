@@ -1,43 +1,49 @@
 import type { Product } from '@/types/content'
 
-// Sweetopia candy bar — products for sale.
+// Sweetopia candy bar -- products for sale. The descriptions are the pastry
+// chef's own build lists, kept as supplied: each is what the sweet is made of,
+// top layer down, separated by middots rather than written out as a sentence.
 export const PRODUCTS: Product[] = [
   {
-    id: 'lollipops',
-    name: 'Caramel Lollipops',
-    description: 'Handmade and boiled on natural juices — one for every taste.',
-    price: 5,
+    id: 'pastel-berry-cupcake',
+    name: 'Pastel Berry Cupcake',
+    description:
+      'Vanilla sponge · Strawberry cream · Raspberry filling · Pastel buttercream · Fresh berries',
+    image: '/images/products/1.png',
+    price: 6,
     tag: 'hit',
   },
   {
-    id: 'cotton-candy',
-    name: 'Cotton Candy',
-    description: 'A light cloud of sweetness on a stick — straight from the Sugar Tree.',
-    price: 6,
+    id: 'raspberry-dream-tart',
+    name: 'Raspberry Dream Tart',
+    description:
+      'Crispy pastry · Vanilla cream · Raspberry confit · Fresh strawberries · Raspberries · White chocolate · Edible flower',
+    image: '/images/products/2.png',
+    price: 8,
   },
   {
-    id: 'marshmallow',
-    name: 'Handmade Marshmallow',
-    description: 'Tender, airy and melts in your mouth — by Mr. Marshmallow’s recipe.',
-    price: 5,
-  },
-  {
-    id: 'gingerbread',
-    name: 'Chocolate Gingerbread',
-    description: 'With glaze and sugar stars, like the walls of the Gingerbread House.',
-    price: 7,
-  },
-  {
-    id: 'marmalade',
-    name: 'Assorted Marmalade',
-    description: 'A fruity mix of all the kingdom’s colors in a single box.',
-    price: 5,
-    tag: 'new',
-  },
-  {
-    id: 'cupcakes',
-    name: 'Sugar King Cupcakes',
-    description: 'Royal buttercream and fresh berries on a gingerbread base.',
+    id: 'strawberry-bliss',
+    name: 'Strawberry Bliss',
+    description:
+      'Vanilla sponge · Vanilla mousse · Raspberry confit · Fresh strawberries & raspberries · White chocolate · Pink macaron',
+    image: '/images/products/3.png',
     price: 9,
+  },
+  {
+    id: 'chocolate-hazelnut-dream',
+    name: 'Chocolate Hazelnut Dream',
+    description:
+      'Chocolate sponge · Dark chocolate ganache · Hazelnut praline · Chocolate mousse · Caramel filling · Roasted hazelnuts · Dark chocolate decor',
+    image: '/images/products/4.png',
+    price: 9,
+  },
+  {
+    id: 'berry-cloud-roulade',
+    name: 'Berry Cloud Roulade',
+    description:
+      'Crisp meringue · Vanilla whipped cream · Raspberry & strawberry confit · Fresh berries · White chocolate · Freeze-dried raspberries',
+    image: '/images/products/5.png',
+    price: 7,
+    tag: 'new',
   },
 ]

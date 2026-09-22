@@ -1,7 +1,6 @@
 import type { Product } from '@/types/content'
 import { CURRENCY } from '@/lib/constants'
 import { useCart } from '@/hooks/useCart'
-import MediaFrame from '@/components/MediaFrame'
 import Button from '@/components/Button'
 import styles from './ProductCard.module.scss'
 
@@ -16,7 +15,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
     <article className={styles.root}>
       <div className={styles.media}>
         {product.tag ? <span className={styles.tag}>{product.tag}</span> : null}
-        <MediaFrame ratio="square" label={`Photo: ${product.name}`} />
+        {/* The art carries its own empty margin and the pieces are not all the
+            same shape, so it is fitted into a square rather than filling one. */}
+        <img className={styles.art} src={product.image} alt={product.name} loading="lazy" />
       </div>
       <div className={styles.body}>
         <h3 className={styles.name}>{product.name}</h3>
