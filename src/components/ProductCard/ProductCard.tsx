@@ -33,7 +33,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <span className={styles.currency}>{CURRENCY}</span>
             {product.price}
           </span>
-          <Button variant="solid" icon="icon-cart" onClick={() => add(product)}>
+          <Button variant="solid" icon="icon-cart" sparkle onClick={() => add(product)}>
             Add to cart
           </Button>
         </div>

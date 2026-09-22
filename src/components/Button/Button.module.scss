@@ -1,4 +1,7 @@
+@use '../../styles/mixins' as *;
+
 .root {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
@@ -34,5 +37,55 @@
   &:hover {
     background: var(--color-blue);
     color: var(--color-white);
+  }
+}
+
+// --- sparkle -----------------------------------------------------------------
+
+// Silver rather than white: against the candy gradient a white star reads as a
+// hole punched in the button, where a cool grey catches the light instead.
+// Sized by the markup, so no two are the same.
+.spark {
+  position: absolute;
+  z-index: 1;
+  color: #dce6f2;
+  opacity: 0;
+  transform: scale(0.2) rotate(-35deg);
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.95));
+  pointer-events: none;
+}
+
+// Each one runs the whole cycle and then waits, so the group never settles
+// into a rhythm you can follow. The stagger is on the markup.
+@keyframes twinkle {
+  0%,
+  72%,
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-35deg);
+  }
+
+  18% {
+    opacity: 1;
+    transform: scale(1) rotate(10deg);
+  }
+
+  46% {
+    opacity: 0.55;
+    transform: scale(0.72) rotate(28deg);
+  }
+}
+
+// Only while the button is actually under the pointer or focused -- left
+// running, seven stars twinkling on every card would be the loudest thing on
+// the page.
+.sparkling {
+  &:hover,
+  &:focus-visible {
+    @include motion-safe {
+      .spark {
+        animation: twinkle 1.9s ease-in-out var(--delay, 0s) infinite;
+      }
+    }
   }
 }
