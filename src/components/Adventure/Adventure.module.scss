@@ -277,9 +277,11 @@
   @include bob(clamp(10px, 1.6vw, 23px), 6.7s);
 
   // The window sits low enough on a tablet to leave the top right corner free,
-  // but not much of it -- so the balloon goes back up there, smaller.
+  // but not much of it -- so the balloon goes back up there, smaller. Not right
+  // against the top edge, though: the scroll lifts it, and at 2% the section
+  // was cutting its canopy off.
   @include md {
-    top: 2%;
+    top: 9%;
     width: 78px;
   }
 

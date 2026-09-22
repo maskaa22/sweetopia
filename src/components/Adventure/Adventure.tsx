@@ -19,7 +19,9 @@ const Adventure = () => {
   // a side, so 30px is well inside what it has to give.
   const clouds = useParallax<HTMLImageElement>(30)
   const plane = useParallax<HTMLImageElement>(34)
-  const balloon = useParallax<HTMLImageElement>(60, 'y')
+  // Less than the plane takes: the balloon is barely 78px across on a tablet,
+  // and the same travel there is most of its own height.
+  const balloon = useParallax<HTMLImageElement>(48, 'y')
 
   return (
     <section id={SECTION_IDS.ADVENTURE} className={styles.root}>
