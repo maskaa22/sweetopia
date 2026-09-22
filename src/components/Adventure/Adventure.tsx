@@ -18,8 +18,8 @@ const Adventure = () => {
   // what reads as distance between them. The bank overhangs its section by 6%
   // a side, so 30px is well inside what it has to give.
   const clouds = useParallax<HTMLImageElement>(30)
-  const plane = useParallax<HTMLImageElement>(26, 'y')
-  const balloon = useParallax<HTMLImageElement>(44, 'y')
+  const plane = useParallax<HTMLImageElement>(38, 'y')
+  const balloon = useParallax<HTMLImageElement>(60, 'y')
 
   return (
     <section id={SECTION_IDS.ADVENTURE} className={styles.root}>

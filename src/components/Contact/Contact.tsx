@@ -56,8 +56,8 @@ const SCATTER = [
 const Contact = () => {
   // Opposite signs, so the two banks pull apart as the section goes by rather
   // than travelling together.
-  const cloudTop = useParallax<HTMLImageElement>(34)
-  const cloudBase = useParallax<HTMLImageElement>(-46)
+  const cloudTop = useParallax<HTMLImageElement>(50)
+  const cloudBase = useParallax<HTMLImageElement>(-60)
 
   return (
     <section id={SECTION_IDS.CONTACT} className={styles.root}>

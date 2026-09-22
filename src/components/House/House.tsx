@@ -8,7 +8,7 @@ import styles from './House.module.scss'
 const House = () => {
   // The bank overhangs the section by 10% a side, so this is nowhere near
   // bringing an edge into view.
-  const cloud = useParallax<HTMLImageElement>(40)
+  const cloud = useParallax<HTMLImageElement>(55)
 
   return (
     <section id={SECTION_IDS.HOUSE} className={styles.root}>

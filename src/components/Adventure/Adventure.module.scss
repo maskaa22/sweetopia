@@ -39,7 +39,7 @@
   opacity: 0.9;
   pointer-events: none;
 
-  @include sway(14px, 52s);
+  @include sway(clamp(8px, 2.8vw, 40px), 26s);
 }
 
 // Over the cloud plate but under the content, so only the bank dissolves. It
@@ -97,7 +97,7 @@
   margin-inline: auto;
   filter: drop-shadow(0 30px 40px rgba(76, 151, 187, 0.28));
 
-  @include bob(10px, 7.4s);
+  @include bob(clamp(8px, 1.1vw, 16px), 5.3s);
 
   @include md {
     grid-area: plane;
@@ -274,7 +274,7 @@
   width: clamp(90px, 11vw, 190px);
   height: auto;
 
-  @include bob(14px, 9.1s);
+  @include bob(clamp(10px, 1.6vw, 23px), 6.7s);
 
   // The window sits low enough on a tablet to leave the top right corner free,
   // but not much of it -- so the balloon goes back up there, smaller.

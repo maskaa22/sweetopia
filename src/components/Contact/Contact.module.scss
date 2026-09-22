@@ -57,7 +57,7 @@
     transparent calc(100% - var(--top-drop))
   );
 
-  @include sway(16px, 47s);
+  @include sway(clamp(10px, 3vw, 43px), 24s);
 }
 
 // In front of everything, including the cat, whose paws bed into it. The
@@ -105,7 +105,7 @@
     transparent calc(100% - var(--base-drop))
   );
 
-  @include sway(20px, 67s);
+  @include sway(clamp(12px, 3.8vw, 55px), 33s);
 }
 
 // --- the scatter ------------------------------------------------------------

@@ -178,7 +178,7 @@
   );
   pointer-events: none;
 
-  @include sway(18px, 61s);
+  @include sway(clamp(12px, 3.5vw, 50px), 28s);
 }
 
 // Line-art flourishes. Decorative, and only where there is room for them.

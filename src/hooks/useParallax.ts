@@ -31,9 +31,14 @@ const read = () => {
     const span = middle + box.height / 2
     const progress = Math.max(-1, Math.min(1, (middle - (box.top + box.height / 2)) / span))
 
+    // The room each piece has to move in is a percentage of its section, so
+    // the travel has to shrink with the viewport too -- a distance that sits
+    // inside the overhang at 1440 runs off the edge on a phone.
+    const travel = distance * Math.min(1, window.innerWidth / 1440)
+
     el.style.setProperty(
       axis === 'x' ? '--parallax' : '--parallax-y',
-      `${(progress * distance).toFixed(1)}px`,
+      `${(progress * travel).toFixed(1)}px`,
     )
   })
 }
@@ -44,8 +49,8 @@ const schedule = () => {
 
 /**
  * Moves a piece of scenery against the scroll, so the layers read as having
- * depth between them. `distance` is how far it travels, in px, across the
- * whole time its section is on screen.
+ * depth between them. `distance` is how far it travels across the whole time
+ * its section is on screen, in px at a 1440 viewport, scaled down below that.
  *
  * Keep it inside whatever room the piece has: the cloud banks run wider than
  * their sections, and travelling further than that overhang brings an edge
