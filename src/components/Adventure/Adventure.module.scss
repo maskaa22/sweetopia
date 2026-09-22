@@ -40,6 +40,21 @@
   pointer-events: none;
 }
 
+// Over the cloud plate but under the content, so only the bank dissolves. It
+// closes on the section's own last colour -- which is also the one Characters
+// opens on -- and fades from that same RGB at zero alpha, never `transparent`,
+// which is black at zero alpha and would grey the ramp.
+.foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: clamp(5rem, 3rem + 9vw, 12rem);
+  background: linear-gradient(180deg, rgba(191, 233, 245, 0) 0%, var(--color-sky-deep) 100%);
+  pointer-events: none;
+}
+
 .stage {
   position: relative;
   z-index: 2;

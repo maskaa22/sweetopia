@@ -96,6 +96,10 @@ const Adventure = () => {
         </div>
       </div>
 
+      {/* The cloud plate is still dense where the section cuts it, so the bank
+          ended on a hard line across the seam into Characters. This dissolves
+          it into the colour both sections meet on. */}
+      <span className={styles.foot} aria-hidden="true" />
     </section>
   )
 }
