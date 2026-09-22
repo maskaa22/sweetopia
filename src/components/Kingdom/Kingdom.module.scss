@@ -1,9 +1,19 @@
 @use '../../styles/mixins' as *;
 
+// Opens on the exact colour Hero ends on -- sampled off the render, and it is
+// --color-cotton there -- and washes out over a band at the top, so the two
+// read as one surface. The ramp is a sized layer rather than a percentage of
+// the section: this one is tall, and a percentage would drag a pink wash a
+// third of the way down it. Pink to blue is muddy interpolated straight, so it
+// lightens to near-white first, and it fades to its own RGB at zero alpha --
+// `transparent` is black at zero alpha and greys the ramp.
 .root {
   position: relative;
   padding-block: var(--section-py) 0;
-  background: linear-gradient(180deg, var(--color-sky) 0%, var(--color-white) 70%);
+  background:
+    linear-gradient(180deg, var(--color-cotton) 0%, #fdf2f7 38%, rgba(253, 242, 247, 0) 100%) top
+      center / 100% clamp(7rem, 16vw, 15rem) no-repeat,
+    linear-gradient(180deg, var(--color-sky) 0%, var(--color-white) 70%);
 }
 
 // Cotton-candy band bridging Hero and Kingdom: it lifts out of this section to
