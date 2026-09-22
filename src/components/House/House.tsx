@@ -1,10 +1,15 @@
 import { SECTION_IDS } from '@/lib/constants'
+import useParallax from '@/hooks/useParallax'
 import Container from '@/components/Container'
 import SectionTitle from '@/components/SectionTitle'
 import SvgIcon from '@/components/SvgIcon'
 import styles from './House.module.scss'
 
 const House = () => {
+  // The bank overhangs the section by 10% a side, so this is nowhere near
+  // bringing an edge into view.
+  const cloud = useParallax<HTMLImageElement>(40)
+
   return (
     <section id={SECTION_IDS.HOUSE} className={styles.root}>
       {/* Both come with their own lean and their own pink-to-blue stroke, so
@@ -74,6 +79,7 @@ const House = () => {
       {/* Hero's cloud again, run past both edges so the house reads as standing
           on a bank rather than on a single puff. */}
       <img
+        ref={cloud}
         className={styles.cloud}
         src="/images/hero-2.png"
         alt=""

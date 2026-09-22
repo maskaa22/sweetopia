@@ -59,7 +59,8 @@ $bp-xl: 1280px;
 @mixin drifts($name, $duration) {
   --kf: #{$name};
 
-  translate: calc(var(--drift) + var(--parallax, 0px)) var(--rise);
+  translate: calc(var(--drift) + var(--parallax, 0px))
+    calc(var(--rise) + var(--parallax-y, 0px));
 
   @include motion-safe {
     animation-name: var(--kf);

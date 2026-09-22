@@ -1,4 +1,5 @@
 import { SECTION_IDS } from '@/lib/constants'
+import useParallax from '@/hooks/useParallax'
 import SvgIcon from '@/components/SvgIcon'
 import styles from './Adventure.module.scss'
 
@@ -13,9 +14,17 @@ const HEARTS = [
 ] as const
 
 const Adventure = () => {
+  // The bank travels least and the two things in flight travel most, which is
+  // what reads as distance between them. The bank overhangs its section by 6%
+  // a side, so 30px is well inside what it has to give.
+  const clouds = useParallax<HTMLImageElement>(30)
+  const plane = useParallax<HTMLImageElement>(26, 'y')
+  const balloon = useParallax<HTMLImageElement>(44, 'y')
+
   return (
     <section id={SECTION_IDS.ADVENTURE} className={styles.root}>
       <img
+        ref={clouds}
         className={styles.clouds}
         src="/images/adventure-fly3.png"
         alt=""
@@ -24,6 +33,7 @@ const Adventure = () => {
         height={940}
       />
       <img
+        ref={balloon}
         className={styles.balloon}
         src="/images/adventure-fly2.png"
         alt=""
@@ -62,6 +72,7 @@ const Adventure = () => {
 
         <img
           className={styles.plane}
+          ref={plane}
           src="/images/adventure-fly.png"
           alt="An aeroplane made of candy, its cabin packed with gumballs"
           width={1254}

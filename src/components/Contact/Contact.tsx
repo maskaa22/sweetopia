@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { SECTION_IDS } from '@/lib/constants'
+import useParallax from '@/hooks/useParallax'
 import Container from '@/components/Container'
 import SectionTitle from '@/components/SectionTitle'
 import styles from './Contact.module.scss'
@@ -53,11 +54,17 @@ const SCATTER = [
 ]
 
 const Contact = () => {
+  // Opposite signs, so the two banks pull apart as the section goes by rather
+  // than travelling together.
+  const cloudTop = useParallax<HTMLImageElement>(34)
+  const cloudBase = useParallax<HTMLImageElement>(-46)
+
   return (
     <section id={SECTION_IDS.CONTACT} className={styles.root}>
       {/* Hero's cloud twice over: flipped at the top so its puffy edge faces
           down into the section, and the right way up at the foot. */}
       <img
+        ref={cloudTop}
         className={styles.cloudTop}
         src="/images/hero-2.png"
         alt=""
@@ -111,6 +118,7 @@ const Contact = () => {
       </Container>
 
       <img
+        ref={cloudBase}
         className={styles.cloudBase}
         src="/images/hero-2.png"
         alt=""
