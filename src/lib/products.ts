@@ -46,12 +46,12 @@ export const PRODUCTS: Product[] = [
     price: 7,
     tag: 'new',
   },
-  // Held open for the sixth sweet. No `image`, so the card shows the
-  // placeholder frame; drop the art in and swap the copy when it arrives.
   {
-    id: 'sixth-treat',
-    name: 'Sixth Treat',
-    description: 'Still in the kitchen — its picture and its recipe are on the way.',
-    price: 7,
+    id: 'marshmallow-berry-cloud',
+    name: 'Marshmallow Berry Cloud',
+    description:
+      'Vanilla mousse · Raspberry confit · Golden biscuit · Pink & white marshmallows · White chocolate · Fresh raspberries',
+    image: '/images/products/6.png',
+    price: 8,
   },
 ]
