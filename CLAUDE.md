@@ -123,6 +123,14 @@ The file is written asynchronously — retry opening it in a loop, or the first
 `Bitmap` load throws. Anchors (`/#ruler`) do not scroll inside headless iframes;
 capture tall and crop by offset.
 
+**`--virtual-time-budget` does not advance the animation clock.** Anything with
+a CSS `transition` on the property you are looking at renders — and reports
+through `getComputedStyle` — the value it held *before* the class changed, and
+stays there however long you wait. Spent a while chasing a tab control whose
+classes were provably correct while both the paint and the computed style
+showed the previous state. Inject `* { transition: none !important }` into the
+frame before reading or capturing anything that has just changed.
+
 ## Git
 
 Branch per section, chained off the previous one (not off `main`), because each

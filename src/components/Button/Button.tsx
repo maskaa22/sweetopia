@@ -25,6 +25,8 @@ interface ButtonProps {
   icon?: string
   /** Scatters silver stars that twinkle while the button is hovered. */
   sparkle?: boolean
+  /** `button` unless it is the one that sends a form. */
+  type?: 'button' | 'submit'
   onClick?: () => void
 }
 
@@ -34,6 +36,7 @@ const Button = ({
   variant = 'solid',
   icon,
   sparkle = false,
+  type = 'button',
   onClick,
 }: ButtonProps) => {
   const className = [styles.root, styles[variant], sparkle ? styles.sparkling : '']
@@ -75,7 +78,7 @@ const Button = ({
   }
 
   return (
-    <button type="button" className={className} onClick={onClick}>
+    <button type={type} className={className} onClick={onClick}>
       {content}
     </button>
   )

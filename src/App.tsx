@@ -5,6 +5,7 @@ import Home from '@/pages/Home'
 import Products from '@/pages/Products'
 import ProductDetail from '@/pages/ProductDetail'
 import About from '@/pages/About'
+import Auth from '@/pages/Auth'
 import NotFound from '@/pages/NotFound'
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
           <Route path={ROUTES.PRODUCTS} element={<Products />} />
           <Route path={ROUTES.PRODUCT} element={<ProductDetail />} />
           <Route path={ROUTES.ABOUT} element={<About />} />
+          <Route path={ROUTES.LOGIN} element={<Auth />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

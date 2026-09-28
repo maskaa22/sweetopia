@@ -22,6 +22,7 @@ export const ROUTES = {
   PRODUCTS: '/products',
   PRODUCT: '/products/:id',
   ABOUT: '/about',
+  LOGIN: '/login',
 } as const
 
 /** Path for one product's page. */

@@ -1,0 +1,147 @@
+@use '../../styles/mixins' as *;
+
+.card {
+  width: min(100%, 460px);
+  margin-inline: auto;
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: var(--shadow-soft);
+}
+
+// Two halves of one control rather than two buttons side by side, so which
+// one is on reads at a glance. The track is cotton rather than blush: the
+// active half is white, and against blush there was barely anything between
+// them.
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: var(--color-cotton);
+}
+
+.tab {
+  padding: 0.6em 1em;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.tabOn {
+  background: var(--color-white);
+  color: var(--color-pink);
+  box-shadow: var(--shadow-soft);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// The whole field is the label, so the text and its input are tied together
+// without an id to keep in step.
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  input {
+    width: 100%;
+    padding: 0.8em 1em;
+    border: 2px solid var(--color-sky-deep);
+    border-radius: 14px;
+    background: var(--color-white);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    color: var(--color-text);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &::placeholder {
+      color: color-mix(in srgb, var(--color-text-muted) 60%, transparent);
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-color: var(--color-blue);
+      box-shadow: var(--ring);
+    }
+  }
+}
+
+.label {
+  font-size: var(--fs-kicker);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+// Colour is not the only marker: the message under the field says the same
+// thing, for anyone who cannot see the border.
+.invalid input {
+  border-color: var(--color-pink);
+}
+
+.error {
+  font-size: var(--fs-kicker);
+  color: var(--color-pink);
+}
+
+.notice {
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  background: var(--color-blush);
+  font-size: var(--fs-kicker);
+  line-height: 1.5;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.aside {
+  margin-top: 1.25rem;
+  font-size: var(--fs-kicker);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+// A control, not a link: it changes what this page shows rather than going
+// anywhere, so it is a button wearing a link's clothes.
+.swap {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--color-blue);
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-pink);
+  }
+}
+
+.skip {
+  align-self: center;
+  font-weight: 500;
+  color: var(--color-blue);
+
+  &:hover {
+    color: var(--color-pink);
+  }
+}

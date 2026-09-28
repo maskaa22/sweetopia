@@ -24,6 +24,23 @@
   gap: 0.5rem;
 }
 
+.account {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-blue);
+  box-shadow: var(--shadow-soft);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-pink);
+  }
+}
+
 // The menu button is only there while the nav is folded away.
 .menu {
   display: inline-flex;

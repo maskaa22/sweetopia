@@ -57,6 +57,10 @@ const Header = () => {
         </nav>
 
         <div className={styles.controls}>
+          <Link to={ROUTES.LOGIN} className={styles.account} aria-label="Sign in">
+            <SvgIcon id="icon-user" width={22} height={22} />
+          </Link>
+
           <button
             type="button"
             className={styles.menu}
