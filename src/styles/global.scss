@@ -23,6 +23,25 @@ html {
   }
 }
 
+// The app is a column so the footer is pushed to the bottom of the viewport on
+// a short page -- without it the body background shows as a band beneath the
+// credits, which only became visible once there were pages shorter than the
+// landing.
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+  // A column as well, so a page shorter than the viewport can be told to fill
+  // what is left. Without it the page's own field stops where its content
+  // does and the body colour shows as a band above the credits.
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   min-height: 100vh;
   font-family: var(--font-body);

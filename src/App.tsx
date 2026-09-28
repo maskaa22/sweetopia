@@ -1,36 +1,25 @@
-import Header from '@/components/Header'
-import CartDrawer from '@/components/CartDrawer'
-import Hero from '@/components/Hero'
-import Kingdom from '@/components/Kingdom'
-import Citizens from '@/components/Citizens'
-import Shop from '@/components/Shop'
-import Ruler from '@/components/Ruler'
-import Adventure from '@/components/Adventure'
-import Characters from '@/components/Characters'
-import Garden from '@/components/Garden'
-import House from '@/components/House'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ROUTES } from '@/lib/constants'
+import Layout from '@/components/Layout'
+import Home from '@/pages/Home'
+import Products from '@/pages/Products'
+import ProductDetail from '@/pages/ProductDetail'
+import About from '@/pages/About'
+import NotFound from '@/pages/NotFound'
 
 const App = () => {
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <Kingdom />
-        <Citizens />
-        <Shop />
-        <Ruler />
-        <Adventure />
-        <Characters />
-        <Garden />
-        <House />
-        <Contact />
-      </main>
-      <Footer />
-      <CartDrawer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route path={ROUTES.PRODUCTS} element={<Products />} />
+          <Route path={ROUTES.PRODUCT} element={<ProductDetail />} />
+          <Route path={ROUTES.ABOUT} element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

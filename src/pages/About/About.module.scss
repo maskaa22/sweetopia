@@ -1,0 +1,10 @@
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 62ch;
+  margin-inline: auto;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--color-text);
+}

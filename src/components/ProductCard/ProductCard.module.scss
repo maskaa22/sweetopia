@@ -75,6 +75,14 @@
   flex: 1;
 }
 
+.nameLink {
+  color: inherit;
+
+  &:hover {
+    color: var(--color-pink);
+  }
+}
+
 .name {
   font-family: var(--font-display);
   // A notch under the shared h3: at that size the longer names took two lines

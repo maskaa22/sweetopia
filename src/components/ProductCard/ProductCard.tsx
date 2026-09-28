@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom'
 import type { Product } from '@/types/content'
-import { CURRENCY } from '@/lib/constants'
+import { CURRENCY, productPath } from '@/lib/constants'
 import { useCart } from '@/hooks/useCart'
 import MediaFrame from '@/components/MediaFrame'
 import Button from '@/components/Button'
@@ -14,7 +15,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <article className={styles.root}>
-      <div className={styles.media}>
+      {/* The art and the name link through; the cart button deliberately does
+          not sit inside that link -- a control nested in a link is reachable
+          twice and fires the wrong thing half the time. */}
+      <Link to={productPath(product.id)} className={styles.media} aria-label={product.name}>
         {product.tag ? <span className={styles.tag}>{product.tag}</span> : null}
         {/* The art carries its own empty margin and the pieces are not all the
             same shape, so it is fitted into a square rather than filling one.
@@ -24,9 +28,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
         ) : (
           <MediaFrame className={styles.slot} ratio="square" label={`Photo: ${product.name}`} />
         )}
-      </div>
+      </Link>
       <div className={styles.body}>
-        <h3 className={styles.name}>{product.name}</h3>
+        <h3 className={styles.name}>
+          <Link to={productPath(product.id)} className={styles.nameLink}>
+            {product.name}
+          </Link>
+        </h3>
         <p className={styles.desc}>{product.description}</p>
         <div className={styles.footer}>
           <span className={styles.price}>
