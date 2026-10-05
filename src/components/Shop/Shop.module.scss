@@ -20,6 +20,19 @@
   color: var(--color-text);
 }
 
+.all {
+  display: block;
+  margin-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  font-size: var(--fs-lead);
+  font-weight: 600;
+  color: var(--color-blue);
+  text-align: center;
+
+  &:hover {
+    color: var(--color-pink);
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;

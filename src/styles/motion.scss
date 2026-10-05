@@ -1,0 +1,89 @@
+// Ambient motion shared across the sections.
+//
+// Every moving piece of scenery writes into the same two custom properties and
+// composes them in one `translate`. That matters here: most of this scenery is
+// already placed with `transform` (the cloud banks are pushed out of their
+// sections by it), and an animation on `transform` would overwrite that
+// placement rather than add to it. `translate` is applied before `transform`,
+// so the two live side by side.
+//
+// Registering the properties is what lets them interpolate -- an unregistered
+// custom property animates by snapping between keyframes.
+@property --drift {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --rise {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+// Sideways sway, for the cloud banks. Each bank runs wider than its section
+// exactly so it can move without either edge coming into view, and `--sway`
+// stays well inside that overhang.
+@keyframes sway {
+  from {
+    --drift: calc(var(--sway, 0px) * -1);
+  }
+
+  to {
+    --drift: var(--sway, 0px);
+  }
+}
+
+@property --breath {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --tilt {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+// Breathing, for the cat. `scale` and `rotate` are their own properties, so
+// they compose with the `transform` that already places him rather than
+// replacing it -- he is shifted onto the cloud differently at every
+// breakpoint, and an animation on `transform` would undo all of that.
+@keyframes breathe {
+  from {
+    --breath: 1;
+    --tilt: calc(var(--lean, 0deg) * -1);
+  }
+
+  to {
+    --breath: var(--swell, 1);
+    --tilt: var(--lean, 0deg);
+  }
+}
+
+// Coming in and going back out: sideways and larger one way, sideways the
+// other and smaller. One keyframe pair drives both, so the two never drift out
+// of step with each other the way two separate animations would.
+@keyframes approach {
+  from {
+    --drift: calc(var(--reach, 0px) * -1);
+    --breath: var(--recede, 1);
+  }
+
+  to {
+    --drift: var(--reach, 0px);
+    --breath: var(--swell, 1);
+  }
+}
+
+// Vertical bob, for things actually in flight.
+@keyframes bob {
+  from {
+    --rise: calc(var(--lift, 0px) * -1);
+  }
+
+  to {
+    --rise: var(--lift, 0px);
+  }
+}

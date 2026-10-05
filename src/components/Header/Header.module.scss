@@ -11,10 +11,53 @@
 }
 
 .inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.account {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-blue);
+  box-shadow: var(--shadow-soft);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-pink);
+  }
+}
+
+// The menu button is only there while the nav is folded away.
+.menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-blue);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+
+  @include lg {
+    display: none;
+  }
 }
 
 .brand {
@@ -26,23 +69,77 @@
   @include gradient-text;
 }
 
+// A row on a desktop; below that it drops out of the bar and becomes a panel
+// under it, opened by the menu button. There was no nav at all below lg before,
+// which was fine while the whole site was one scroll -- with pages of its own,
+// half of it was unreachable on a phone.
 .nav {
-  display: none;
-  align-items: center;
-  gap: clamp(0.75rem, 0.3rem + 1.5vw, 1.75rem);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem var(--gutter) 1rem;
+  background: var(--color-sky);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+
+  // Folded away rather than removed, so the button has something to point at
+  // and the panel can be animated open.
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
+
+  &.navOpen {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
 
   @include lg {
-    display: flex;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(0.75rem, 0.3rem + 1.5vw, 1.75rem);
+    padding: 0;
+    background: none;
+    border: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
 }
 
 .link {
   font-weight: 500;
   color: var(--color-ink);
+  white-space: nowrap;
   transition: color 0.2s ease;
 
   &:hover {
     color: var(--color-pink);
+  }
+}
+
+.current {
+  color: var(--color-pink);
+}
+
+// Room to hit, while the links are stacked rows rather than a bar.
+.nav .link {
+  padding-block: 0.55rem;
+
+  @include lg {
+    padding-block: 0;
   }
 }
 

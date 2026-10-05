@@ -1,0 +1,26 @@
+@use '../../styles/mixins' as *;
+
+// The same blush the candy bar closes on, so an inner page reads as part of
+// the same kingdom rather than a plain document.
+.root {
+  flex: 1 0 auto;
+  padding-block: clamp(2.5rem, 1.5rem + 5vw, 6rem) clamp(3.5rem, 2rem + 7vw, 8rem);
+  background:
+    radial-gradient(85% 55% at 50% 0%, rgba(255, 255, 255, 0.75), transparent 70%),
+    linear-gradient(180deg, var(--color-blush) 0%, #fdf7fa 55%, var(--color-blush) 100%);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.lead {
+  max-width: 56ch;
+  margin-inline: auto;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--color-text);
+  text-align: center;
+}

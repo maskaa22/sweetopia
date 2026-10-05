@@ -38,6 +38,8 @@
   height: auto;
   opacity: 0.9;
   pointer-events: none;
+
+  @include sway(clamp(8px, 2.8vw, 40px), 26s);
 }
 
 // Over the cloud plate but under the content, so only the bank dissolves. It
@@ -94,6 +96,8 @@
   height: auto;
   margin-inline: auto;
   filter: drop-shadow(0 30px 40px rgba(76, 151, 187, 0.28));
+
+  @include approach(clamp(10px, 2.5vw, 36px), 0.97, 1.03, 9.2s);
 
   @include md {
     grid-area: plane;
@@ -270,10 +274,14 @@
   width: clamp(90px, 11vw, 190px);
   height: auto;
 
+  @include bob(clamp(10px, 1.6vw, 23px), 6.7s);
+
   // The window sits low enough on a tablet to leave the top right corner free,
-  // but not much of it -- so the balloon goes back up there, smaller.
+  // but not much of it -- so the balloon goes back up there, smaller. Not right
+  // against the top edge, though: the scroll lifts it, and at 2% the section
+  // was cutting its canopy off.
   @include md {
-    top: 2%;
+    top: 9%;
     width: 78px;
   }
 

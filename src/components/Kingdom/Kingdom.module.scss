@@ -9,6 +9,11 @@
 // `transparent` is black at zero alpha and greys the ramp.
 .root {
   position: relative;
+  // The cloud runs past both edges so it has somewhere to drift, which put a
+  // horizontal scrollbar on the page. `clip` rather than `hidden`: hidden on
+  // one axis forces the other to become a scroll container, and this cloud has
+  // to keep rising out of the top of the section into Hero.
+  overflow-x: clip;
   padding-block: var(--section-py) 0;
   background:
     linear-gradient(180deg, var(--color-cotton) 0%, #fdf2f7 38%, rgba(253, 242, 247, 0) 100%) top
@@ -23,17 +28,26 @@
 .cloud {
   position: absolute;
   top: 0;
-  left: 0;
+  // Run a little past both edges, purely so it has somewhere to drift: the
+  // asset's cloud reaches its own left and right edges, with no clear margin,
+  // so at full width any sideways movement shows a cut.
+  left: -3%;
   z-index: 3;
-  width: 100%;
+  width: 106%;
+  max-width: none;
   height: auto;
-  transform: translateY(-65%);
+  // The offsets below are a percentage of the image's own height, which the
+  // extra width takes up with it -- so they are divided back down by the same
+  // 1.06 to leave the cloud sitting exactly where it sat over the house.
+  transform: translateY(-61.3%);
   pointer-events: none;
+
+  @include sway(clamp(6px, 1.8vw, 26px), 20s);
 
   // Desktop gives the hero far more headroom, so the same offset rides too high
   // over the house -- ease it back down.
   @include lg {
-    transform: translateY(-56%);
+    transform: translateY(-52.8%);
   }
 }
 

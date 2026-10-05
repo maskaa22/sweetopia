@@ -203,7 +203,58 @@
   font-size: var(--fs-lead);
 }
 
+// Podarok has no `$` glyph, so a currency sign set in it simply does not
+// render -- which is what left the total here reading as a bare number. The
+// amount keeps the display face and the sign is set in the body face beside
+// it, the same split the product card uses.
 .total {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.currency {
+  margin-right: 0.12em;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+// --- after checkout ----------------------------------------------------------
+
+// Same shape as the empty state, so the panel does not jump between the two.
+.placed {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem var(--drawer-pad, 1.5rem);
+  text-align: center;
+  color: var(--color-text-muted);
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  p {
+    max-width: 30ch;
+  }
+}
+
+.placedIcon {
+  color: var(--color-pink);
+}
+
+.placedSum {
+  margin-top: 0.25rem;
   font-family: var(--font-display);
   font-size: var(--fs-h3);
   font-weight: 700;

@@ -1,4 +1,5 @@
-import { SECTION_IDS } from '@/lib/constants'
+import { Link } from 'react-router-dom'
+import { ROUTES, SECTION_IDS } from '@/lib/constants'
 import { PRODUCTS } from '@/lib/products'
 import Container from '@/components/Container'
 import SectionTitle from '@/components/SectionTitle'
@@ -22,6 +23,10 @@ const Shop = () => {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        <Link to={ROUTES.PRODUCTS} className={styles.all}>
+          See the whole candy bar &rarr;
+        </Link>
       </Container>
     </section>
   )
