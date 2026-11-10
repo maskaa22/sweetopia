@@ -248,7 +248,63 @@ guesses), and the section's own title/lollipop/orbit placement.
   Adventure foot. Check any boundary by eye before assuming it is still a hard cut.
 - `Auth` has nowhere to send the form (a note says so); the comment points at
   Supabase as the intended backend.
-- `About` copy is placeholder, written to be replaced. Footer says `© 2027`.
+- `About` copy is placeholder, written to be replaced. The footer year comes from
+  `new Date().getFullYear()` (it was a hard-coded 2027 until the user corrected it).
 - `font-weight: 400 700` on Podarok is one `.ttf`, so bold is synthesised.
 - Product images are 1024–1536 px and shown in small cards; if weight matters
   again, a `srcset` with a ~600 px size is the next step.
+
+## Deploy
+
+Live at https://sweetopia-flame.vercel.app/ (Vercel). `BrowserRouter` needs every
+path to fall back to `index.html`, so `vercel.json` carries a single rewrite —
+without it `/products`, `/about`, `/login` and `/products/:id` all returned 404
+on reload (found by curl, not by looking). Vercel serves real files before
+rewrites, so `/images/*` and `/fonts/*` are unaffected. Static files come back
+`max-age=0, must-revalidate`; fine while art is still being swapped.
+
+## Backend decision
+
+**Supabase is enough — no custom server.** Postgres + Auth + Storage + Row Level
+Security covers catalogue, accounts, orders and product photos. Anything that
+must not trust the browser (order total, stock check, payment webhook) goes in a
+Postgres function or a Supabase Edge Function, not in React. Planned shape:
+
+- `products` (id, name, description, image, price, tag, stock) — replaces
+  `lib/products.ts`; photos in Storage; public read, no client write.
+- `profiles` (id → auth.users, name).
+- `orders` + `order_items` — the server prices the order from `products`; the
+  client only sends ids and quantities. RLS: a user reads only their own.
+- Cart: guest in `localStorage` as now; after sign-in merge into a server cart.
+- Payment is a separate decision (Stripe Checkout + an Edge Function webhook, or
+  pay-on-delivery with the order as a request). Nothing is blocked on it.
+- Free tier pauses an idle project — fine for a demo, not for a shop.
+
+## Roadmap (agreed with the user, not started)
+
+Foundations first, because nothing is tested or checked on PRs yet:
+
+1. CI (GitHub Actions: `npx tsc -b --noEmit` + `npm run build` on every PR).
+2. ESLint + Prettier + `.editorconfig` + `.gitattributes` (git warns about
+   LF→CRLF on every touched `.tsx` on this machine).
+3. Tests: Vitest for `CartProvider` (merge, decrement-to-zero, stale stored ids,
+   the 350 ms settle timer); Playwright for the drawer's focus behaviour and
+   navigation. A throwaway script for the drawer exists in the old scratchpad —
+   rewrite it, do not look for it.
+4. SEO per route: `<title>`/description, OG image, sitemap.
+5. A11y finish: focus and heading on route change, skip link, body scroll lock
+   under the drawer.
+6. Backend in three steps — catalogue, then auth (`Auth.tsx` already validates;
+   the submit handler is the one place to wire), then orders.
+7. Perf if it matters: `React.lazy` on pages, ~600 px `srcset` for product cards,
+   preload Hero's art.
+
+Product ideas the user liked (build after the foundations):
+
+- **Wishlist / favourites** — sits naturally on the account.
+- **Search and filters** by `hit`/`new` and price, once there are more than six.
+- **"Build a gift box"** — pick 3–4 sweets into one box; very on-brand.
+- **Characters as guides** — "Sugar Queen recommends…" linking to products.
+- **A real About page** in place of the placeholder copy.
+
+Housekeeping: old local branches (`feat/*`, `chore/webp-cart-a11y-cleanup`) can go.
