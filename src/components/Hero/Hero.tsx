@@ -38,7 +38,7 @@ const Hero = () => {
 
         <img
           className={styles.art}
-          src="/images/hero.png"
+          src="/images/hero.webp"
           alt="A candy gingerbread house floating on pink sugar clouds"
           width={1024}
           height={1024}

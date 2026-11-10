@@ -14,17 +14,17 @@ const House = () => {
     <section id={SECTION_IDS.HOUSE} className={styles.root}>
       {/* Both come with their own lean and their own pink-to-blue stroke, so
           they are placed as they are -- no tilt, no tint. */}
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.popsicle}
-        src="/images/sweet-4.png"
+        src="/images/sweet-4.webp"
         alt=""
         aria-hidden="true"
         width={518}
         height={1024}
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.wrapper}
-        src="/images/sweet-3.png"
+        src="/images/sweet-3.webp"
         alt=""
         aria-hidden="true"
         width={534}
@@ -67,9 +67,9 @@ const House = () => {
 
         {/* The same house as the Hero -- this section is where you finally get
             up close to it, so it is deliberately the identical asset. */}
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.art}
-          src="/images/hero.png"
+          src="/images/hero.webp"
           alt="A gingerbread house with a lollipop roof, marmalade windows and caramel doors"
           width={1024}
           height={1024}
@@ -78,10 +78,10 @@ const House = () => {
 
       {/* Hero's cloud again, run past both edges so the house reads as standing
           on a bank rather than on a single puff. */}
-      <img
+      <img loading="lazy" decoding="async"
         ref={cloud}
         className={styles.cloud}
-        src="/images/hero-2.png"
+        src="/images/hero-2.webp"
         alt=""
         aria-hidden="true"
         width={1664}

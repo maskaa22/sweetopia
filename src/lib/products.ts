@@ -9,7 +9,7 @@ export const PRODUCTS: Product[] = [
     name: 'Pastel Berry Cupcake',
     description:
       'Vanilla sponge · Strawberry cream · Raspberry filling · Pastel buttercream · Fresh berries',
-    image: '/images/products/1.png',
+    image: '/images/products/1.webp',
     price: 6,
     tag: 'hit',
   },
@@ -18,7 +18,7 @@ export const PRODUCTS: Product[] = [
     name: 'Raspberry Dream Tart',
     description:
       'Crispy pastry · Vanilla cream · Raspberry confit · Fresh strawberries · Raspberries · White chocolate · Edible flower',
-    image: '/images/products/2.png',
+    image: '/images/products/2.webp',
     price: 8,
   },
   {
@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
     name: 'Strawberry Bliss',
     description:
       'Vanilla sponge · Vanilla mousse · Raspberry confit · Fresh strawberries & raspberries · White chocolate · Pink macaron',
-    image: '/images/products/3.png',
+    image: '/images/products/3.webp',
     price: 9,
   },
   {
@@ -34,7 +34,7 @@ export const PRODUCTS: Product[] = [
     name: 'Chocolate Hazelnut Dream',
     description:
       'Chocolate sponge · Dark chocolate ganache · Hazelnut praline · Chocolate mousse · Caramel filling · Roasted hazelnuts · Dark chocolate decor',
-    image: '/images/products/4.png',
+    image: '/images/products/4.webp',
     price: 9,
   },
   {
@@ -42,7 +42,7 @@ export const PRODUCTS: Product[] = [
     name: 'Berry Cloud Roulade',
     description:
       'Crisp meringue · Vanilla whipped cream · Raspberry & strawberry confit · Fresh berries · White chocolate · Freeze-dried raspberries',
-    image: '/images/products/5.png',
+    image: '/images/products/5.webp',
     price: 7,
     tag: 'new',
   },
@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
     name: 'Marshmallow Berry Cloud',
     description:
       'Vanilla mousse · Raspberry confit · Golden biscuit · Pink & white marshmallows · White chocolate · Fresh raspberries',
-    image: '/images/products/6.png',
+    image: '/images/products/6.webp',
     price: 8,
   },
 ]

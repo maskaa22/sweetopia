@@ -12,16 +12,16 @@ const CARDS: Record<
   string,
   { image: string; shape: CardShape; layout: CardLayout; orbit?: boolean }
 > = {
-  'sugar-tree': { image: '/images/characters/1.png', shape: 'arch-mirror', layout: 'art-first' },
-  'dark-choco': { image: '/images/characters/2.png', shape: 'pill', layout: 'text-first' },
-  'sugar-thief': { image: '/images/characters/3.png', shape: 'wide', layout: 'row' },
+  'sugar-tree': { image: '/images/characters/1.webp', shape: 'arch-mirror', layout: 'art-first' },
+  'dark-choco': { image: '/images/characters/2.webp', shape: 'pill', layout: 'text-first' },
+  'sugar-thief': { image: '/images/characters/3.webp', shape: 'wide', layout: 'row' },
   'sugar-queen': {
-    image: '/images/characters/4.png',
+    image: '/images/characters/4.webp',
     shape: 'arch',
     layout: 'text-first',
     orbit: true,
   },
-  'mr-marshmallow': { image: '/images/characters/5.png', shape: 'pill', layout: 'text-first' },
+  'mr-marshmallow': { image: '/images/characters/5.webp', shape: 'pill', layout: 'text-first' },
 }
 
 const SPARKS = ['sparkA', 'sparkB', 'sparkC', 'sparkD', 'sparkE'] as const
@@ -57,9 +57,9 @@ const Characters = () => {
           />
         ))}
 
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.lollipop}
-          src="/images/sweet-2.png"
+          src="/images/sweet-2.webp"
           alt=""
           aria-hidden="true"
           width={412}

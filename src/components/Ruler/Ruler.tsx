@@ -72,9 +72,9 @@ const Ruler = () => {
 
       <div className={styles.stage}>
         <div className={styles.cake}>
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.cakeArt}
-            src="/images/ruler-keks.png"
+            src="/images/ruler-keks.webp"
             alt=""
             aria-hidden="true"
             width={1536}
@@ -100,9 +100,9 @@ const Ruler = () => {
 
       {/* Sits outside .stage so it anchors to the section, not the cupcake's
           column. */}
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.king}
-        src="/images/ruler.png"
+        src="/images/ruler.webp"
         alt="The Sugar King on a candy throne, holding a lollipop sceptre"
         width={1536}
         height={1024}

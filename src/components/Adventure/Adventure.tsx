@@ -25,27 +25,27 @@ const Adventure = () => {
 
   return (
     <section id={SECTION_IDS.ADVENTURE} className={styles.root}>
-      <img
+      <img loading="lazy" decoding="async"
         ref={clouds}
         className={styles.clouds}
-        src="/images/adventure-fly3.png"
+        src="/images/adventure-fly3.webp"
         alt=""
         aria-hidden="true"
         width={1672}
         height={940}
       />
-      <img
+      <img loading="lazy" decoding="async"
         ref={balloon}
         className={styles.balloon}
-        src="/images/adventure-fly2.png"
+        src="/images/adventure-fly2.webp"
         alt=""
         aria-hidden="true"
         width={1024}
         height={1536}
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.candy}
-        src="/images/sweet-3.png"
+        src="/images/sweet-3.webp"
         alt=""
         aria-hidden="true"
         width={534}
@@ -72,10 +72,10 @@ const Adventure = () => {
           Buckle up your marshmallow seatbelts and set off on the sweetest journey of your life.
         </p>
 
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.plane}
           ref={plane}
-          src="/images/adventure-fly.png"
+          src="/images/adventure-fly.webp"
           alt="An aeroplane made of candy, its cabin packed with gumballs"
           width={1254}
           height={1254}

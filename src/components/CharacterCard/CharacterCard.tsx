@@ -69,7 +69,7 @@ const CharacterCard = ({
 
   const body = (
     <>
-      <img className={styles.art} src={image} alt="" aria-hidden="true" />
+      <img loading="lazy" decoding="async" className={styles.art} src={image} alt="" aria-hidden="true" />
 
       <div className={styles.text}>
         <h3 className={styles.name}>{character.name}</h3>
