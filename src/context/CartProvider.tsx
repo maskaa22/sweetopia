@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { Product } from '@/types/content'
 import { PRODUCTS } from '@/lib/products'
 import {
@@ -53,6 +53,17 @@ const CartProvider = ({ children }: CartProviderProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [status, setStatus] = useState<CartStatus>('idle')
   const [placed, setPlaced] = useState(0)
+  // The pending "back to idle" after the drawer is dismissed. Kept so it can be
+  // cancelled: reopen the cart inside that window and it would otherwise fire
+  // against the new session and swap the confirmation for the empty message.
+  const settleTimer = useRef<number | undefined>(undefined)
+
+  const cancelSettle = useCallback(() => {
+    window.clearTimeout(settleTimer.current)
+    settleTimer.current = undefined
+  }, [])
+
+  useEffect(() => cancelSettle, [cancelSettle])
 
   useEffect(() => {
     try {
@@ -64,6 +75,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
   }, [items])
 
   const add = useCallback((product: Product) => {
+    cancelSettle()
     setStatus('idle')
     setItems((prev) => {
       const existing = prev.find((item) => item.id === product.id)
@@ -75,7 +87,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
       return [...prev, { ...product, quantity: 1 }]
     })
     setIsOpen(true)
-  }, [])
+  }, [cancelSettle])
 
   const increment = useCallback((id: string) => {
     setItems((prev) =>
@@ -106,14 +118,18 @@ const CartProvider = ({ children }: CartProviderProps) => {
     setItems([])
   }, [items])
 
-  const open = useCallback(() => setIsOpen(true), [])
+  const open = useCallback(() => {
+    cancelSettle()
+    setIsOpen(true)
+  }, [cancelSettle])
 
   const close = useCallback(() => {
     setIsOpen(false)
     // Back to a normal cart once the confirmation has been dismissed -- but
     // only after it is out of sight, so it does not change as it slides away.
-    window.setTimeout(() => setStatus('idle'), 350)
-  }, [])
+    cancelSettle()
+    settleTimer.current = window.setTimeout(() => setStatus('idle'), 350)
+  }, [cancelSettle])
 
   const value = useMemo<CartContextValue>(() => {
     const count = items.reduce((sum, item) => sum + item.quantity, 0)

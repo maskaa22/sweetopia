@@ -14,7 +14,9 @@ const Header = () => {
   // Shut on any navigation. Clicking a link inside the menu is the usual way
   // out of it, and a menu left standing over the page you just asked for is
   // the thing people complain about.
-  useEffect(() => setMenuOpen(false), [key])
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [key])
 
   useEffect(() => {
     if (!menuOpen) return

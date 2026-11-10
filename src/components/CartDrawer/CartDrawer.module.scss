@@ -45,6 +45,15 @@
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
+
+  // The panel itself takes focus when the drawer opens, so that a screen reader
+  // starts at "Cart" -- it is not a control, and a ring round the whole drawer
+  // would say otherwise.
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: -20px 0 60px -30px rgba(59, 77, 86, 0.5);
+  }
 }
 
 .head {
