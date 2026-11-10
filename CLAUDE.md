@@ -1,7 +1,8 @@
 # Sweetopia
 
-Single-page candy-kingdom landing. React 18 + TypeScript + Vite, SCSS modules,
-no router, no backend. Alias `@/` → `src/`.
+Candy-kingdom site: a landing page plus a few inner pages. React 18 +
+TypeScript + Vite, SCSS modules, `react-router-dom` 7, no backend. Alias `@/` →
+`src/`.
 
 ```
 npm run dev      # vite (port drifts: 5173 or 5174 — read the startup output, don't assume)
@@ -11,16 +12,47 @@ npx tsc -b --noEmit
 
 ## Layout of the thing
 
-`App.tsx` = Header → 10 sections → Footer → CartDrawer. Section order:
-Hero, Kingdom, Citizens, Ruler, Adventure, Characters, Garden, House, Shop, Contact.
+`main.tsx` wraps `App` in `CartProvider`. `App.tsx` is only the routes, all
+inside `components/Layout` (ScrollManager → Header → `<main><Outlet/></main>` →
+Footer → CartDrawer — the cart lives in the layout so it survives navigation).
 
-- One folder per component: `Name.tsx` + `Name.module.scss` + `index.ts`.
-- `lib/constants.ts` — `SECTION_IDS`, `BRAND`, `CURRENCY` (`$`), `NAV_LINKS`.
-- `context/CartContext.ts` + `CartProvider.tsx`, hook `hooks/useCart.ts`.
+| Route | Page |
+|---|---|
+| `/` | `pages/Home` — the landing, 10 sections in this order: Hero, Kingdom, Citizens, **Shop**, Ruler, Adventure, Characters, Garden, House, Contact |
+| `/products`, `/products/:id` | `Products`, `ProductDetail` (unknown id renders `NotFound`) |
+| `/about` | `About` (placeholder copy) |
+| `/login` | `Auth` — sign in / register, real validation, nothing behind it yet |
+| `*` | `NotFound` |
+
+- One folder per component/page: `Name.tsx` + `Name.module.scss` + `index.ts`
+  (`Layout` has no stylesheet).
+- `lib/constants.ts` — `SECTION_IDS`, `BRAND`, `CURRENCY` (`$`), `ROUTES`,
+  `productPath()`, `NAV_LINKS`. Nav anchors are written `/#id`, never bare `#id`,
+  so they work from any page.
+- `lib/products.ts` (catalogue), `lib/characters.ts`, types in `types/content.ts`.
+- `context/CartContext.ts` + `CartProvider.tsx`, hook `hooks/useCart.ts`. Only
+  `id` + `quantity` go to `localStorage` (`sweetopia.cart`); name/price/image are
+  looked up from `PRODUCTS` on the way back in.
+- `PageShell` — frame shared by the inner pages (field, title block, measure).
+- `hooks/useParallax.ts` + `styles/motion.scss` — ambient motion, see below.
 - `styles/` — `tokens.scss` (palette, fluid type, spacing), `mixins.scss`
-  (`sm/md/lg/xl` = 480/768/1024/1280 **min-width**, `gradient-text`, `motion-safe`),
+  (`sm/md/lg/xl` = 480/768/1024/1280 **min-width**, `gradient-text`, `motion-safe`,
+  and the `sway/bob/approach/breathe` motion mixins), `motion.scss`,
   `global.scss`, `fonts.scss`.
 - Icons: one sprite at `public/sprite.svg`, used via `<SvgIcon id="icon-…">`.
+- Art: **WebP** in `public/images` (~5 MB total). See "Assets" below.
+
+### Ambient motion
+
+Scenery drifts via `translate`, not `transform` — most of it is already placed
+with `transform`, and an animation on that would overwrite the placement.
+`--drift/--rise/--breath/--tilt` are registered with `@property` so they
+interpolate. The animation name goes through `--kf` on purpose: CSS Modules
+rewrites any `animation-name` it sees, so a plain name compiled to a hashed one
+that matched nothing. `useParallax(distance, axis)` writes `--parallax(-y)` from
+the *section's* box (never the element's — it is transformed, and feeding that
+back jitters), one scroll listener for the whole page. Keep `distance` inside the
+overhang of the cloud bank it moves, or an edge shows.
 
 Copy is English throughout, brand `Sweetopia`. Display font Podarok (fallback
 Oswald), body Oswald.
@@ -47,12 +79,33 @@ Two things that are load-bearing here:
 
 ### Shared section pieces
 
-`StorySection` is the original generic layout (title + copy + `MediaFrame`
-placeholder). Sections get rebuilt off it one by one into bespoke layouts —
-Kingdom, Citizens and Ruler are already off it. `SectionTitle` takes
-`kicker / variant(outline|filled) / tone / kickerTone / align / className`.
-Kicker default is the pink→blue gradient; Garden overrides to `white` because its
-title sits on artwork.
+Every section is a bespoke layout now; the generic `StorySection` is gone (it
+was unused once Garden and House were rebuilt — it is in git history if wanted).
+`MediaFrame` survives only as the placeholder for a product with no photo yet.
+`SectionTitle` takes `kicker / variant(outline|filled) / tone / kickerTone /
+align / as / className`. Kicker default is the pink→blue gradient; Garden
+overrides to `white` because its title sits on artwork. `ArchPanel` is the shared
+arch outline (Citizens, and the arch character cards).
+
+### Cart drawer
+
+A real modal: takes focus when it opens, Tab/Shift+Tab wrap inside it, Escape
+closes, focus returns to whatever opened it, and after Checkout focus lands on
+the panel (the Checkout button unmounts under it). The "back to idle" timer after
+`close()` is held in a ref and cancelled by `open`/`add` — reopening inside its
+350 ms used to flip the confirmation to "empty".
+
+### Assets
+
+Everything in `public/images` is `.webp`, converted from the supplied PNGs at
+quality 90, `alphaQuality` 100, effort 6, `smartSubsample` — alpha came out
+**bit-identical** (max Δ 0), RGB mean Δ ≈ 2/255, 38.8 MB → 4.9 MB. Dimensions are
+unchanged. When new art arrives as PNG, convert it the same way and point the
+reference at `.webp`; do not drop the PNG in next to a `.webp` reference (the old
+PNGs are in git history, so a silent replacement will not show up in the page).
+Check the alpha first (see the checkerboard trap below). Sections below the fold
+use `loading="lazy" decoding="async"`; Hero's art and the product-detail art stay
+eager because they are what the page opens on.
 
 ## Traps that cost real time
 
@@ -133,10 +186,9 @@ frame before reading or capturing anything that has just changed.
 
 ## Git
 
-Branch per section, chained off the previous one (not off `main`), because each
-builds on shared changes from the last: `feat/kingdom-section` →
-`feat/citizens-section` → `feat/ruler-section` → `feat/adventure-section` →
-`feat/characters-section`.
+Everything is merged into `main` (`93825fe`: candy bar, cart logic, routes and
+pages). The old per-section branches (`feat/kingdom-section` … `feat/router-pages`)
+still exist locally and can be deleted. Branch off `main` for new work.
 Conventional commits, body explains *why*. Remote `origin` = maskaa22/sweetopia.
 
 ## Working style the user expects
@@ -149,18 +201,23 @@ asset mtime/size when something looks different. Ask before large asset surgery.
 
 ## Settled — do not reopen
 
-- `hero-2.png` is the alpha I recovered, not a fresh export, and that is fine:
+- `hero-2` (now `.webp`) is the alpha I recovered, not a fresh export, and that is fine:
   no checkerboard survives and the clear zone measures dead flat at alpha 0.
 - The Adventure window's close control and its accept/decline buttons are
   decorative `span`s on purpose, so nothing announces itself as operable or
   takes focus. The copy inside is real text.
 - Adventure's hearts stay flat sprite hearts rather than 3D art.
 
-## Where this was left (shelved)
+## Where this was left
 
-On `feat/characters-section`. Hero, Kingdom, Citizens, Ruler and Adventure are
-finished and pushed. Characters is **mid-flight** — built and building clean,
-but only reviewed as far as the third card.
+On `main`, clean tree, `tsc` and `vite build` both pass. All ten landing
+sections, the cart and the inner pages exist and render; a full-page screenshot
+at 1440 shows every section populated.
+
+**Characters was last reviewed card by card, mobile-first — and the notes below
+are from that review, not re-checked since.** At 1440 the queen sits inside her
+arch in a full-page screenshot, so item 4 may already be fixed; confirm at phone
+width before treating either as open.
 
 Reviewed and signed off, mobile-first, card by card:
 
@@ -187,8 +244,11 @@ guesses), and the section's own title/lollipop/orbit placement.
 
 - Sparkle colour `#4a3f8c` (Citizens, Characters) is the only colour outside the
   tokens.
-- Seams Kingdom↔Citizens, Citizens↔Ruler and Ruler↔Adventure are done; the
-  remaining boundaries are still hard cuts.
-- Garden onward still sit on `StorySection` with `MediaFrame` placeholders.
-- Nothing is merged to `main` yet — the five section branches are chained, so a
-  PR for the newest shows all of them. Merge bottom-up to split them.
+- Seams: recent commits dissolved Hero↔Kingdom, the cloud banks, Shop and the
+  Adventure foot. Check any boundary by eye before assuming it is still a hard cut.
+- `Auth` has nowhere to send the form (a note says so); the comment points at
+  Supabase as the intended backend.
+- `About` copy is placeholder, written to be replaced. Footer says `© 2027`.
+- `font-weight: 400 700` on Podarok is one `.ttf`, so bold is synthesised.
+- Product images are 1024–1536 px and shown in small cards; if weight matters
+  again, a `srcset` with a ~600 px size is the next step.

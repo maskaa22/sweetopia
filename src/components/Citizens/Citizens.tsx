@@ -7,17 +7,17 @@ import styles from './Citizens.module.scss'
 const Citizens = () => {
   return (
     <section id={SECTION_IDS.CITIZENS} className={styles.root}>
-      <img className={styles.cake} src="/images/sweet-1.png" alt="" aria-hidden="true" />
-      <img className={styles.lollipop} src="/images/sweet-2.png" alt="" aria-hidden="true" />
-      <img className={styles.candy} src="/images/sweet-3.png" alt="" aria-hidden="true" />
+      <img loading="lazy" decoding="async" className={styles.cake} src="/images/sweet-1.webp" alt="" aria-hidden="true" />
+      <img loading="lazy" decoding="async" className={styles.lollipop} src="/images/sweet-2.webp" alt="" aria-hidden="true" />
+      <img loading="lazy" decoding="async" className={styles.candy} src="/images/sweet-3.webp" alt="" aria-hidden="true" />
 
       <Container>
         <h2 className={styles.title}>Kingdom residents</h2>
 
         <div className={styles.grid}>
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.figure}
-            src="/images/citizens.png"
+            src="/images/citizens.webp"
             alt="A smiling pink cupcake character with sprinkles and raspberry ears"
             width={1362}
             height={1155}

@@ -7,9 +7,9 @@ import styles from './Kingdom.module.scss'
 const Kingdom = () => {
   return (
     <section id={SECTION_IDS.KINGDOM} className={styles.root}>
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.cloud}
-        src="/images/hero-2.png"
+        src="/images/hero-2.webp"
         alt=""
         aria-hidden="true"
         width={1672}
@@ -37,17 +37,17 @@ const Kingdom = () => {
       </Container>
 
       <div className={styles.scene}>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.terrain}
-          src="/images/kingdom-bg.png"
+          src="/images/kingdom-bg.webp"
           alt=""
           aria-hidden="true"
           width={1672}
           height={941}
         />
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.cart}
-          src="/images/kingdom.png"
+          src="/images/kingdom.webp"
           alt="An ice cream cart standing among the sugar mountains"
           width={1536}
           height={1024}

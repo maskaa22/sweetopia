@@ -36,9 +36,9 @@ const Garden = () => {
           </p>
         </Container>
 
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.art}
-          src="/images/garden.png"
+          src="/images/garden.webp"
           alt="A candy garden of blossom trees, lollipop lamps and a striped bench"
           width={1536}
           height={1024}
