@@ -3,6 +3,9 @@ import Container from '@/components/Container'
 import styles from './Footer.module.scss'
 
 const Footer = () => {
+  // Read at render, so the line does not need touching every January.
+  const year = new Date().getFullYear()
+
   return (
     <footer className={styles.root}>
       <Container className={styles.inner}>
@@ -14,7 +17,7 @@ const Footer = () => {
           <span className={styles.label}>all rights reserved</span>
           {/* The year and the mark are one unit -- no break between them. */}
           <span className={styles.name}>
-            &copy;&nbsp;2027 {BRAND}
+            &copy;&nbsp;{year} {BRAND}
           </span>
         </p>
         <p className={[styles.item, styles.end].join(' ')}>
